@@ -36,7 +36,12 @@ function Contact() {
   const sendEmail = (e) => {
     e.preventDefault()
     setStatus("sending")
-    emailjs.sendForm("service_a86lspd", "template_qpsku4g", form.current, "3EFdmUCA6bRib3bQ0")
+    emailjs.sendForm(
+      import.meta.env.VITE_EMAILJS_SERVICE_ID,
+      import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+      form.current,
+      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+    )
       .then(() => { setStatus("ok"); form.current.reset() })
       .catch(() => setStatus("err"))
   }
