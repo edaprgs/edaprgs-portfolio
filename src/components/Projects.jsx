@@ -29,7 +29,7 @@ const projects = [
 
     accent: "#e879a0",
 
-    github: "https://www.figma.com/design/a4593rDDQslYZMxCI6gh5O/eTanom-Planter-s-Interface-%7C-Paragoso?node-id=398-1875&t=2Fa3FuXY8H9pNd3e-0",
+    // github: "https://www.figma.com/design/a4593rDDQslYZMxCI6gh5O/eTanom-Planter-s-Interface-%7C-Paragoso?node-id=398-1875&t=2Fa3FuXY8H9pNd3e-0",
 
     // live: "https://www.figma.com/design/a4593rDDQslYZMxCI6gh5O/eTanom-Planter-s-Interface-%7C-Paragoso?node-id=398-1875&t=2Fa3FuXY8H9pNd3e-0",
 
