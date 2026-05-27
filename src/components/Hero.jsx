@@ -1,6 +1,7 @@
 import { FaGithub, FaLinkedin } from "react-icons/fa"
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
+import { Download } from "lucide-react"
 
 const roles = [
   "Full-Stack Web Developer",
@@ -142,18 +143,20 @@ function Hero() {
         >
           View Projects
         </a>
-        <a href="/resume.pdf"
-          className="px-7 py-3 rounded-full text-sm font-medium tracking-wide transition-all duration-300"
+        <a
+          href="/resume.pdf"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="px-7 py-3 rounded-full text-sm font-medium tracking-wide transition-all duration-300 flex items-center gap-2"
           style={{
             background: "transparent",
             border: "1px solid rgba(249,168,201,0.4)",
             color: "#f9a8c9",
             fontFamily: "'DM Sans', sans-serif",
           }}
-          onMouseEnter={e => { e.currentTarget.style.background = "rgba(249,168,201,0.08)"; e.currentTarget.style.transform = "translateY(-2px)" }}
-          onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.transform = "translateY(0)" }}
         >
-          Download Résumé
+          <Download size={16} />
+          View Resume
         </a>
       </motion.div>
 

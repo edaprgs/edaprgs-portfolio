@@ -36,7 +36,7 @@ function Contact() {
   const sendEmail = (e) => {
     e.preventDefault()
     setStatus("sending")
-    emailjs.sendForm("service_a86lspd", "template_qpsku4g", form.current, "3EFdmUCA6bRib3bQ0")
+    emailjs.sendForm("service_a86lspd", "template_pxm6tmh", form.current, "3EFdmUCA6bRib3bQ0")
       .then(() => { setStatus("ok"); form.current.reset() })
       .catch(() => setStatus("err"))
   }
