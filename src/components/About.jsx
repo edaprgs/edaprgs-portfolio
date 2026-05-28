@@ -24,7 +24,7 @@ function About() {
       </div>
 
       <div className="grid md:grid-cols-2 gap-8">
-        
+
         {/* Left */}
         <div
           className="glass p-8 md:p-10"
@@ -46,12 +46,7 @@ function About() {
               <User size={20} color="#f9a8c9" />
             </div>
 
-            <h3
-              style={{
-                fontSize: "1.5rem",
-                fontWeight: 500,
-              }}
-            >
+            <h3 style={{ fontSize: "1.5rem", fontWeight: 500 }}>
               Background
             </h3>
           </div>
@@ -63,7 +58,7 @@ function About() {
               fontSize: "0.94rem",
             }}
           >
-            I’m a{" "}
+            I'm a{" "}
             <strong style={{ color: "#f9a8c9", fontWeight: 500 }}>
               BS Computer Science graduate
             </strong>{" "}
@@ -83,13 +78,28 @@ function About() {
               marginTop: "1rem",
             }}
           >
-            I specialize in front-end and full-stack web development using{" "}
+            I enjoy working across the stack — currently building with{" "}
             <strong style={{ color: "#f9a8c9" }}>
               React, Next.js, Tailwind CSS, and Supabase
             </strong>
-            . Recently, I developed a Church Management System with
-            authentication, analytics dashboards, role-based access, and member
-            record management features.
+            , though I'm always exploring new tools and technologies. Most
+            recently, I built a full-stack church membership management system
+            featuring authentication, analytics dashboards, role-based access,
+            and member record management.
+          </p>
+
+          <p
+            style={{
+              color: "rgba(240,216,232,0.74)",
+              lineHeight: 1.9,
+              fontSize: "0.94rem",
+              marginTop: "1rem",
+            }}
+          >
+            I'm eager to keep growing — whether that means picking up new
+            frameworks, diving deeper into back-end systems, or collaborating
+            on projects outside my comfort zone. I believe the best way to
+            learn is to build.
           </p>
         </div>
 
@@ -114,12 +124,7 @@ function About() {
               <GraduationCap size={20} color="#f9a8c9" />
             </div>
 
-            <h3
-              style={{
-                fontSize: "1.5rem",
-                fontWeight: 500,
-              }}
-            >
+            <h3 style={{ fontSize: "1.5rem", fontWeight: 500 }}>
               Education & Focus
             </h3>
           </div>
@@ -135,19 +140,19 @@ function About() {
               icon: <Code2 size={18} color="#f9a8c9" />,
               label: "Tech Stack",
               value:
-                "React, Next.js, Tailwind CSS, Supabase, PostgreSQL, JavaScript, and TypeScript.",
+                "React, Next.js, Tailwind CSS, Supabase, PostgreSQL, JavaScript, and TypeScript — with an eye toward learning more.",
             },
             {
               icon: <LayoutDashboard size={18} color="#f9a8c9" />,
-              label: "Current Project",
+              label: "Latest Project",
               value:
-                "Developing a full-stack Church Management System with dashboards, analytics, authentication, and member management features.",
+                "Built a full-stack Church Membership Management System with role-based authentication, analytics dashboards, and complete member record management.",
             },
             {
               icon: <Briefcase size={18} color="#f9a8c9" />,
               label: "Career Goal",
               value:
-                "To pursue opportunities in Front-End or Full-Stack Development while building accessible and impactful digital products.",
+                "To grow as a developer — contributing to meaningful products, picking up new technologies along the way, and eventually taking on more complex engineering challenges.",
             },
           ].map(({ icon, label, value }) => (
             <div
@@ -159,11 +164,8 @@ function About() {
                 border: "1px solid rgba(249,168,201,0.12)",
               }}
             >
-              <div
-                className="flex items-center gap-2 mb-2"
-              >
+              <div className="flex items-center gap-2 mb-2">
                 {icon}
-
                 <span
                   style={{
                     fontSize: "0.72rem",
