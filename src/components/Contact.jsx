@@ -1,3 +1,5 @@
+// src/components/Contact.jsx
+
 import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt } from "react-icons/fa"
 import useScrollReveal from "../hooks/useScrollReveal"
 import emailjs from "@emailjs/browser"

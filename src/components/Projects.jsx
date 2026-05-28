@@ -1,3 +1,5 @@
+// src/components/Projects.jsx
+
 import useScrollReveal from "../hooks/useScrollReveal"
 import { motion } from "framer-motion"
 
@@ -33,7 +35,7 @@ const projects = [
 
     live: "https://uccpiligan.vercel.app/",
 
-    image: "/images/membership-system-preview.png",
+    image: "/images/church-management-preview.png",
   },
 
   {

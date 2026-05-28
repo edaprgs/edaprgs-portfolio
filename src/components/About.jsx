@@ -1,3 +1,5 @@
+// src/components/About.jsx
+
 import useScrollReveal from "../hooks/useScrollReveal"
 import {
   User,

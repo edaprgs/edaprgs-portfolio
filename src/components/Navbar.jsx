@@ -1,3 +1,5 @@
+// src/components/Navbar.jsx
+
 import { useEffect, useState } from "react"
 
 const links = ["home","about","experience","skills","projects","contact"]
@@ -48,7 +50,7 @@ function Navbar() {
               <span className="absolute inset-0 rounded-full"
                 style={{ background: "rgba(249,168,201,0.1)", border: "1px solid rgba(249,168,201,0.2)" }} />
             )}
-            <span className="relative">{id}</span>
+            <span className="relative">{id.charAt(0).toUpperCase() + id.slice(1)}</span>
           </a>
         ))}
       </div>

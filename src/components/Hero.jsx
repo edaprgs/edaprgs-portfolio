@@ -1,3 +1,5 @@
+// src/components/Hero.jsx
+
 import { FaGithub, FaLinkedin } from "react-icons/fa"
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"

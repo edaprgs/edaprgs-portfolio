@@ -1,3 +1,5 @@
+// src/components/Experience.jsx
+
 import { motion } from "framer-motion"
 import {
   Briefcase,
