@@ -7,24 +7,25 @@ import {
 
 const experiences = [
   {
-    role: "Church Management System Developer / Data Management Assistant",
+    role: "Full-Stack Developer / Data Management Assistant",
     company: "United Church of Christ in the Philippines - Iligan",
     period: "Jul 2025 – Present",
     location: "Iligan City, Philippines",
     icon: <Database size={18} color="#f9a8c9" />,
     bullets: [
-      "Developed and maintained a full-stack Church Management System using React, Next.js, Tailwind CSS, and Supabase.",
+      "Developed and maintained a full-stack membership management system using React, Next.js, Tailwind CSS, and Supabase.",
       
       "Built separate admin and member interfaces with role-based access, authentication, and profile management features.",
       
-      "Implemented CRUD operations, member registration workflows, approval-based account management, and secure record handling.",
+      "Implemented CRUD operations, member registration workflows, approval-based account handling, and secure data management.",
       
-      "Designed analytics dashboards displaying member statistics, birthdays, demographics, and church-related reporting data.",
+      "Designed analytics dashboards for member demographics, birthdays, and church membership statistics.",
       
-      "Integrated CSV export and reporting functionality to improve administrative workflows and record accessibility.",
+      "Integrated CSV export and reporting functionality to streamline administrative workflows and data accessibility.",
       
-      "Maintained, validated, and organized 3,000+ membership records through systematic verification and data cleaning.",
+      "Managed, validated, and organized 3,000+ membership records through systematic verification and database maintenance.",
     ],
+
   },
 
   {

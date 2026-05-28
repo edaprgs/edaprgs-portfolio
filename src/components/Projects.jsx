@@ -10,12 +10,12 @@ import {
 
 const projects = [
   {
-    title: "Church Management System",
+    title: "Church Membership Management System",
 
     icon: <Church size={22} color="#f9a8c9" />,
 
     desc:
-      "Developed a full-stack Church Management System using Next.js, React, Tailwind CSS, and Supabase. Built separate admin and member interfaces with authentication, role-based access, member registration workflows, analytics dashboards, profile management, and CSV export reporting features.",
+      "Developed a full-stack membership management system using Next.js, React, Tailwind CSS, and Supabase. Built separate admin and member portals with authentication, role-based access control, member registration, analytics dashboards, profile management, and CSV export reporting.",
 
     tech: [
       "React",
@@ -33,7 +33,7 @@ const projects = [
 
     live: "https://uccpiligan.vercel.app/",
 
-    image: "/images/church-management-preview.png",
+    image: "/images/membership-system-preview.png",
   },
 
   {
