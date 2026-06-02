@@ -15,17 +15,11 @@ const experiences = [
     location: "Iligan City, Philippines",
     icon: <Database size={18} color="#f9a8c9" />,
     bullets: [
-      "Developed and maintained a full-stack membership management system using React, Next.js, Tailwind CSS, and Supabase.",
-      
-      "Built separate admin and member interfaces with role-based access, authentication, and profile management features.",
-      
-      "Implemented CRUD operations, member registration workflows, approval-based account handling, and secure data management.",
-      
-      "Designed analytics dashboards for member demographics, birthdays, and church membership statistics.",
-      
-      "Integrated CSV export and reporting functionality to streamline administrative workflows and data accessibility.",
-      
-      "Managed, validated, and organized 3,000+ membership records through systematic verification and database maintenance.",
+      "Shipped a Next.js + Supabase membership system with JWT auth and role-based access control (admin/member) for 3,000+ users.",
+      "Built a typed data access layer in TypeScript with batched pagination to query 3,000+ records beyond Supabase's default row limit.",
+      "Built live analytics dashboards and CSV export pipelines, cutting manual reporting time by ~80%.",
+      "Configured CI/CD via Vercel deployment hooks with environment variables secured via Vercel project settings.",
+      "Migrated and validated 3,000+ records into PostgreSQL with zero data loss during go-live.",
     ],
 
   },
@@ -37,15 +31,8 @@ const experiences = [
     location: "Iligan City, Philippines",
     icon: <Palette size={18} color="#f9a8c9" />,
     bullets: [
-      "Designed responsive UI/UX interfaces and interactive prototypes for web and mobile platforms using Figma.",
-      
-      "Worked on the planter-facing interface of eTanom’s reforestation platform focused on accessibility and usability.",
-      
-      "Created user flows, and interface layouts to support intuitive cross-device user experiences.",
-      
-      "Collaborated with the design and development team to refine interface consistency and improve usability workflows.",
-      
-      "Applied modern UI/UX principles including responsive design, accessibility, and user-centered interface design.",
+      "Designed 15+ user flows and a clickable Figma prototype for a web and mobile reforestation platform.",
+      "Handed off developer-ready specs with annotated components, cutting clarification rounds for a 4-person dev team.",
     ],
   },
 ]

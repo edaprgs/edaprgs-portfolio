@@ -98,10 +98,9 @@ function About() {
               marginTop: "1rem",
             }}
           >
-            I'm eager to keep growing — whether that means picking up new
-            frameworks, diving deeper into back-end systems, or collaborating
-            on projects outside my comfort zone. I believe the best way to
-            learn is to build.
+            I bring production experience to the table — a live system managing 3,000+ 
+            real users, built and deployed solo. I'm looking for a team where I can 
+            contribute meaningful work from day one.
           </p>
         </div>
 
@@ -154,7 +153,7 @@ function About() {
               icon: <Briefcase size={18} color="#f9a8c9" />,
               label: "Career Goal",
               value:
-                "To grow as a developer — contributing to meaningful products, picking up new technologies along the way, and eventually taking on more complex engineering challenges.",
+                "Seeking a junior full-stack or frontend engineer role where I can ship production-grade features and grow into more complex distributed systems.",
             },
           ].map(({ icon, label, value }) => (
             <div

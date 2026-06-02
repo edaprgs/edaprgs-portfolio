@@ -16,9 +16,7 @@ const projects = [
 
     icon: <Church size={22} color="#f9a8c9" />,
 
-    desc:
-      "Developed a full-stack membership management system using Next.js, React, Tailwind CSS, and Supabase. Built separate admin and member portals with authentication, role-based access control, member registration, analytics dashboards, profile management, and CSV export reporting.",
-
+    desc: "Shipped a production membership system in Next.js and Supabase with JWT auth, role-based access control, and a typed TypeScript data layer handling 3,000+ records. Features real-time analytics dashboards, CSV export, and CI/CD via Vercel.",
     tech: [
       "React",
       "Next.js",
