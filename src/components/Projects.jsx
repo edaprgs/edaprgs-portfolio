@@ -6,6 +6,8 @@ import { motion } from "framer-motion"
 import {
   Church,
   Sprout,
+  Hospital,
+  Brain,
   ExternalLink,
 } from "lucide-react"
 
@@ -16,14 +18,14 @@ const projects = [
 
     icon: <Church size={22} color="#f9a8c9" />,
 
-    desc: "Shipped a production membership system in Next.js and Supabase with JWT auth, role-based access control, and a typed TypeScript data layer handling 3,000+ records. Features real-time analytics dashboards, CSV export, and CI/CD via Vercel.",
+    desc: "Production membership management platform built with Next.js, TypeScript, Supabase, and PostgreSQL. Features RBAC-secured admin and member portals, configurable reports with CSV export, account linking workflows, automated field computations, and support for 3,000+ member records.",
     tech: [
-      "React",
       "Next.js",
+      "TypeScript",
       "Tailwind CSS",
       "Supabase",
       "PostgreSQL",
-      "JavaScript",
+      "RBAC",
       "Vercel",
     ],
 
@@ -34,6 +36,56 @@ const projects = [
     live: "https://uccpiligan.vercel.app/",
 
     image: "/images/church-management-preview.png",
+  },
+
+  {
+    title: "Clinic Management System",
+
+    icon: <Hospital size={22} color="#60a5fa" />,
+
+    desc:
+      "Multi-role healthcare management platform built with Flask and MySQL. Supports administrators, doctors, medtechs, and receptionists with role-based authentication, real-time notifications using Flask-SocketIO, Cloudinary-powered file uploads, automated email workflows, and audit logging.",
+
+    tech: [
+      "Python",
+      "Flask",
+      "MySQL",
+      "Flask-SocketIO",
+      "Cloudinary",
+      "Flask-Login",
+    ],
+
+    accent: "#60a5fa",
+
+    github:
+      "https://github.com/edaprgs/Clinic-Management-System",
+
+    image: "/images/clinic-management-preview.png",
+  },
+
+  {
+    title: "CNN Hair Type Recognition",
+
+    icon: <Brain size={22} color="#c084fc" />,
+
+    desc:
+      "Deep learning project that classifies four hair types using a custom dataset of 6,000 images. Built with TensorFlow and Keras, incorporating data augmentation techniques and achieving 79.67% test accuracy with minimal overfitting.",
+
+    tech: [
+      "Python",
+      "TensorFlow",
+      "Keras",
+      "scikit-learn",
+      "CNN",
+      "Computer Vision",
+    ],
+
+    accent: "#c084fc",
+
+    github:
+      "https://github.com/edaprgs/CNN-Hair-Type-Recognition",
+
+    image: "/images/hair-cnn-preview.png",
   },
 
   {

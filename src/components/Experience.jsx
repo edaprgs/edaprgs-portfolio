@@ -9,19 +9,18 @@ import {
 
 const experiences = [
   {
-    role: "Full-Stack Developer / Data Management Assistant",
+    role: "Full-Stack Developer (Volunteer)",
     company: "United Church of Christ in the Philippines - Iligan",
     period: "Jul 2025 – Present",
     location: "Iligan City, Philippines",
     icon: <Database size={18} color="#f9a8c9" />,
     bullets: [
-      "Shipped a Next.js + Supabase membership system with JWT auth and role-based access control (admin/member) for 3,000+ users.",
-      "Built a typed data access layer in TypeScript with batched pagination to query 3,000+ records beyond Supabase's default row limit.",
-      "Built live analytics dashboards and CSV export pipelines, cutting manual reporting time by ~80%.",
-      "Configured CI/CD via Vercel deployment hooks with environment variables secured via Vercel project settings.",
-      "Migrated and validated 3,000+ records into PostgreSQL with zero data loss during go-live.",
-    ],
-
+      "Architected and shipped a production membership management system using Next.js, TypeScript, and Supabase (PostgreSQL), serving a live organization with 3,000+ member records.",
+      "Implemented role-based access control (RBAC) through Next.js Middleware, securing separate admin and member portals with server-side JWT session validation.",
+      "Designed a 40+ field normalized PostgreSQL data model covering member profiles, church records, educational history, family background, and ministry involvement.",
+      "Built configurable reports with live search, multi-criteria filtering, toggleable columns, and one-click CSV export, reducing manual reporting time by ~80%.",
+      "Deployed to Vercel with continuous deployment and migrated 3,000+ historical records into PostgreSQL with zero data loss during go-live.",
+    ]
   },
 
   {
@@ -31,9 +30,10 @@ const experiences = [
     location: "Iligan City, Philippines",
     icon: <Palette size={18} color="#f9a8c9" />,
     bullets: [
-      "Designed 15+ user flows and a clickable Figma prototype for a web and mobile reforestation platform.",
-      "Handed off developer-ready specs with annotated components, cutting clarification rounds for a 4-person dev team.",
-    ],
+      "Designed the eTanom Planter's Interface, a responsive web and mobile reforestation platform, using Figma and user-centered design principles.",
+      "Mapped and prototyped 8+ end-to-end user flows including onboarding, OTP verification, order management, earnings tracking, withdrawals, and in-app messaging.",
+      "Built a WCAG-compliant color system with documented contrast ratios and delivered developer handoff documentation for a 4-person engineering team.",
+    ]
   },
 ]
 
