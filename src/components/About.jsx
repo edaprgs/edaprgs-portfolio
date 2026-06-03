@@ -62,7 +62,7 @@ function About() {
           >
             I'm a{" "}
             <strong style={{ color: "#f9a8c9", fontWeight: 500 }}>
-              BS Computer Science graduate
+              BS Computer Science graduate, Cum Laude
             </strong>{" "}
             from{" "}
             <strong style={{ color: "#f0d8e8", fontWeight: 500 }}>
@@ -82,12 +82,12 @@ function About() {
           >
             I enjoy working across the stack — currently building with{" "}
             <strong style={{ color: "#f9a8c9" }}>
-              React, Next.js, Tailwind CSS, and Supabase
+              React, Next.js, Tailwind CSS, Supabase, and the Gemini API
             </strong>
             , though I'm always exploring new tools and technologies. Most
             recently, I built a full-stack church membership management system
-            featuring authentication, analytics dashboards, role-based access,
-            and member record management.
+            featuring RBAC, dual user portals, analytics dashboards, and
+            AI-powered report summarization and natural language Q&A via the Gemini API.
           </p>
 
           <p
@@ -99,8 +99,8 @@ function About() {
             }}
           >
             I bring production experience to the table — a live system managing 3,000+ 
-            real users, built and deployed solo. I'm looking for a team where I can 
-            contribute meaningful work from day one.
+            real users, built and deployed solo. My code is in production, not just on GitHub. 
+            I'm looking for a team where I can contribute meaningful work from day one.
           </p>
         </div>
 
@@ -141,19 +141,19 @@ function About() {
               icon: <Code2 size={18} color="#f9a8c9" />,
               label: "Tech Stack",
               value:
-                "React, Next.js, Tailwind CSS, Supabase, PostgreSQL, JavaScript, and TypeScript — with an eye toward learning more.",
+                "React, Next.js, TypeScript, Tailwind CSS, Supabase, PostgreSQL, Gemini API — with an eye toward learning more.",
             },
             {
               icon: <LayoutDashboard size={18} color="#f9a8c9" />,
               label: "Latest Project",
               value:
-                "Built a full-stack Church Membership Management System with role-based authentication, analytics dashboards, and complete member record management.",
+                "Built a full-stack Church Membership Management System with RBAC, dual user portals, configurable reports with CSV export, and Gemini API integration for AI-powered report summarization and natural language Q&A.",
             },
             {
               icon: <Briefcase size={18} color="#f9a8c9" />,
               label: "Career Goal",
               value:
-                "Seeking a junior full-stack or frontend engineer role where I can ship production-grade features and grow into more complex distributed systems.",
+                "Seeking a junior full-stack or frontend engineer role at the intersection of AI development and practical business tooling — where I can ship production-grade features from day one.",
             },
           ].map(({ icon, label, value }) => (
             <div

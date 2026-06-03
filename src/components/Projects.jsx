@@ -18,13 +18,14 @@ const projects = [
 
     icon: <Church size={22} color="#f9a8c9" />,
 
-    desc: "Production membership management platform built with Next.js, TypeScript, Supabase, and PostgreSQL. Features RBAC-secured admin and member portals, configurable reports with CSV export, account linking workflows, automated field computations, and support for 3,000+ member records.",
+    desc: "Production membership management platform with an AI layer built on Next.js, TypeScript, Supabase, and PostgreSQL. Features RBAC-secured dual portals (admin + member self-service), Gemini API integration for AI-powered report summarization and natural language Q&A, configurable reports with CSV export, and support for 3,000+ member records.",
     tech: [
       "Next.js",
       "TypeScript",
       "Tailwind CSS",
       "Supabase",
       "PostgreSQL",
+      "Gemini API",
       "RBAC",
       "Vercel",
     ],
@@ -44,7 +45,7 @@ const projects = [
     icon: <Hospital size={22} color="#60a5fa" />,
 
     desc:
-      "Multi-role healthcare management platform built with Flask and MySQL. Supports administrators, doctors, medtechs, and receptionists with role-based authentication, real-time notifications using Flask-SocketIO, Cloudinary-powered file uploads, automated email workflows, and audit logging.",
+      "Multi-role healthcare management platform built with Flask and MySQL. Supports administrators, doctors, medtechs, and receptionists with Flask-Login RBAC, real-time cross-role notifications via Flask-SocketIO, Cloudinary-powered file uploads, Flask-Mail automated credential emails, and full audit logging via MySQL stored procedures.",
 
     tech: [
       "Python",
@@ -69,7 +70,7 @@ const projects = [
     icon: <Brain size={22} color="#c084fc" />,
 
     desc:
-      "Deep learning project that classifies four hair types using a custom dataset of 6,000 images. Built with TensorFlow and Keras, incorporating data augmentation techniques and achieving 79.67% test accuracy with minimal overfitting.",
+      "Deep learning project classifying 4 hair types (coily, curly, straight, wavy) on a custom 6,000-image dataset curated from Kaggle, Google, and Pinterest. Built with TensorFlow and Keras, applying data augmentation (rotation, zoom, flip, brightness) to improve generalization; achieved 79.67% test accuracy over 20 epochs with minimal overfitting.",
 
     tech: [
       "Python",

@@ -9,17 +9,21 @@ import {
 
 const experiences = [
   {
-    role: "Full-Stack Developer (Volunteer)",
-    company: "United Church of Christ in the Philippines - Iligan",
+    role: "Full-Stack Developer & AI Integration (Volunteer)",
+    company: "United Church of Christ in the Philippines – Iligan",
     period: "Jul 2025 – Present",
     location: "Iligan City, Philippines",
     icon: <Database size={18} color="#f9a8c9" />,
     bullets: [
-      "Architected and shipped a production membership management system using Next.js, TypeScript, and Supabase (PostgreSQL), serving a live organization with 3,000+ member records.",
-      "Implemented role-based access control (RBAC) through Next.js Middleware, securing separate admin and member portals with server-side JWT session validation.",
-      "Designed a 40+ field normalized PostgreSQL data model covering member profiles, church records, educational history, family background, and ministry involvement.",
-      "Built configurable reports with live search, multi-criteria filtering, toggleable columns, and one-click CSV export, reducing manual reporting time by ~80%.",
-      "Deployed to Vercel with continuous deployment and migrated 3,000+ historical records into PostgreSQL with zero data loss during go-live.",
+      "Architected and shipped a full-stack membership management system using Next.js (App Router), TypeScript, and Supabase (PostgreSQL), serving a live organization with 3,000+ member records.",
+      "Integrated the Gemini API to build an AI-powered report summarization feature — admins generate a filtered member report and receive a natural language summary of demographics, trends, and anomalies, eliminating manual data interpretation.",
+      "Built a natural language Q&A interface powered by the Gemini API, enabling non-technical admins to query membership data conversationally (e.g. \"How many active members are in Zone 3?\") without writing queries or navigating filters.",
+      "Implemented role-based access control (RBAC) via Next.js Middleware — intercepting every request server-side, verifying Supabase JWT sessions, and routing admin and member users to separate portals with no client-side enforcement gaps.",
+      "Built two fully separate user portals: an admin dashboard (member directory, AI tools, reports, settings) and a self-service member portal where members can view and update their own profiles.",
+      "Designed a 40+ field normalized member data model in PostgreSQL covering personal info, family background, church records, educational history, and ministry involvement.",
+      "Developed a typed data access layer in TypeScript with batched pagination (1,000-row chunks) to reliably fetch all records beyond Supabase's default query limit.",
+      "Built a configurable reports module with live search, multi-criteria filtering, toggleable column visibility, and one-click CSV export — reducing manual reporting time by ~80%.",
+      "Deployed to Vercel with continuous deployment; migrated and validated 3,000+ historical records into PostgreSQL with zero data loss during go-live.",
     ]
   },
 
@@ -30,9 +34,10 @@ const experiences = [
     location: "Iligan City, Philippines",
     icon: <Palette size={18} color="#f9a8c9" />,
     bullets: [
-      "Designed the eTanom Planter's Interface, a responsive web and mobile reforestation platform, using Figma and user-centered design principles.",
-      "Mapped and prototyped 8+ end-to-end user flows including onboarding, OTP verification, order management, earnings tracking, withdrawals, and in-app messaging.",
-      "Built a WCAG-compliant color system with documented contrast ratios and delivered developer handoff documentation for a 4-person engineering team.",
+      "Designed the eTanom Planter's Interface — a reforestation platform for community planters, delivered with responsive layouts for both web and mobile.",
+      "Mapped and prototyped 8+ end-to-end user flows: multi-step onboarding with OTP phone verification, order accept/decline with structured decline reasons, image-upload proof-of-planting, earnings tracking with withdrawal flows (GCash, Maya, bank), and in-app messaging.",
+      "Built a full WCAG-compliant color system with documented contrast ratios across 9 shade levels, ensuring AA/AAA compliance on both light and dark surfaces.",
+      "Delivered developer handoff documentation with annotated components and interaction states (default, hover, active, disabled, error, success), reducing clarification rounds for a 4-person engineering team.",
     ]
   },
 ]

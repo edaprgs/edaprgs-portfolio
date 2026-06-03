@@ -5,7 +5,7 @@ import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaPython } from "react-icons/fa"
 import {
   SiFigma, SiJira, SiPostman, SiTailwindcss, SiFlask,
   SiPostgresql, SiMysql, SiVercel, SiNextdotjs, SiSupabase,
-  SiTypescript, SiGit,
+  SiTypescript, SiGit, SiGooglegemini,
 } from "react-icons/si"
 
 const categories = [
@@ -34,6 +34,13 @@ const categories = [
       { name: "PostgreSQL", icon: <SiPostgresql />,  color: "#93c5fd" },
       { name: "MySQL",      icon: <SiMysql />,       color: "#fb923c" },
       { name: "Flask",      icon: <SiFlask />,       color: "#86efac" },
+    ],
+  },
+  {
+    label: "AI & LLM",
+    skills: [
+      { name: "Gemini API", icon: <SiGooglegemini />, color: "#a78bfa" },
+      { name: "Prompt Eng.", icon: <span style={{ fontSize: "1.6rem" }}>✦</span>, color: "#f9a8c9" },
     ],
   },
   {

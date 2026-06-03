@@ -7,7 +7,7 @@ import { Download } from "lucide-react"
 
 const roles = [
   "Full-Stack Web Developer",
-  "Next.js · React · Supabase",
+  "Next.js · Supabase · AI Integration"
 ]
 
 function Hero() {

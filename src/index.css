@@ -142,3 +142,20 @@ body::before {
 ::-webkit-scrollbar { width: 5px; }
 ::-webkit-scrollbar-track { background: #0f0610; }
 ::-webkit-scrollbar-thumb { background: var(--mauve); border-radius: 10px; }
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #f9a8c9 !important;
+}
+
+.swiper-pagination-bullet {
+  background: rgba(249, 168, 201, 0.4) !important;
+}
+
+.swiper-pagination-bullet-active {
+  background: #f9a8c9 !important;
+}
+
+.swiper {
+  overflow: visible;
+}
