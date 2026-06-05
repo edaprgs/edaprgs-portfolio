@@ -66,7 +66,7 @@ function Contact() {
             </h3>
             {[
               { Icon: FaMapMarkerAlt, text: "General Trias, Cavite, Philippines" },
-              { Icon: FaEnvelope,     text: "edagrace.paragoso@gmail.com" },
+              { Icon: FaEnvelope,     text: "edaparagoso2002@gmail.com" },
               { Icon: FaPhone,        text: "+63 992-291-6852" },
             ].map(({ Icon, text }) => (
               <p key={text} className="flex items-center gap-3 mb-3"
@@ -82,7 +82,7 @@ function Contact() {
             {[
               { href: "https://github.com/edaprgs", Icon: FaGithub },
               { href: "https://www.linkedin.com/in/eda-grace-paragoso-2877ba40a/", Icon: FaLinkedin },
-              { href: "mailto:edagrace.paragoso@gmail.com", Icon: FaEnvelope },
+              { href: "mailto:edaparagoso2002@gmail.com", Icon: FaEnvelope },
             ].map(({ href, Icon }) => (
               <a key={href} href={href} target="_blank" rel="noreferrer"
                 className="transition-all duration-300"
