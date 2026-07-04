@@ -54,7 +54,7 @@ export default function Contact() {
         viewport={{ once: true }} transition={{ duration: 0.65 }} style={{ marginBottom: "2rem" }}>
         <span style={{ fontSize: "0.7rem", fontWeight: 600, letterSpacing: "0.14em",
           textTransform: "uppercase", color: "var(--rose)", display: "block", marginBottom: "0.6rem" }}>
-          05 — Contact
+          05 · Contact
         </span>
         <h2 style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)", fontWeight: 700,
           letterSpacing: "-0.02em", lineHeight: 1.1, marginBottom: "0.6rem" }} className="grad-text">

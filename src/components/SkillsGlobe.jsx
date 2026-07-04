@@ -30,10 +30,10 @@ const SKILLS = [
 
 // category palette (light-mode readable)
 const CAT_COLORS = [
-  "#b52a5d", // Frontend — rose
-  "#5b2a82", // Backend — purple
-  "#c084a8", // AI — mauve-pink
-  "#7e3460", // Tools — deep mauve
+  "#b52a5d", // Frontend: rose
+  "#5b2a82", // Backend: purple
+  "#c084a8", // AI: mauve-pink
+  "#7e3460", // Tools: deep mauve
 ]
 
 function fibonacciSphere(n) {

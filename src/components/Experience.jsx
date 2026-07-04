@@ -38,7 +38,7 @@ const experiences = [
     color: "#7e3460",
     Icon: Palette,
     badge: "Figma · 8+ flows · WCAG compliant",
-    shortDesc: "Designed the eTanom Planter's Interface — a reforestation platform — covering responsive web and mobile layouts across 8+ end-to-end user flows.",
+    shortDesc: "Designed the eTanom Planter's Interface, a reforestation platform, covering responsive web and mobile layouts across 8+ end-to-end user flows.",
     tech: ["Figma", "Prototyping", "WCAG", "UI/UX", "Responsive Design"],
     bullets: [
       "Designed the eTanom Planter's Interface, a reforestation platform, covering responsive web and mobile layouts.",
@@ -121,7 +121,7 @@ function RepoCard({ exp, isSelected, onClick }) {
         {exp.shortDesc}
       </p>
 
-      {/* Footer row — GitHub-style meta */}
+      {/* Footer row: GitHub-style meta */}
       <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
         {exp.tech.slice(0, 3).map(t => (
           <span key={t} style={{ display: "flex", alignItems: "center", gap: "0.3rem", fontSize: "0.72rem", color: "var(--text-dim)" }}>

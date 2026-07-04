@@ -2,7 +2,7 @@ import { motion } from "framer-motion"
 import { Code2, Palette, Brain, Database, Server, Rocket } from "lucide-react"
 
 const services = [
-  { icon: Code2,    title:"Full-Stack Development", desc:"End-to-end web apps with React, Next.js, and TypeScript — from pixel-perfect UI to production APIs.", color:"#e879a0" },
+  { icon: Code2,    title:"Full-Stack Development", desc:"End-to-end web apps with React, Next.js, and TypeScript: from pixel-perfect UI to production APIs.", color:"#e879a0" },
   { icon: Palette,  title:"UI/UX Design",           desc:"Figma wireframes, WCAG-compliant color systems, responsive prototypes, and developer-ready handoffs.", color:"#c084fc" },
   { icon: Brain,    title:"AI Integration",          desc:"Gemini API for report summarization, natural language Q&A over structured data, and smart admin tools.", color:"#a78bfa" },
   { icon: Database, title:"Database Architecture",  desc:"Normalized PostgreSQL schemas, Supabase, batched pagination, and type-safe data access layers.", color:"#86efac" },

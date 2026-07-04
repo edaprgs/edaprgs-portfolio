@@ -175,7 +175,7 @@ export default function Home() {
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.12 }}
           style={{ fontSize: "0.8rem", fontWeight: 500, color: "var(--text-muted)", marginBottom: "0.55rem", minHeight: "1.3em", display: "flex", alignItems: "center", gap: "0.35rem" }}>
-          <span style={{ color: "var(--rose)", opacity: 0.5 }}>—</span>
+          <span style={{ color: "var(--rose)", opacity: 0.5 }}>·</span>
           <span>{displayed}</span>
           <span style={{ display: "inline-block", width: 2, height: "0.85em", background: "var(--rose)", verticalAlign: "middle", animation: "blink 1.1s step-end infinite" }}/>
         </motion.div>
@@ -217,7 +217,7 @@ export default function Home() {
       {/* ── Card Grid ── */}
       <div style={{ flex: 1, minHeight: 0, display: "grid", gridTemplateColumns: "1.5fr 1fr", gridTemplateRows: "minmax(0,1fr) minmax(0,1fr)", gap: "0.65rem" }}>
 
-        {/* ① Projects Showcase — left info + right vertical scroll stack */}
+        {/* ① Projects Showcase: left info + right vertical scroll stack */}
         <div className="home-card" onClick={() => setPage("projects")}
           style={{ cursor: "pointer", flexDirection: "row", gap: "1rem", padding: "1.1rem" }}>
           {/* Left: icon + title + description */}
@@ -238,7 +238,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ② Skills & Tools — 2 marquee rows */}
+        {/* ② Skills & Tools: 2 marquee rows */}
         <div className="home-card" onClick={() => setPage("skills")} style={{ cursor: "pointer" }}>
           <CardHeader Icon={Wrench} title="Skills & Tools" sub="Web, frontend, and backend technologies."/>
           <div style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column", justifyContent: "center", gap: "0.38rem", overflow: "hidden" }}>
@@ -254,7 +254,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ③ Achievements — flashcard */}
+        {/* ③ Achievements: flashcard */}
         <div className="home-card" onClick={() => advAch(1)} style={{ cursor: "pointer", position: "relative" }}>
           <CardHeader Icon={Award} title="Achievements" sub="Click to browse · auto-advances"/>
           <div style={{ flex: 1, minHeight: 0, position: "relative", overflow: "hidden" }}>
@@ -297,7 +297,7 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ④ Career — big logo icons */}
+        {/* ④ Career: big logo icons */}
         <div className="home-card" onClick={() => setPage("experience")} style={{ cursor: "pointer" }}>
           <CardHeader Icon={Briefcase} title="Career" sub="Professional journey & work experience."/>
           <div style={{ flex: 1, minHeight: 0, display: "flex", alignItems: "center", justifyContent: "center", gap: "1.2rem" }}>

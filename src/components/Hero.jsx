@@ -80,7 +80,7 @@ export default function Hero() {
       {/* ── Sub ── */}
       <motion.p {...fade(0.18)} style={{ fontSize:"clamp(0.92rem,1.6vw,1.08rem)", color:"var(--text-muted)",
         lineHeight:1.8, maxWidth:480, marginBottom:"2.8rem" }}>
-        I build full-stack web apps, design clean interfaces, and integrate AI where it adds real value — shipped to real users.
+        I build full-stack web apps, design clean interfaces, and integrate AI where it adds real value. Shipped to real users.
       </motion.p>
 
       {/* ── CTAs ── */}
