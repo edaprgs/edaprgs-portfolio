@@ -1,0 +1,53 @@
+import { useState } from "react"
+import { useTheme } from "../context/ThemeContext"
+import { usePage } from "../context/PageContext"
+import { Sun, Moon, Menu, X } from "lucide-react"
+
+const links = ["home","about","experience","skills","projects","contact"]
+
+export default function MobileNav() {
+  const { dark, toggle } = useTheme()
+  const { page, setPage } = usePage()
+  const [open, setOpen] = useState(false)
+
+  const go = (id) => { setPage(id); setOpen(false) }
+
+  return (
+    <>
+      <header className="mobile-nav">
+        <span style={{ fontSize:"1rem", fontWeight:700, color:"var(--body-color)" }}>
+          Eda Grace <span style={{ color:"var(--rose)" }}>Paragoso</span>
+        </span>
+        <div style={{ display:"flex", alignItems:"center", gap:"0.75rem" }}>
+          <button onClick={toggle} style={{ background:"none", border:"none", cursor:"pointer", color:"var(--text-muted)", display:"flex" }}>
+            {dark ? <Sun size={16}/> : <Moon size={16}/>}
+          </button>
+          <button onClick={() => setOpen(o => !o)} style={{ background:"none", border:"none", cursor:"pointer", color:"var(--text-muted)", display:"flex" }}>
+            {open ? <X size={18}/> : <Menu size={18}/>}
+          </button>
+        </div>
+      </header>
+
+      {open && (
+        <div style={{
+          position:"fixed", top:"3.5rem", left:0, right:0, bottom:0,
+          background:"var(--bg-sidebar)", zIndex:98,
+          padding:"2rem 1.5rem", display:"flex", flexDirection:"column", gap:"0.5rem",
+        }}>
+          {links.map(id => (
+            <button key={id} onClick={() => go(id)}
+              style={{
+                background:"none", border:"none", cursor:"pointer",
+                fontSize:"0.95rem", fontWeight: page === id ? 600 : 400,
+                color: page === id ? "var(--rose)" : "var(--text-muted)",
+                padding:"0.8rem 0", borderBottom:"1px solid var(--divider)",
+                textAlign:"left", transition:"color 0.2s",
+              }}>
+              {id.charAt(0).toUpperCase() + id.slice(1)}
+            </button>
+          ))}
+        </div>
+      )}
+    </>
+  )
+}

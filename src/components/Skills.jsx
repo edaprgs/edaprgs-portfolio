@@ -1,116 +1,106 @@
-// src/components/Skills.jsx
-
-import useScrollReveal from "../hooks/useScrollReveal"
-import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaPython } from "react-icons/fa"
+import { motion } from "framer-motion"
+import SkillsGlobe from "./SkillsGlobe"
 import {
-  SiFigma, SiJira, SiPostman, SiTailwindcss, SiFlask,
-  SiPostgresql, SiMysql, SiVercel, SiNextdotjs, SiSupabase,
-  SiTypescript, SiGit, SiGooglegemini,
+  SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiPython,
+  SiHtml5, SiCss, SiTailwindcss, SiSupabase, SiPostgresql,
+  SiMysql, SiFlask, SiNodedotjs, SiSocketdotio, SiCloudinary,
+  SiGooglegemini, SiTensorflow, SiFigma, SiGit, SiVercel,
+  SiFramer, SiPostman,
 } from "react-icons/si"
+import { Wrench } from "lucide-react"
 
-const categories = [
-  {
-    label: "Languages",
-    skills: [
-      { name: "JavaScript", icon: <FaJs />,           color: "#facc15" },
-      { name: "TypeScript", icon: <SiTypescript />,   color: "#60a5fa" },
-      { name: "Python",     icon: <FaPython />,       color: "#fde68a" },
-      { name: "HTML",       icon: <FaHtml5 />,        color: "#f97316" },
-      { name: "CSS",        icon: <FaCss3Alt />,      color: "#60a5fa" },
-    ],
-  },
-  {
-    label: "Frontend",
-    skills: [
-      { name: "React",      icon: <FaReact />,        color: "#67e8f9" },
-      { name: "Next.js",    icon: <SiNextdotjs />,    color: "#f0d8e8" },
-      { name: "Tailwind",   icon: <SiTailwindcss />,  color: "#67e8f9" },
-    ],
-  },
-  {
-    label: "Backend & Data",
-    skills: [
-      { name: "Supabase",   icon: <SiSupabase />,    color: "#86efac" },
-      { name: "PostgreSQL", icon: <SiPostgresql />,  color: "#93c5fd" },
-      { name: "MySQL",      icon: <SiMysql />,       color: "#fb923c" },
-      { name: "Flask",      icon: <SiFlask />,       color: "#86efac" },
-    ],
-  },
-  {
-    label: "AI & LLM",
-    skills: [
-      { name: "Gemini API", icon: <SiGooglegemini />, color: "#a78bfa" },
-      { name: "Prompt Eng.", icon: <span style={{ fontSize: "1.6rem" }}>✦</span>, color: "#f9a8c9" },
-    ],
-  },
-  {
-    label: "Tools & Design",
-    skills: [
-      { name: "Figma",   icon: <SiFigma />,    color: "#f9a8d4" },
-      { name: "Git",     icon: <SiGit />,      color: "#f97316" },
-      { name: "Vercel",  icon: <SiVercel />,   color: "#f0d8e8" },
-      { name: "Postman", icon: <SiPostman />,  color: "#fb923c" },
-      { name: "Jira",    icon: <SiJira />,     color: "#93c5fd" },
-    ],
-  },
-]
-
-function SkillCard({ skill }) {
-  return (
-    <div
-      className="glass flex flex-col items-center gap-3 p-5 cursor-default transition-all duration-300"
-      style={{ borderColor: "rgba(249,168,201,0.12)" }}
-      onMouseEnter={e => {
-        e.currentTarget.style.borderColor = skill.color + "60"
-        e.currentTarget.style.transform = "translateY(-4px)"
-        e.currentTarget.style.boxShadow = `0 12px 40px ${skill.color}22`
-      }}
-      onMouseLeave={e => {
-        e.currentTarget.style.borderColor = "rgba(249,168,201,0.12)"
-        e.currentTarget.style.transform = "translateY(0)"
-        e.currentTarget.style.boxShadow = "none"
-      }}
-    >
-      <span style={{ fontSize: "2rem", color: skill.color }}>{skill.icon}</span>
-      <span style={{ fontSize: "0.72rem", color: "rgba(240,216,232,0.6)", letterSpacing: "0.08em", fontFamily: "'DM Sans', sans-serif" }}>
-        {skill.name}
-      </span>
-    </div>
-  )
+const ICON_MAP = {
+  "JavaScript":       SiJavascript,
+  "TypeScript":       SiTypescript,
+  "Python":           SiPython,
+  "HTML5":            SiHtml5,
+  "CSS3":             SiCss,
+  "React":            SiReact,
+  "Next.js":          SiNextdotjs,
+  "Tailwind CSS":     SiTailwindcss,
+  "Framer Motion":    SiFramer,
+  "Supabase":         SiSupabase,
+  "PostgreSQL":       SiPostgresql,
+  "MySQL":            SiMysql,
+  "Flask":            SiFlask,
+  "Node.js":          SiNodedotjs,
+  "SocketIO":         SiSocketdotio,
+  "Cloudinary":       SiCloudinary,
+  "Gemini API":       SiGooglegemini,
+  "TensorFlow":       SiTensorflow,
+  "Figma":            SiFigma,
+  "Git":              SiGit,
+  "Vercel":           SiVercel,
+  "Postman":          SiPostman,
 }
 
-function Skills() {
-  const ref = useScrollReveal()
+const categories = [
+  { label: "Languages",      color: "#9a1847",  skills: ["JavaScript", "TypeScript", "Python", "HTML5", "CSS3", "SQL"] },
+  { label: "Frontend",       color: "#7e3460",  skills: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "Shadcn UI"] },
+  { label: "Backend & Data", color: "#5b2a82",  skills: ["Supabase", "PostgreSQL", "MySQL", "Flask", "Node.js", "SocketIO"] },
+  { label: "AI & LLM",       color: "#c084a8",  skills: ["Gemini API", "TensorFlow", "Keras", "CNN", "Prompt Engineering"] },
+  { label: "Tools & Design", color: "#b52a5d",  skills: ["Figma", "Git", "Vercel", "Postman", "Cloudinary", "WCAG"] },
+]
+
+export default function Skills() {
   return (
-    <section id="skills" ref={ref} className="reveal px-6 md:px-20">
+    <section id="skills" className="ide-section">
+      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }} transition={{ duration: 0.65 }} style={{ marginBottom: "1.6rem" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.6rem" }}>
+          <Wrench size={14} style={{ color: "var(--rose)" }}/>
+          <span style={{ fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.14em",
+            textTransform: "uppercase", color: "var(--rose)" }}>
+            03 · Skills
+          </span>
+        </div>
+        <h2 style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)", fontWeight: 700,
+          letterSpacing: "-0.02em", lineHeight: 1.1 }} className="grad-text">
+          Skills & Technologies
+        </h2>
+      </motion.div>
 
-      <div className="mb-14 text-center">
-        <span className="section-sub">What I work with</span>
-        <h2 className="section-title grad-text">Skills & Technologies</h2>
-      </div>
+      {/* Globe */}
+      <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
+        transition={{ duration: 1 }} style={{ marginBottom: "2rem" }}>
+        <SkillsGlobe/>
+      </motion.div>
 
-      <div className="space-y-10">
-        {categories.map(({ label, skills }) => (
-          <div key={label}>
-            <p style={{
-              fontSize: "0.7rem",
-              fontWeight: 600,
-              letterSpacing: "0.16em",
-              textTransform: "uppercase",
-              color: "rgba(249,168,201,0.5)",
-              marginBottom: "1rem",
-              fontFamily: "'DM Sans', sans-serif",
-            }}>
-              {label}
-            </p>
-            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 gap-4">
-              {skills.map((s, i) => <SkillCard key={i} skill={s} />)}
+      {/* Category breakdown */}
+      <div style={{ display: "flex", flexDirection: "column", gap: "1.4rem" }}>
+        {categories.map(({ label, color, skills }, i) => (
+          <motion.div key={label}
+            initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.06 }}>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.65rem" }}>
+              <span style={{ width: 6, height: 6, borderRadius: "50%", background: color, display: "block", flexShrink: 0 }}/>
+              <span style={{ fontSize: "0.7rem", fontWeight: 700, color, letterSpacing: "0.1em", textTransform: "uppercase" }}>
+                {label}
+              </span>
+              <div style={{ flex: 1, height: 1, background: "var(--divider)" }}/>
             </div>
-          </div>
+            <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem" }}>
+              {skills.map(s => {
+                const Icon = ICON_MAP[s]
+                return (
+                  <span key={s} style={{
+                    display: "inline-flex", alignItems: "center", gap: "0.35rem",
+                    padding: "0.3rem 0.85rem", borderRadius: 999,
+                    background: "var(--surface)", border: "1px solid var(--glass-border)",
+                    fontSize: "0.8rem", color: "var(--text-muted)",
+                    transition: "all 0.2s", cursor: "default",
+                  }}
+                    onMouseEnter={e => { e.currentTarget.style.borderColor = color; e.currentTarget.style.color = color; e.currentTarget.style.background = "var(--surface-2)" }}
+                    onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--glass-border)"; e.currentTarget.style.color = "var(--text-muted)"; e.currentTarget.style.background = "var(--surface)" }}>
+                    {Icon && <Icon size={13} style={{ flexShrink: 0 }}/>}
+                    {s}
+                  </span>
+                )
+              })}
+            </div>
+          </motion.div>
         ))}
       </div>
     </section>
   )
 }
-
-export default Skills

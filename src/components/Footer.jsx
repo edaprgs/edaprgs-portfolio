@@ -1,46 +1,34 @@
-// src/components/Footer.jsx
+import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa"
 
-const links = ["home", "about", "experience", "skills", "projects", "contact"]
-
-function Footer() {
+export default function Footer() {
   return (
-    <footer
-      className="py-12 px-6"
-      style={{ borderTop: "1px solid rgba(249,168,201,0.08)" }}
-    >
-      {/* nav links */}
-      <div className="flex justify-center flex-wrap gap-6 mb-8">
-        {links.map(id => (
-          <a
-            key={id}
-            href={`#${id}`}
-            style={{
-              fontSize: "0.72rem",
-              letterSpacing: "0.14em",
-              textTransform: "uppercase",
-              color: "rgba(240,216,232,0.35)",
-              fontFamily: "'DM Sans', sans-serif",
-              transition: "color 0.2s",
-            }}
-            onMouseEnter={e => e.currentTarget.style.color = "#f9a8c9"}
-            onMouseLeave={e => e.currentTarget.style.color = "rgba(240,216,232,0.35)"}
-          >
-            {id}
-          </a>
-        ))}
+    <footer style={{ padding: "2rem 3rem", borderTop: "1px solid var(--divider)" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between",
+        flexWrap: "wrap", gap: "1rem", marginBottom: "1rem" }}>
+        <p style={{ fontSize: "0.95rem", fontWeight: 700, color: "var(--body-color)", letterSpacing: "-0.01em" }}>
+          Eda Grace{" "}
+          <em style={{ fontStyle: "normal", color: "var(--rose)" }}>Paragoso</em>
+        </p>
+        <div style={{ display: "flex", gap: "0.6rem" }}>
+          {[
+            { href: "https://github.com/edaprgs", Icon: FaGithub },
+            { href: "https://www.linkedin.com/in/eda-grace-paragoso-2877ba40a/", Icon: FaLinkedin },
+            { href: "mailto:edaparagoso2002@gmail.com", Icon: FaEnvelope },
+          ].map(({ href, Icon }) => (
+            <a key={href} href={href} target="_blank" rel="noreferrer"
+              style={{ width: 32, height: 32, borderRadius: 8, display: "flex", alignItems: "center",
+                justifyContent: "center", background: "var(--surface)", border: "1px solid var(--glass-border)",
+                color: "var(--text-muted)", transition: "all 0.2s" }}
+              onMouseEnter={e => { e.currentTarget.style.color = "var(--rose)"; e.currentTarget.style.transform = "translateY(-2px)" }}
+              onMouseLeave={e => { e.currentTarget.style.color = "var(--text-muted)"; e.currentTarget.style.transform = "translateY(0)" }}>
+              <Icon size={13}/>
+            </a>
+          ))}
+        </div>
       </div>
-
-      {/* divider */}
-      <div style={{ width: 40, height: 1, background: "rgba(249,168,201,0.2)", margin: "0 auto 1.5rem" }} />
-
-      <p style={{ textAlign: "center", fontSize: "0.88rem", color: "rgba(240,216,232,0.45)", letterSpacing: "0.03em" }}>
-        © 2026 Eda Grace Paragoso
-      </p>
-      <p style={{ textAlign: "center", marginTop: "0.35rem", fontSize: "0.75rem", color: "rgba(240,216,232,0.28)" }}>
-        Designed & built with React · Deployed on Vercel
+      <p style={{ fontSize: "0.74rem", color: "var(--text-muted)" }}>
+        © 2026 Eda Grace Paragoso · Built with React · Deployed on Vercel
       </p>
     </footer>
   )
 }
-
-export default Footer

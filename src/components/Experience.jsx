@@ -1,183 +1,299 @@
-// src/components/Experience.jsx
-
-import { motion } from "framer-motion"
-import {
-  Briefcase,
-  Database,
-  Palette,
-} from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { useState } from "react"
+import { Database, Palette, MapPin, Calendar, X, Briefcase, ExternalLink } from "lucide-react"
 
 const experiences = [
   {
-    role: "Full-Stack Developer & AI Integration (Volunteer)",
-    company: "United Church of Christ in the Philippines – Iligan",
-    period: "Jul 2025 – Present",
+    role: "Full-Stack Developer & AI Integration Engineer",
+    type: "Volunteer",
+    company: "United Church of Christ in the Philippines, Iligan",
+    companyShort: "UCCP Iligan",
+    logo: "/images/uccp-logo.png",
+    period: "Jul 2025 · Present",
     location: "Iligan City, Philippines",
-    icon: <Database size={18} color="#f9a8c9" />,
+    color: "#b52a5d",
+    Icon: Database,
+    badge: "Live in Production · 3,000+ members · AI-powered",
+    shortDesc: "Production-grade church membership system serving 3,000+ active records with a three-tier role system, AI-powered reporting via Gemini, and configurable CSV exports.",
+    tech: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Gemini API", "Zod", "Recharts", "Vercel"],
     bullets: [
-      "Architected and shipped a full-stack membership management system using Next.js (App Router), TypeScript, and Supabase (PostgreSQL), serving a live organization with 3,000+ member records.",
-      "Integrated the Gemini API to build an AI-powered report summarization feature — admins generate a filtered member report and receive a natural language summary of demographics, trends, and anomalies, eliminating manual data interpretation.",
-      "Built a natural language Q&A interface powered by the Gemini API, enabling non-technical admins to query membership data conversationally (e.g. \"How many active members are in Zone 3?\") without writing queries or navigating filters.",
-      "Implemented role-based access control (RBAC) via Next.js Middleware — intercepting every request server-side, verifying Supabase JWT sessions, and routing admin and member users to separate portals with no client-side enforcement gaps.",
-      "Built two fully separate user portals: an admin dashboard (member directory, AI tools, reports, settings) and a self-service member portal where members can view and update their own profiles.",
-      "Designed a 40+ field normalized member data model in PostgreSQL covering personal info, family background, church records, educational history, and ministry involvement.",
-      "Developed a typed data access layer in TypeScript with batched pagination (1,000-row chunks) to reliably fetch all records beyond Supabase's default query limit.",
-      "Built a configurable reports module with live search, multi-criteria filtering, toggleable column visibility, and one-click CSV export — reducing manual reporting time by ~80%.",
-      "Deployed to Vercel with continuous deployment; migrated and validated 3,000+ historical records into PostgreSQL with zero data loss during go-live.",
-    ]
+      "Built a production-grade church membership system using Next.js (App Router), TypeScript, and Supabase serving 3,000+ active member records.",
+      "Integrated the Gemini API for AI-powered report summarization and natural language Q&A over live membership data.",
+      "Implemented a three-tier role system (Admin, Staff, Member) via Next.js Middleware with fine-grained access control and zero client-side enforcement gaps.",
+      "Designed a 40+ field normalized PostgreSQL schema with Row Level Security covering personal, family, church, educational, and ministry data.",
+      "Built a configurable reports module with live search, multi-filter, toggleable columns, and one-click CSV export, cutting manual reporting time by ~80%.",
+      "Implemented 1,000-row batched pagination to reliably fetch all records beyond Supabase's default query ceiling.",
+      "Added CSP security headers, X-Frame-Options DENY, and Referrer Policy to the Next.js config for production hardening.",
+      "Migrated 3,000+ historical records to the new schema with zero data loss; deployed to Vercel with CI/CD.",
+    ],
   },
-
   {
     role: "UI/UX Design Intern",
-    company: "Sikai Inc.",
-    period: "Jun 2024 – Jul 2024",
+    type: "Internship",
+    company: "Sikai Inc. (eTanom)",
+    companyShort: "Sikai Inc.",
+    logo: "/images/etanom-logo.png",
+    period: "Jun 2024 · Jul 2024",
     location: "Iligan City, Philippines",
-    icon: <Palette size={18} color="#f9a8c9" />,
+    color: "#7e3460",
+    Icon: Palette,
+    badge: "Figma · 8+ flows · WCAG compliant",
+    shortDesc: "Designed the eTanom Planter's Interface — a reforestation platform — covering responsive web and mobile layouts across 8+ end-to-end user flows.",
+    tech: ["Figma", "Prototyping", "WCAG", "UI/UX", "Responsive Design"],
     bullets: [
-      "Designed the eTanom Planter's Interface — a reforestation platform for community planters, delivered with responsive layouts for both web and mobile.",
-      "Mapped and prototyped 8+ end-to-end user flows: multi-step onboarding with OTP phone verification, order accept/decline with structured decline reasons, image-upload proof-of-planting, earnings tracking with withdrawal flows (GCash, Maya, bank), and in-app messaging.",
-      "Built a full WCAG-compliant color system with documented contrast ratios across 9 shade levels, ensuring AA/AAA compliance on both light and dark surfaces.",
-      "Delivered developer handoff documentation with annotated components and interaction states (default, hover, active, disabled, error, success), reducing clarification rounds for a 4-person engineering team.",
-    ]
+      "Designed the eTanom Planter's Interface, a reforestation platform, covering responsive web and mobile layouts.",
+      "Prototyped 8+ end-to-end user flows: OTP onboarding, proof-of-planting photo uploads, earnings tracking, and in-app messaging.",
+      "Built a WCAG-compliant color system across 9 shade levels with AA/AAA contrast ratios on both light and dark surfaces.",
+      "Delivered annotated Figma handoffs with full interaction states and component specs, reducing dev clarification rounds for a 4-person engineering team.",
+    ],
   },
 ]
 
-function Experience() {
+const TECH_COLORS = {
+  "Next.js": "#000",
+  "TypeScript": "#3178c6",
+  "Supabase": "#3ecf8e",
+  "PostgreSQL": "#336791",
+  "Gemini API": "#8b5cf6",
+  "Zod": "#3068b7",
+  "Recharts": "#e8577a",
+  "Vercel": "#000",
+  "Figma": "#f24e1e",
+  "Prototyping": "#7e3460",
+  "WCAG": "#1a7f5a",
+  "UI/UX": "#b52a5d",
+  "Responsive Design": "#0ea5e9",
+}
+
+function RepoCard({ exp, isSelected, onClick }) {
+  const [hovered, setHovered] = useState(false)
+  const active = isSelected || hovered
+
   return (
-    <section id="experience" className="px-6 md:px-20">
-      
-      <div className="mb-14 text-center">
-        <span className="section-sub">My journey</span>
-        <h2 className="section-title grad-text">Experience</h2>
+    <motion.div
+      initial={{ opacity: 0, y: 16 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+      onClick={onClick}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      style={{
+        padding: "1.1rem 1.3rem",
+        borderRadius: 12,
+        background: isSelected ? `${exp.color}08` : "var(--glass-bg)",
+        border: `1px solid ${isSelected ? exp.color + "50" : active ? exp.color + "30" : "var(--glass-border)"}`,
+        cursor: "pointer",
+        transition: "all 0.2s",
+        transform: hovered && !isSelected ? "translateY(-2px)" : "translateY(0)",
+      }}>
+
+      {/* Header row */}
+      <div style={{ display: "flex", alignItems: "flex-start", gap: "0.75rem", marginBottom: "0.65rem" }}>
+        <div style={{
+          width: 36, height: 36, borderRadius: 9, overflow: "hidden", flexShrink: 0,
+          background: "#fff", border: `1px solid ${exp.color}22`,
+          display: "flex", alignItems: "center", justifyContent: "center",
+        }}>
+          <img src={exp.logo} alt={exp.companyShort} style={{ width: "80%", height: "80%", objectFit: "contain" }}/>
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap", marginBottom: "0.15rem" }}>
+            <span style={{ fontSize: "0.9rem", fontWeight: 700, color: exp.color, lineHeight: 1.3 }}>
+              {exp.companyShort}
+            </span>
+            <span style={{
+              fontSize: "0.6rem", fontWeight: 600, padding: "2px 8px", borderRadius: 999,
+              border: `1px solid ${exp.color}35`, color: exp.color,
+              background: `${exp.color}0e`, letterSpacing: "0.05em", textTransform: "uppercase",
+            }}>{exp.type}</span>
+          </div>
+          <p style={{ fontSize: "0.78rem", color: "var(--text-dim)", lineHeight: 1.3 }}>{exp.role}</p>
+        </div>
       </div>
 
-      <div className="relative max-w-3xl mx-auto pl-10">
-        
-        {/* timeline line */}
-        <div
-          className="absolute left-0 top-0 bottom-0 w-px"
-          style={{
-            background:
-              "linear-gradient(to bottom, transparent, #e879a0 20%, #e879a0 80%, transparent)",
-          }}
-        />
+      {/* Short description */}
+      <p style={{
+        fontSize: "0.82rem", color: "var(--text-muted)", lineHeight: 1.7,
+        marginBottom: "0.85rem",
+        display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden",
+      }}>
+        {exp.shortDesc}
+      </p>
 
-        <div className="space-y-10">
-          {experiences.map((exp, i) => (
-            <motion.div
-              key={i}
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, amount: 0.3 }}
-              transition={{
-                duration: 0.7,
-                delay: i * 0.1,
-                ease: [0.22, 1, 0.36, 1],
-              }}
-              className="relative glass p-7"
-              style={{
-                borderColor: "rgba(249,168,201,0.15)",
-              }}
-            >
-              {/* timeline dot */}
-              <span
-                className="absolute -left-[2.65rem] top-8 w-3 h-3 rounded-full border-2"
-                style={{
-                  background: "#0f0610",
-                  borderColor: "#e879a0",
-                  boxShadow: "0 0 10px rgba(232,121,160,0.6)",
-                }}
-              />
+      {/* Footer row — GitHub-style meta */}
+      <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
+        {exp.tech.slice(0, 3).map(t => (
+          <span key={t} style={{ display: "flex", alignItems: "center", gap: "0.3rem", fontSize: "0.72rem", color: "var(--text-dim)" }}>
+            <span style={{ width: 9, height: 9, borderRadius: "50%", background: TECH_COLORS[t] || exp.color, flexShrink: 0, display: "inline-block" }}/>
+            {t}
+          </span>
+        ))}
+        <span style={{ display: "flex", alignItems: "center", gap: "0.3rem", fontSize: "0.72rem", color: "var(--text-dim)", marginLeft: "auto" }}>
+          <Calendar size={11}/> {exp.period}
+        </span>
+      </div>
+    </motion.div>
+  )
+}
 
-              {/* top */}
-              <div className="flex items-start gap-4 mb-4">
-                
-                <div
-                  style={{
-                    width: 42,
-                    height: 42,
-                    borderRadius: "50%",
-                    background: "rgba(249,168,201,0.1)",
-                    border: "1px solid rgba(249,168,201,0.15)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    flexShrink: 0,
-                  }}
-                >
-                  {exp.icon}
-                </div>
+function DetailPanel({ exp, onClose }) {
+  return (
+    <motion.div
+      key={exp.role}
+      initial={{ opacity: 0, x: 40 }}
+      animate={{ opacity: 1, x: 0 }}
+      exit={{ opacity: 0, x: 40 }}
+      transition={{ duration: 0.28, ease: "easeOut" }}
+      style={{
+        background: "var(--glass-bg)",
+        border: "1px solid var(--glass-border)",
+        borderRadius: 14,
+        overflow: "hidden",
+        display: "flex",
+        flexDirection: "column",
+        height: "100%",
+      }}>
 
-                <div>
-                  <h3
-                    style={{
-                      fontSize: "1.2rem",
-                      fontWeight: 500,
-                      lineHeight: 1.3,
-                    }}
-                  >
-                    {exp.role}
-                  </h3>
+      {/* Panel header */}
+      <div style={{
+        padding: "1.1rem 1.3rem",
+        borderBottom: "1px solid var(--glass-border)",
+        display: "flex", alignItems: "flex-start", gap: "0.85rem",
+      }}>
+        <div style={{
+          width: 44, height: 44, borderRadius: 11, overflow: "hidden", flexShrink: 0,
+          background: "#fff", border: `1.5px solid ${exp.color}28`,
+          display: "flex", alignItems: "center", justifyContent: "center",
+          boxShadow: `0 2px 10px ${exp.color}14`,
+        }}>
+          <img src={exp.logo} alt={exp.company} style={{ width: "80%", height: "80%", objectFit: "contain" }}/>
+        </div>
+        <div style={{ flex: 1, minWidth: 0 }}>
+          <p style={{ fontSize: "0.95rem", fontWeight: 700, color: exp.color, lineHeight: 1.2, marginBottom: "0.18rem" }}>{exp.company}</p>
+          <p style={{ fontSize: "0.8rem", color: "var(--body-color)", fontWeight: 600, marginBottom: "0.3rem" }}>{exp.role}</p>
+          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+            <span style={{ display: "flex", alignItems: "center", gap: "0.3rem", fontSize: "0.72rem", color: "var(--text-dim)" }}>
+              <Calendar size={11}/> {exp.period}
+            </span>
+            <span style={{ display: "flex", alignItems: "center", gap: "0.3rem", fontSize: "0.72rem", color: "var(--text-dim)" }}>
+              <MapPin size={11}/> {exp.location}
+            </span>
+          </div>
+        </div>
+        <button onClick={onClose} style={{
+          width: 28, height: 28, borderRadius: 7, border: "none", cursor: "pointer",
+          background: "var(--surface)", display: "flex", alignItems: "center", justifyContent: "center",
+          color: "var(--text-dim)", flexShrink: 0, transition: "all 0.15s",
+        }}
+          onMouseEnter={e => { e.currentTarget.style.background = `${exp.color}18`; e.currentTarget.style.color = exp.color }}
+          onMouseLeave={e => { e.currentTarget.style.background = "var(--surface)"; e.currentTarget.style.color = "var(--text-dim)" }}>
+          <X size={14}/>
+        </button>
+      </div>
 
-                  <p
-                    style={{
-                      color: "#f9a8c9",
-                      fontSize: "0.85rem",
-                      fontWeight: 500,
-                      marginTop: 4,
-                    }}
-                  >
-                    {exp.company}
-                  </p>
-                </div>
-              </div>
+      {/* Badge */}
+      <div style={{ padding: "0.85rem 1.3rem 0" }}>
+        <div style={{
+          display: "inline-flex", alignItems: "center", gap: "0.4rem",
+          padding: "0.25rem 0.8rem", borderRadius: 999,
+          background: `${exp.color}0e`, border: `1px solid ${exp.color}25`,
+          fontSize: "0.7rem", fontWeight: 600, color: exp.color,
+        }}>
+          ✦ {exp.badge}
+        </div>
+      </div>
 
-              {/* meta */}
-              <p
-                style={{
-                  color: "rgba(240,216,232,0.45)",
-                  fontSize: "0.74rem",
-                  letterSpacing: "0.12em",
-                  marginBottom: "1rem",
-                  textTransform: "uppercase",
-                }}
-              >
-                {exp.period} · {exp.location}
-              </p>
+      {/* Bullets */}
+      <div style={{ flex: 1, overflowY: "auto", padding: "0.85rem 1.3rem", scrollbarWidth: "none" }}>
+        <p style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-dim)", marginBottom: "0.75rem" }}>
+          Highlights
+        </p>
+        <ul style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
+          {exp.bullets.map((b, i) => (
+            <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "0.7rem", fontSize: "0.84rem", color: "var(--text-muted)", lineHeight: 1.75 }}>
+              <span style={{ width: 5, height: 5, borderRadius: "50%", background: exp.color, flexShrink: 0, marginTop: "0.6rem" }}/>
+              {b}
+            </li>
+          ))}
+        </ul>
 
-              {/* bullets */}
-              <ul className="space-y-2">
-                {exp.bullets.map((b, j) => (
-                  <li
-                    key={j}
-                    className="flex items-start gap-3"
-                    style={{
-                      color: "rgba(240,216,232,0.72)",
-                      fontSize: "0.9rem",
-                      lineHeight: 1.7,
-                    }}
-                  >
-                    <span
-                      style={{
-                        color: "#f9a8c9",
-                        marginTop: "0.45rem",
-                        fontSize: "0.45rem",
-                        flexShrink: 0,
-                      }}
-                    >
-                      ◆
-                    </span>
+        {/* Tech stack */}
+        <div style={{ marginTop: "1.2rem" }}>
+          <p style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-dim)", marginBottom: "0.6rem" }}>
+            Tech Stack
+          </p>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
+            {exp.tech.map(t => (
+              <span key={t} style={{
+                display: "flex", alignItems: "center", gap: "0.3rem",
+                padding: "0.25rem 0.65rem", borderRadius: 999,
+                background: "var(--surface)", border: "1px solid var(--glass-border)",
+                fontSize: "0.72rem", color: "var(--text-muted)",
+              }}>
+                <span style={{ width: 7, height: 7, borderRadius: "50%", background: TECH_COLORS[t] || exp.color, flexShrink: 0 }}/>
+                {t}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </motion.div>
+  )
+}
 
-                    {b}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
+export default function Experience() {
+  const [selected, setSelected] = useState(null)
+
+  const toggle = (exp) => setSelected(s => s?.role === exp.role ? null : exp)
+
+  return (
+    <section id="experience" className="ide-section">
+      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }} transition={{ duration: 0.65 }} style={{ marginBottom: "2rem" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.6rem" }}>
+          <Briefcase size={14} style={{ color: "var(--rose)" }}/>
+          <span style={{ fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--rose)" }}>
+            02 · Experience
+          </span>
+        </div>
+        <h2 style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.1 }}
+          className="grad-text">
+          My Journey
+        </h2>
+        <p style={{ fontSize: "0.88rem", color: "var(--text-muted)", marginTop: "0.6rem", lineHeight: 1.7 }}>
+          Click any card to view full details.
+        </p>
+      </motion.div>
+
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: selected ? "1fr 1fr" : "1fr",
+        gap: "1rem",
+        alignItems: "start",
+        transition: "grid-template-columns 0.3s ease",
+      }}>
+        {/* Card list */}
+        <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+          {experiences.map(exp => (
+            <RepoCard
+              key={exp.role}
+              exp={exp}
+              isSelected={selected?.role === exp.role}
+              onClick={() => toggle(exp)}
+            />
           ))}
         </div>
+
+        {/* Detail panel */}
+        <AnimatePresence mode="wait">
+          {selected && (
+            <div style={{ position: "sticky", top: "1rem", minHeight: 420 }}>
+              <DetailPanel exp={selected} onClose={() => setSelected(null)}/>
+            </div>
+          )}
+        </AnimatePresence>
       </div>
     </section>
   )
 }
-
-export default Experience

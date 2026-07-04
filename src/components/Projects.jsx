@@ -1,271 +1,128 @@
-// src/components/Projects.jsx
-
-import useScrollReveal from "../hooks/useScrollReveal"
 import { motion } from "framer-motion"
-
-import {
-  Church,
-  Sprout,
-  Hospital,
-  Brain,
-  ExternalLink,
-} from "lucide-react"
-
+import { Church, Sprout, Hospital, Brain, ExternalLink, Timer, FolderOpen } from "lucide-react"
+import { FaGithub } from "react-icons/fa"
+import { useState } from "react"
 
 const projects = [
   {
-    title: "Church Membership Management System",
-
-    icon: <Church size={22} color="#f9a8c9" />,
-
-    desc: "Production membership management platform with an AI layer built on Next.js, TypeScript, Supabase, and PostgreSQL. Features RBAC-secured dual portals (admin + member self-service), Gemini API integration for AI-powered report summarization and natural language Q&A, configurable reports with CSV export, and support for 3,000+ member records.",
-    tech: [
-      "Next.js",
-      "TypeScript",
-      "Tailwind CSS",
-      "Supabase",
-      "PostgreSQL",
-      "Gemini API",
-      "RBAC",
-      "Vercel",
-    ],
-
-    accent: "#e879a0",
-
-    // github: "https://www.figma.com/design/a4593rDDQslYZMxCI6gh5O/eTanom-Planter-s-Interface-%7C-Paragoso?node-id=398-1875&t=2Fa3FuXY8H9pNd3e-0",
-
+    title: "Church Membership System",
+    icon: <Church size={18}/>,
+    desc: "Production membership platform for a local congregation with a three-tier role system (Admin, Staff, Member), AI-powered report summarization via Gemini, configurable CSV exports, and a 40+ field normalized schema. Serving 3,000+ active records.",
+    tech: ["Next.js", "TypeScript", "Tailwind v4", "Supabase", "PostgreSQL", "Gemini API", "Zod", "Recharts", "Vercel"],
+    accent: "#b52a5d",
     live: "https://uccpiligan.vercel.app/",
-
     image: "/images/church-management-preview.png",
   },
-
+  {
+    title: "Chrona Time Tracker",
+    icon: <Timer size={18}/>,
+    desc: "Full-featured time tracking platform for freelancers with automated activity capture via VS Code and Chrome extensions. Features a focus score engine, 52-week heatmap, multi-workspace support, rich text notes, and multi-currency invoice generation with PDF and CSV export.",
+    tech: ["Next.js", "TypeScript", "Tailwind v4", "Supabase", "Shadcn UI", "Tiptap", "Recharts", "VS Code Ext", "Chrome Ext", "Vercel"],
+    accent: "#7e3460",
+    live: "https://chrona-time-tracker.vercel.app",
+    image: "/images/chrona-time-tracker-preview.png",
+  },
   {
     title: "Clinic Management System",
-
-    icon: <Hospital size={22} color="#60a5fa" />,
-
-    desc:
-      "Multi-role healthcare management platform built with Flask and MySQL. Supports administrators, doctors, medtechs, and receptionists with Flask-Login RBAC, real-time cross-role notifications via Flask-SocketIO, Cloudinary-powered file uploads, Flask-Mail automated credential emails, and full audit logging via MySQL stored procedures.",
-
-    tech: [
-      "Python",
-      "Flask",
-      "MySQL",
-      "Flask-SocketIO",
-      "Cloudinary",
-      "Flask-Login",
-    ],
-
-    accent: "#60a5fa",
-
-    github:
-      "https://github.com/edaprgs/Clinic-Management-System",
-
+    icon: <Hospital size={18}/>,
+    desc: "Multi-role healthcare platform for small clinics with real-time cross-role notifications via SocketIO, Cloudinary file uploads, automated credential emails, and prescription assistance based on lab results and patient history. Supports four roles: Admin, Receptionist, Doctor, and Medical Technician.",
+    tech: ["Python", "Flask", "MySQL", "Flask-SocketIO", "Flask-Login", "Flask-Mail", "Cloudinary", "Jinja2"],
+    accent: "#9a6bc4",
+    github: "https://github.com/edaprgs/Clinic-Management-System",
     image: "/images/clinic-management-preview.png",
   },
-
   {
     title: "CNN Hair Type Recognition",
-
-    icon: <Brain size={22} color="#c084fc" />,
-
-    desc:
-      "Deep learning project classifying 4 hair types (coily, curly, straight, wavy) on a custom 6,000-image dataset curated from Kaggle, Google, and Pinterest. Built with TensorFlow and Keras, applying data augmentation (rotation, zoom, flip, brightness) to improve generalization; achieved 79.67% test accuracy over 20 epochs with minimal overfitting.",
-
-    tech: [
-      "Python",
-      "TensorFlow",
-      "Keras",
-      "scikit-learn",
-      "CNN",
-      "Computer Vision",
-    ],
-
-    accent: "#c084fc",
-
-    github:
-      "https://github.com/edaprgs/CNN-Hair-Type-Recognition",
-
+    icon: <Brain size={18}/>,
+    desc: "Deep learning classifier for four hair types trained on a custom 6,000-image dataset with data augmentation. Built with TensorFlow and Keras, achieving 79.67% test accuracy over 20 epochs.",
+    tech: ["Python", "TensorFlow", "Keras", "scikit-learn", "CNN", "Data Augmentation"],
+    accent: "#c084a8",
+    github: "https://github.com/edaprgs/CNN-Hair-Type-Recognition",
     image: "/images/hair-cnn-preview.png",
   },
-
   {
-    title: "Planter's UI/UX Design",
-
-    icon: <Sprout size={22} color="#86efac" />,
-
-    desc:
-      "Designed the planter-facing UI/UX experience for eTanom’s reforestation platform at Sikai Inc. Created responsive wireframes, workflows, and interactive prototypes in Figma focused on accessibility, usability, and cross-device user experience.",
-
-    tech: [
-      "Figma",
-      "UI/UX Design",
-      "Prototyping",
-      "Responsive Design",
-    ],
-
-    accent: "#86efac",
-
-    figma:
-      "https://www.figma.com/design/a4593rDDQslYZMxCI6gh5O/eTanom-Planter-s-Interface-%7C-Paragoso?node-id=0-1&m=dev&t=2Fa3FuXY8H9pNd3e-1",
-
+    title: "eTanom UI/UX Design",
+    icon: <Sprout size={18}/>,
+    desc: "Planter-facing interface for a reforestation platform covering 8+ end-to-end user flows, a WCAG-compliant color system across 9 shade levels, responsive Figma prototypes, and annotated developer handoffs.",
+    tech: ["Figma", "UI/UX Design", "Prototyping", "WCAG", "Responsive Design"],
+    accent: "#2d7a2d",
+    figma: "https://www.figma.com/design/a4593rDDQslYZMxCI6gh5O/eTanom-Planter-s-Interface-%7C-Paragoso?node-id=0-1",
     image: "/images/etanom-ui-preview.png",
   },
 ]
 
-function ProjectCard({ project, index }) {
-  return (
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{
-        duration: 0.7,
-        delay: index * 0.08,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className="glass overflow-hidden flex flex-col group transition-all duration-300"
-      style={{
-        borderColor: "rgba(249,168,201,0.12)",
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.borderColor = project.accent + "55"
-        e.currentTarget.style.transform = "translateY(-5px)"
-        e.currentTarget.style.boxShadow = `0 20px 50px ${project.accent}18`
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.borderColor =
-          "rgba(249,168,201,0.12)"
-        e.currentTarget.style.transform = "translateY(0)"
-        e.currentTarget.style.boxShadow = "none"
-      }}
-    >
-      {/* IMAGE */}
-      <div className="relative overflow-hidden h-[220px]">
-        <img
-          src={project.image}
-          alt={project.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-        />
+function ProjectCard({ project, i }) {
+  const [hovered, setHovered] = useState(false)
 
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "linear-gradient(to top, rgba(15,6,16,0.9), transparent)",
-          }}
-        />
+  return (
+    <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }} transition={{ duration: 0.65, delay: i * 0.09 }}
+      style={{
+        borderRadius: 14, overflow: "hidden",
+        background: "var(--glass-bg)",
+        border: `1px solid ${hovered ? project.accent + "44" : "var(--glass-border)"}`,
+        transition: "border-color 0.3s, transform 0.3s, box-shadow 0.3s",
+        transform: hovered ? "translateY(-5px)" : "translateY(0)",
+        boxShadow: hovered ? `0 16px 40px ${project.accent}12` : "none",
+        display: "flex", flexDirection: "column",
+      }}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}>
+
+      <div style={{ position: "relative", overflow: "hidden", height: 175, flexShrink: 0 }}>
+        <img src={project.image} alt={project.title}
+          style={{ width: "100%", height: "100%", objectFit: "cover",
+            transform: hovered ? "scale(1.05)" : "scale(1)", transition: "transform 0.6s" }}/>
+        <div style={{ position: "absolute", inset: 0,
+          background: `linear-gradient(to top, var(--bg) 0%, ${project.accent}06 100%)` }}/>
       </div>
 
-      {/* CONTENT */}
-      <div className="p-7 flex flex-col flex-1">
-        
-        {/* top */}
-        <div className="flex items-start gap-3 mb-4">
-          
-          <div
-            style={{
-              width: 42,
-              height: 42,
-              borderRadius: "50%",
-              background: `${project.accent}15`,
-              border: `1px solid ${project.accent}25`,
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              flexShrink: 0,
-            }}
-          >
-            {project.icon}
-          </div>
-
-          <h3
-            style={{
-              fontSize: "1.3rem",
-              fontWeight: 500,
-              lineHeight: 1.3,
-              color: "#f0d8e8",
-            }}
-          >
+      <div style={{ padding: "1.3rem", display: "flex", flexDirection: "column", flex: 1 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.7rem", marginBottom: "0.7rem" }}>
+          <span style={{ color: project.accent, opacity: 0.9, display: "flex" }}>{project.icon}</span>
+          <h3 style={{ fontSize: "1rem", fontWeight: 700, color: "var(--body-color)", lineHeight: 1.3 }}>
             {project.title}
           </h3>
         </div>
 
-        {/* desc */}
-        <p
-          className="flex-1 mb-5"
-          style={{
-            color: "rgba(240,216,232,0.68)",
-            fontSize: "0.9rem",
-            lineHeight: 1.8,
-          }}
-        >
+        <p style={{ fontSize: "0.85rem", color: "var(--text-muted)", lineHeight: 1.8, marginBottom: "1rem", flex: 1 }}>
           {project.desc}
         </p>
 
-        {/* tech */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {project.tech.map((t, i) => (
-            <span key={i} className="tag">
-              {t}
-            </span>
-          ))}
+        <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem", marginBottom: "1rem" }}>
+          {project.tech.map(t => <span key={t} className="tag">{t}</span>)}
         </div>
 
-        {/* links */}
-        <div className="flex items-center gap-3 mt-auto">
-          
+        <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", marginTop: "auto" }}>
           {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300"
-              style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.08)",
-                color: "#f0d8e8",
-                fontSize: "0.85rem",
-              }}
-            >
-              <ExternalLink size={16} />
-              GitHub
+            <a href={project.github} target="_blank" rel="noopener noreferrer"
+              style={{ display: "flex", alignItems: "center", gap: "0.4rem", padding: "0.38rem 0.85rem",
+                borderRadius: 8, background: "var(--surface)", border: "1px solid var(--glass-border)",
+                color: "var(--text-muted)", fontSize: "0.78rem", fontWeight: 500, transition: "all 0.2s" }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = project.accent + "55"; e.currentTarget.style.color = project.accent }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--glass-border)"; e.currentTarget.style.color = "var(--text-muted)" }}>
+              <FaGithub size={13}/> GitHub
             </a>
           )}
-
           {project.figma && (
-            <a
-              href={project.figma}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300"
-              style={{
-                background: "rgba(255,255,255,0.04)",
-                border: "1px solid rgba(255,255,255,0.08)",
-                color: "#f0d8e8",
-                fontSize: "0.85rem",
-              }}
-            >
-              <ExternalLink size={16} />
-              Figma
+            <a href={project.figma} target="_blank" rel="noopener noreferrer"
+              style={{ display: "flex", alignItems: "center", gap: "0.4rem", padding: "0.38rem 0.85rem",
+                borderRadius: 8, background: "var(--surface)", border: "1px solid var(--glass-border)",
+                color: "var(--text-muted)", fontSize: "0.78rem", fontWeight: 500, transition: "all 0.2s" }}
+              onMouseEnter={e => { e.currentTarget.style.borderColor = project.accent + "55"; e.currentTarget.style.color = project.accent }}
+              onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--glass-border)"; e.currentTarget.style.color = "var(--text-muted)" }}>
+              <ExternalLink size={13}/> Figma
             </a>
           )}
-
           {project.live && (
-            <a
-              href={project.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300"
-              style={{
-                background: `${project.accent}15`,
-                border: `1px solid ${project.accent}25`,
-                color: "#f0d8e8",
-                fontSize: "0.85rem",
-              }}
-            >
-              <ExternalLink size={16} />
-              Live Demo
+            <a href={project.live} target="_blank" rel="noopener noreferrer"
+              style={{ display: "flex", alignItems: "center", gap: "0.4rem", padding: "0.38rem 0.85rem",
+                borderRadius: 8, background: `${project.accent}18`, border: `1px solid ${project.accent}35`,
+                color: project.accent, fontSize: "0.78rem", fontWeight: 500, marginLeft: "auto",
+                transition: "background 0.2s" }}
+              onMouseEnter={e => e.currentTarget.style.background = `${project.accent}28`}
+              onMouseLeave={e => e.currentTarget.style.background = `${project.accent}18`}>
+              <ExternalLink size={13}/> Live Demo
             </a>
           )}
         </div>
@@ -274,33 +131,27 @@ function ProjectCard({ project, index }) {
   )
 }
 
-function Projects() {
-  const ref = useScrollReveal()
-
+export default function Projects() {
   return (
-    <section
-      id="projects"
-      ref={ref}
-      className="reveal px-6 md:px-20"
-    >
-      <div className="mb-14 text-center">
-        <span className="section-sub">What I've built</span>
-        <h2 className="section-title grad-text">
-          Projects
+    <section id="projects" className="ide-section">
+      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }} transition={{ duration: 0.65 }} style={{ marginBottom: "2rem" }}>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.6rem" }}>
+          <FolderOpen size={14} style={{ color: "var(--rose)" }}/>
+          <span style={{ fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.14em",
+            textTransform: "uppercase", color: "var(--rose)" }}>
+            04 · Projects
+          </span>
+        </div>
+        <h2 style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)", fontWeight: 700,
+          letterSpacing: "-0.02em", lineHeight: 1.1 }} className="grad-text">
+          What I've Built
         </h2>
-      </div>
+      </motion.div>
 
-      <div className="grid md:grid-cols-2 gap-7">
-        {projects.map((p, i) => (
-          <ProjectCard
-            key={i}
-            project={p}
-            index={i}
-          />
-        ))}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "1.2rem" }}>
+        {projects.map((p, i) => <ProjectCard key={p.title} project={p} i={i}/>)}
       </div>
     </section>
   )
 }
-
-export default Projects
