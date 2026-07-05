@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react"
+import { useState, useEffect, useRef, useCallback } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { FaGithub, FaLinkedin, FaFacebook, FaInstagram, FaWhatsapp, FaTelegramPlane } from "react-icons/fa"
 import {
@@ -99,7 +99,9 @@ export default function Home() {
   const [achIdx,   setAchIdx]   = useState(0)
   const [achDir,   setAchDir]   = useState(1)
   const [progress, setProgress] = useState(0)
+  const [achPaused, setAchPaused] = useState(false)
   const progressRef = useRef(null)
+  const pausedRef   = useRef(false)
 
   // typewriter
   useEffect(() => {
@@ -123,22 +125,35 @@ export default function Home() {
     }
   }, [displayed, typing, roleIdx])
 
-  // achievement flashcard auto-advance with progress bar
+  // keep pausedRef in sync so the rAF loop can read it without stale closure
+  useEffect(() => { pausedRef.current = achPaused }, [achPaused])
+
+  // achievement flashcard auto-advance with progress bar + pause-on-hover
   const INTERVAL = 2800
   useEffect(() => {
     setProgress(0)
-    const start = performance.now()
-    const tick = () => {
-      const pct = Math.min(100, ((performance.now() - start) / INTERVAL) * 100)
-      setProgress(pct)
-      if (pct < 100) progressRef.current = requestAnimationFrame(tick)
+    let startTime = null
+    let elapsed   = 0
+
+    const tick = (ts) => {
+      if (!pausedRef.current) {
+        if (startTime === null) startTime = ts - elapsed
+        elapsed = ts - startTime
+        const pct = Math.min(100, (elapsed / INTERVAL) * 100)
+        setProgress(pct)
+        if (pct >= 100) {
+          setAchDir(1)
+          setAchIdx(i => (i + 1) % achievements.length)
+          return
+        }
+      } else {
+        // paused — freeze startTime so elapsed picks up where it left off
+        startTime = null
+      }
+      progressRef.current = requestAnimationFrame(tick)
     }
     progressRef.current = requestAnimationFrame(tick)
-    const adv = setTimeout(() => {
-      setAchDir(1)
-      setAchIdx(i => (i + 1) % achievements.length)
-    }, INTERVAL)
-    return () => { clearTimeout(adv); cancelAnimationFrame(progressRef.current) }
+    return () => cancelAnimationFrame(progressRef.current)
   }, [achIdx])
 
   const advAch = (dir) => {
@@ -235,7 +250,7 @@ export default function Home() {
 
         <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }}
           style={{ fontSize: "0.78rem", color: "var(--text-muted)", lineHeight: 1.65, marginBottom: "0.8rem" }}>
-          CS graduate from MSU-IIT building full-stack web apps with AI integration: pixel-perfect interfaces, production-grade backends, and meaningful AI integrations.
+          I ship software real people use - 3,000+ members on a production system I built as a volunteer. CS graduate from MSU-IIT, focused on Next.js, TypeScript, and AI integration.
         </motion.p>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.24 }}
@@ -304,15 +319,15 @@ export default function Home() {
             <div className="marquee-track-rev">
               {[...skillsRow2, ...skillsRow2].map((s, i) => <SkillPill key={i} {...s}/>)}
             </div>
-            <div className="marquee-track">
-              {[...skillsRow2.slice(3), ...skillsRow1.slice(3), ...skillsRow2.slice(3), ...skillsRow1.slice(3)].map((s, i) => <SkillPill key={i} {...s}/>)}
-            </div>
           </div>
         </div>
 
         {/* ③ Achievements: flashcard */}
-        <div className="home-card" onClick={() => advAch(1)} style={{ cursor: "pointer", position: "relative" }}>
-          <CardHeader Icon={Award} title="Achievements" sub="Click to browse · auto-advances"/>
+        <div className="home-card" onClick={() => advAch(1)}
+          onMouseEnter={() => setAchPaused(true)}
+          onMouseLeave={() => setAchPaused(false)}
+          style={{ cursor: "pointer", position: "relative" }}>
+          <CardHeader Icon={Award} title="Achievements" sub="Hover to pause · click to browse"/>
           <div style={{ flex: 1, minHeight: 0, position: "relative", overflow: "hidden", containerType: "size" }}>
             <AnimatePresence mode="wait" initial={false}>
               {(() => {

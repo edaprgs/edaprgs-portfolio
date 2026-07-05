@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion"
-import { useState, useEffect } from "react"
-import { Database, Palette, MapPin, Calendar, X, Briefcase, ChevronDown } from "lucide-react"
+import { useState } from "react"
+import { Database, Palette, MapPin, Calendar, ChevronDown, Briefcase } from "lucide-react"
 
 const experiences = [
   {
@@ -65,199 +65,157 @@ const TECH_COLORS = {
   "Responsive Design": "#0ea5e9",
 }
 
-function RepoCard({ exp, isSelected, onClick }) {
-  const [hovered, setHovered] = useState(false)
-  const active = isSelected || hovered
-
+function AccordionCard({ exp, isOpen, onToggle, index }) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.5 }}
-      onClick={onClick}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      transition={{ duration: 0.5, delay: index * 0.08 }}
       style={{
-        padding: "1.1rem 1.3rem",
         borderRadius: 12,
-        background: isSelected ? `${exp.color}08` : "var(--glass-bg)",
-        border: `1px solid ${isSelected ? exp.color + "50" : active ? exp.color + "30" : "var(--glass-border)"}`,
-        cursor: "pointer",
-        transition: "all 0.2s",
-        transform: hovered && !isSelected ? "translateY(-2px)" : "translateY(0)",
-      }}>
-
-      {/* Header row */}
-      <div style={{ display: "flex", alignItems: "flex-start", gap: "0.75rem", marginBottom: "0.65rem" }}>
-        <div style={{
-          width: 36, height: 36, borderRadius: 9, overflow: "hidden", flexShrink: 0,
-          background: "#fff", border: `1px solid ${exp.color}22`,
-          display: "flex", alignItems: "center", justifyContent: "center",
-        }}>
-          <img src={exp.logo} alt={exp.companyShort} style={{ width: "80%", height: "80%", objectFit: "contain" }}/>
-        </div>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem", flexWrap: "wrap", marginBottom: "0.15rem" }}>
-            <span style={{ fontSize: "0.9rem", fontWeight: 700, color: exp.color, lineHeight: 1.3 }}>
-              {exp.companyShort}
-            </span>
-            <span style={{
-              fontSize: "0.6rem", fontWeight: 600, padding: "2px 8px", borderRadius: 999,
-              border: `1px solid ${exp.color}35`, color: exp.color,
-              background: `${exp.color}0e`, letterSpacing: "0.05em", textTransform: "uppercase",
-            }}>{exp.type}</span>
-          </div>
-          <p style={{ fontSize: "0.78rem", color: "var(--text-dim)", lineHeight: 1.3 }}>{exp.role}</p>
-        </div>
-      </div>
-
-      {/* Short description */}
-      <p style={{
-        fontSize: "0.82rem", color: "var(--text-muted)", lineHeight: 1.7,
-        marginBottom: "0.85rem",
-        display: "-webkit-box", WebkitLineClamp: 2, WebkitBoxOrient: "vertical", overflow: "hidden",
-      }}>
-        {exp.shortDesc}
-      </p>
-
-      {/* Footer row: GitHub-style meta */}
-      <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
-        {exp.tech.slice(0, 3).map(t => (
-          <span key={t} style={{ display: "flex", alignItems: "center", gap: "0.3rem", fontSize: "0.72rem", color: "var(--text-dim)" }}>
-            <span style={{ width: 9, height: 9, borderRadius: "50%", background: TECH_COLORS[t] || exp.color, flexShrink: 0, display: "inline-block" }}/>
-            {t}
-          </span>
-        ))}
-        <span style={{ display: "flex", alignItems: "center", gap: "0.3rem", fontSize: "0.72rem", color: "var(--text-dim)", marginLeft: "auto" }}>
-          <Calendar size={11}/> {exp.period}
-        </span>
-      </div>
-    </motion.div>
-  )
-}
-
-function DetailPanel({ exp, onClose }) {
-  return (
-    <motion.div
-      key={exp.role}
-      initial={{ opacity: 0, x: 40 }}
-      animate={{ opacity: 1, x: 0 }}
-      exit={{ opacity: 0, x: 40 }}
-      transition={{ duration: 0.28, ease: "easeOut" }}
-      style={{
         background: "var(--glass-bg)",
-        border: "1px solid var(--glass-border)",
-        borderRadius: 14,
+        border: `1px solid ${isOpen ? exp.color + "45" : "var(--glass-border)"}`,
         overflow: "hidden",
-        display: "flex",
-        flexDirection: "column",
-        height: "100%",
+        transition: "border-color 0.2s",
       }}>
 
-      {/* Panel header */}
-      <div style={{
-        padding: "1.1rem 1.3rem",
-        borderBottom: "1px solid var(--glass-border)",
-        display: "flex", alignItems: "flex-start", gap: "0.85rem",
-      }}>
-        <div style={{
-          width: 44, height: 44, borderRadius: 11, overflow: "hidden", flexShrink: 0,
-          background: "#fff", border: `1.5px solid ${exp.color}28`,
-          display: "flex", alignItems: "center", justifyContent: "center",
-          boxShadow: `0 2px 10px ${exp.color}14`,
+      {/* ── Card header — GitHub repo card style ── */}
+      <button
+        onClick={onToggle}
+        style={{
+          width: "100%", display: "flex", flexDirection: "column",
+          padding: "1rem 1.2rem", background: "transparent", border: "none",
+          cursor: "pointer", textAlign: "left", gap: "0.55rem",
         }}>
-          <img src={exp.logo} alt={exp.company} style={{ width: "80%", height: "80%", objectFit: "contain" }}/>
-        </div>
-        <div style={{ flex: 1, minWidth: 0 }}>
-          <p style={{ fontSize: "0.95rem", fontWeight: 700, color: exp.color, lineHeight: 1.2, marginBottom: "0.18rem" }}>{exp.company}</p>
-          <p style={{ fontSize: "0.8rem", color: "var(--body-color)", fontWeight: 600, marginBottom: "0.3rem" }}>{exp.role}</p>
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-            <span style={{ display: "flex", alignItems: "center", gap: "0.3rem", fontSize: "0.72rem", color: "var(--text-dim)" }}>
-              <Calendar size={11}/> {exp.period}
-            </span>
-            <span style={{ display: "flex", alignItems: "center", gap: "0.3rem", fontSize: "0.72rem", color: "var(--text-dim)" }}>
-              <MapPin size={11}/> {exp.location}
-            </span>
+
+        {/* Row 1: icon + name + badge + chevron */}
+        <div style={{ display: "flex", alignItems: "center", gap: "0.55rem", width: "100%" }}>
+          {/* Logo */}
+          <div style={{
+            width: 20, height: 20, borderRadius: 4, overflow: "hidden", flexShrink: 0,
+            background: "#fff", border: "1px solid var(--glass-border)",
+            display: "flex", alignItems: "center", justifyContent: "center",
+          }}>
+            <img src={exp.logo} alt={exp.companyShort} style={{ width: "90%", height: "90%", objectFit: "contain" }}/>
           </div>
-        </div>
-        <button onClick={onClose} style={{
-          width: 28, height: 28, borderRadius: 7, border: "none", cursor: "pointer",
-          background: "var(--surface)", display: "flex", alignItems: "center", justifyContent: "center",
-          color: "var(--text-dim)", flexShrink: 0, transition: "all 0.15s",
-        }}
-          onMouseEnter={e => { e.currentTarget.style.background = `${exp.color}18`; e.currentTarget.style.color = exp.color }}
-          onMouseLeave={e => { e.currentTarget.style.background = "var(--surface)"; e.currentTarget.style.color = "var(--text-dim)" }}>
-          <X size={14}/>
-        </button>
-      </div>
 
-      {/* Badge */}
-      <div style={{ padding: "0.85rem 1.3rem 0" }}>
-        <div style={{
-          display: "inline-flex", alignItems: "center", gap: "0.4rem",
-          padding: "0.25rem 0.8rem", borderRadius: 999,
-          background: `${exp.color}0e`, border: `1px solid ${exp.color}25`,
-          fontSize: "0.7rem", fontWeight: 600, color: exp.color,
+          <span style={{ fontSize: "0.88rem", fontWeight: 700, color: exp.color, flex: 1, minWidth: 0 }}>
+            {exp.companyShort}
+          </span>
+
+          <span style={{
+            fontSize: "0.65rem", fontWeight: 500, padding: "1px 9px", borderRadius: 999,
+            border: `1px solid ${exp.color}30`, color: exp.color,
+            background: `${exp.color}0c`, letterSpacing: "0.04em", flexShrink: 0,
+          }}>{exp.type}</span>
+
+          <motion.div
+            animate={{ rotate: isOpen ? 180 : 0 }}
+            transition={{ duration: 0.22 }}
+            style={{ flexShrink: 0, color: isOpen ? exp.color : "var(--text-dim)", marginLeft: "0.2rem" }}>
+            <ChevronDown size={16}/>
+          </motion.div>
+        </div>
+
+        {/* Row 2: short description */}
+        <p style={{
+          fontSize: "0.8rem", color: "var(--text-muted)", lineHeight: 1.6,
+          display: "-webkit-box", WebkitLineClamp: isOpen ? undefined : 2,
+          WebkitBoxOrient: "vertical", overflow: isOpen ? "visible" : "hidden",
         }}>
-          ✦ {exp.badge}
-        </div>
-      </div>
-
-      {/* Bullets */}
-      <div style={{ flex: 1, overflowY: "auto", padding: "0.85rem 1.3rem", scrollbarWidth: "none" }}>
-        <p style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-dim)", marginBottom: "0.75rem" }}>
-          Highlights
+          {exp.shortDesc}
         </p>
-        <ul style={{ display: "flex", flexDirection: "column", gap: "0.6rem" }}>
-          {exp.bullets.map((b, i) => (
-            <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "0.7rem", fontSize: "0.84rem", color: "var(--text-muted)", lineHeight: 1.75 }}>
-              <span style={{ width: 5, height: 5, borderRadius: "50%", background: exp.color, flexShrink: 0, marginTop: "0.6rem" }}/>
-              {b}
-            </li>
-          ))}
-        </ul>
 
-        {/* Tech stack */}
-        <div style={{ marginTop: "1.2rem" }}>
-          <p style={{ fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-dim)", marginBottom: "0.6rem" }}>
-            Tech Stack
-          </p>
-          <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
-            {exp.tech.map(t => (
-              <span key={t} style={{
-                display: "flex", alignItems: "center", gap: "0.3rem",
-                padding: "0.25rem 0.65rem", borderRadius: 999,
-                background: "var(--surface)", border: "1px solid var(--glass-border)",
-                fontSize: "0.72rem", color: "var(--text-muted)",
-              }}>
-                <span style={{ width: 7, height: 7, borderRadius: "50%", background: TECH_COLORS[t] || exp.color, flexShrink: 0 }}/>
-                {t}
-              </span>
-            ))}
-          </div>
+        {/* Row 3: tech dots + period (GitHub footer row) */}
+        <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
+          {exp.tech.slice(0, 3).map(t => (
+            <span key={t} style={{ display: "flex", alignItems: "center", gap: "0.3rem", fontSize: "0.72rem", color: "var(--text-dim)" }}>
+              <span style={{ width: 10, height: 10, borderRadius: "50%", background: TECH_COLORS[t] || exp.color, flexShrink: 0 }}/>
+              {t}
+            </span>
+          ))}
+          <span style={{ display: "flex", alignItems: "center", gap: "0.3rem", fontSize: "0.72rem", color: "var(--text-dim)", marginLeft: "auto" }}>
+            <Calendar size={11}/> {exp.period}
+          </span>
         </div>
-      </div>
+      </button>
+
+      {/* ── Expanded drawer ── */}
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            key="drawer"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+            style={{ overflow: "hidden" }}>
+
+            <div style={{ padding: "0 1.2rem 1.2rem" }}>
+              <div style={{ height: 1, background: "var(--divider)", marginBottom: "1rem" }}/>
+
+              {/* Badge */}
+              <div style={{ marginBottom: "1rem" }}>
+                <span style={{
+                  display: "inline-flex", alignItems: "center", gap: "0.35rem",
+                  padding: "0.22rem 0.8rem", borderRadius: 999,
+                  background: `${exp.color}0e`, border: `1px solid ${exp.color}25`,
+                  fontSize: "0.69rem", fontWeight: 600, color: exp.color,
+                }}>
+                  ✦ {exp.badge}
+                </span>
+              </div>
+
+              {/* Highlights */}
+              <p style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-dim)", marginBottom: "0.6rem" }}>
+                Highlights
+              </p>
+              <ul style={{ display: "flex", flexDirection: "column", gap: "0.5rem", marginBottom: "1.1rem" }}>
+                {exp.bullets.map((b, i) => (
+                  <li key={i} style={{ display: "flex", alignItems: "flex-start", gap: "0.6rem", fontSize: "0.82rem", color: "var(--text-muted)", lineHeight: 1.7 }}>
+                    <span style={{ width: 5, height: 5, borderRadius: "50%", background: exp.color, flexShrink: 0, marginTop: "0.58rem" }}/>
+                    {b}
+                  </li>
+                ))}
+              </ul>
+
+              {/* Tech stack */}
+              <p style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-dim)", marginBottom: "0.5rem" }}>
+                Tech Stack
+              </p>
+              <div style={{ display: "flex", flexWrap: "wrap", gap: "0.35rem" }}>
+                {exp.tech.map(t => (
+                  <span key={t} style={{
+                    display: "flex", alignItems: "center", gap: "0.28rem",
+                    padding: "0.2rem 0.6rem", borderRadius: 999,
+                    background: "var(--surface)", border: "1px solid var(--glass-border)",
+                    fontSize: "0.7rem", color: "var(--text-muted)",
+                  }}>
+                    <span style={{ width: 8, height: 8, borderRadius: "50%", background: TECH_COLORS[t] || exp.color, flexShrink: 0 }}/>
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   )
 }
 
 export default function Experience() {
-  const [selected, setSelected] = useState(null)
-  const [isMobile, setIsMobile] = useState(window.innerWidth <= 540)
+  const [openRole, setOpenRole] = useState(null)
 
-  useEffect(() => {
-    const handler = () => setIsMobile(window.innerWidth <= 540)
-    window.addEventListener("resize", handler)
-    return () => window.removeEventListener("resize", handler)
-  }, [])
-
-  const toggle = (exp) => setSelected(s => s?.role === exp.role ? null : exp)
+  const toggle = (role) => setOpenRole(r => r === role ? null : role)
 
   return (
     <section id="experience" className="ide-section">
-      <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }} transition={{ duration: 0.65 }} style={{ marginBottom: "2rem" }}>
+      <motion.div
+        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }} transition={{ duration: 0.65 }}
+        style={{ marginBottom: "2rem" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.6rem" }}>
           <Briefcase size={14} style={{ color: "var(--rose)" }}/>
           <span style={{ fontSize: "0.75rem", fontWeight: 700, letterSpacing: "0.14em", textTransform: "uppercase", color: "var(--rose)" }}>
@@ -269,82 +227,21 @@ export default function Experience() {
           My Journey
         </h2>
         <p style={{ fontSize: "0.88rem", color: "var(--text-muted)", marginTop: "0.6rem", lineHeight: 1.7 }}>
-          Tap any card to view full details.
+          From church pews to production servers.
         </p>
       </motion.div>
 
-      {isMobile ? (
-        /* Mobile: accordion/drawer layout */
-        <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-          {experiences.map(exp => {
-            const isOpen = selected?.role === exp.role
-            return (
-              <div key={exp.role}>
-                <div onClick={() => toggle(exp)}>
-                  <RepoCard exp={exp} isSelected={isOpen} onClick={() => {}}/>
-                </div>
-                {/* Drawer hint when closed */}
-                {!isOpen && (
-                  <div style={{
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    padding: "0.3rem", gap: "0.3rem",
-                    fontSize: "0.62rem", color: "var(--text-dim)",
-                    cursor: "pointer",
-                  }} onClick={() => toggle(exp)}>
-                    <ChevronDown size={12}/>
-                    <span>Tap to expand</span>
-                  </div>
-                )}
-                <AnimatePresence>
-                  {isOpen && (
-                    <motion.div
-                      initial={{ opacity: 0, height: 0 }}
-                      animate={{ opacity: 1, height: "auto" }}
-                      exit={{ opacity: 0, height: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                      style={{ overflow: "hidden", marginTop: "0.5rem" }}>
-                      {/* Drawer handle */}
-                      <div style={{ display: "flex", justifyContent: "center", marginBottom: "0.4rem" }}>
-                        <div style={{ width: 36, height: 4, borderRadius: 2, background: "var(--glass-border)" }}/>
-                      </div>
-                      <div style={{ borderRadius: 14, overflow: "hidden" }}>
-                        <DetailPanel exp={exp} onClose={() => setSelected(null)}/>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-            )
-          })}
-        </div>
-      ) : (
-        /* Desktop: side-by-side grid */
-        <div className="experience-grid" style={{
-          display: "grid",
-          gridTemplateColumns: selected ? "1fr 1fr" : "1fr",
-          gap: "1rem",
-          alignItems: "start",
-          transition: "grid-template-columns 0.3s ease",
-        }}>
-          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-            {experiences.map(exp => (
-              <RepoCard
-                key={exp.role}
-                exp={exp}
-                isSelected={selected?.role === exp.role}
-                onClick={() => toggle(exp)}
-              />
-            ))}
-          </div>
-          <AnimatePresence mode="wait">
-            {selected && (
-              <div style={{ position: "sticky", top: "1rem", minHeight: 420 }}>
-                <DetailPanel exp={selected} onClose={() => setSelected(null)}/>
-              </div>
-            )}
-          </AnimatePresence>
-        </div>
-      )}
+      <div style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
+        {experiences.map((exp, i) => (
+          <AccordionCard
+            key={exp.role}
+            exp={exp}
+            index={i}
+            isOpen={openRole === exp.role}
+            onToggle={() => toggle(exp.role)}
+          />
+        ))}
+      </div>
     </section>
   )
 }

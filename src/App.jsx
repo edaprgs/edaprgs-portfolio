@@ -10,6 +10,7 @@ import Skills from "./components/Skills"
 import Projects from "./components/Projects"
 import Contact from "./components/Contact"
 import Footer from "./components/Footer"
+import SparkleTrail from "./components/SparkleTrail"
 
 const views = { home: Home, about: About, experience: Experience, skills: Skills, projects: Projects, contact: Contact }
 
@@ -19,6 +20,7 @@ function Layout() {
 
   return (
     <>
+      <SparkleTrail />
       <Background />
       <MobileNav />
       <div className="app-container">

@@ -163,7 +163,8 @@ img { display: block; max-width: 100% }
   overflow: hidden;
   min-height: 0;
 }
-.home-card:hover { border-color: rgba(154,24,71,0.3) }
+.home-card:hover { border-color: rgba(154,24,71,0.35); box-shadow: 0 4px 20px rgba(154,24,71,0.08); transform: translateY(-1px); }
+.home-card { transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
 
 .home-card-title {
   font-size: 0.82rem;
