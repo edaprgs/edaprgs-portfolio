@@ -208,6 +208,21 @@ img { display: block; max-width: 100% }
   .mobile-nav { display: none !important }
 }
 
+/* Mobile profile block: hidden on desktop, shown on mobile */
+.mobile-profile-block { display: none }
+@media (max-width: 1023px) {
+  .mobile-profile-block { display: flex }
+  .mobile-profile-divider {
+    display: block !important;
+    width: 100%;
+    height: 1px;
+    background: var(--divider);
+    margin-top: 1rem;
+    margin-bottom: 1.4rem;
+    flex-shrink: 0;
+  }
+}
+
 /* ─── Small mobile (≤ 540px) ────────────────────────────────── */
 @media (max-width: 540px) {
   /* Home: single-column card stack */
@@ -230,6 +245,9 @@ img { display: block; max-width: 100% }
 
   /* Experience: single column on mobile (drawer stacks below) */
   .experience-grid { grid-template-columns: 1fr !important; }
+
+  /* Projects card: cap image scroll so card doesn't expand to show all images */
+  .projects-img-scroll { max-height: 220px !important; }
 
   /* Skills globe: tighter height */
   .globe-canvas { height: 380px !important; }

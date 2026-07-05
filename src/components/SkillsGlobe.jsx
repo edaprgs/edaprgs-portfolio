@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from "react"
+import { useEffect, useRef, useCallback, useState } from "react"
 
 const SKILLS = [
   { label: "React",         cat: 0 },
@@ -63,6 +63,16 @@ function hexToRgb(hex) {
 
 export default function SkillsGlobe() {
   const canvasRef = useRef()
+  const [canvasHeight, setCanvasHeight] = useState(
+    window.innerWidth <= 640 ? 340 : 680
+  )
+
+  useEffect(() => {
+    const update = () => setCanvasHeight(window.innerWidth <= 640 ? 340 : 680)
+    window.addEventListener("resize", update)
+    return () => window.removeEventListener("resize", update)
+  }, [])
+
   const state = useRef({
     rot: { x: 0.3, y: 0 },
     vel: { x: 0.0008, y: 0.003 },
@@ -268,16 +278,15 @@ export default function SkillsGlobe() {
   ]
 
   return (
-    <div style={{ position: "relative" }}>
+    <div>
       <canvas
         ref={canvasRef}
-        className="globe-canvas"
-        style={{ width: "100%", height: 680, cursor: "grab", display: "block" }}
+        style={{ width: "100%", height: canvasHeight, cursor: "grab", display: "block" }}
       />
       {/* Legend */}
       <div style={{
-        position: "absolute", bottom: 12, left: "50%", transform: "translateX(-50%)",
-        display: "flex", gap: "1rem", flexWrap: "wrap", justifyContent: "center",
+        display: "flex", gap: "0.85rem", flexWrap: "wrap",
+        justifyContent: "center", marginTop: "0.5rem",
       }}>
         {legend.map(({ label, color }) => (
           <span key={label} style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>

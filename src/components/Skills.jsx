@@ -62,7 +62,7 @@ export default function Skills() {
 
       {/* Globe */}
       <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
-        transition={{ duration: 1 }} style={{ marginBottom: "2rem" }}>
+        transition={{ duration: 1 }} style={{ marginBottom: "1.2rem", marginTop: "-0.5rem" }}>
         <SkillsGlobe/>
       </motion.div>
 

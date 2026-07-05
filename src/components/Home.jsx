@@ -1,16 +1,16 @@
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { FaGithub, FaLinkedin, FaFacebook, FaInstagram } from "react-icons/fa"
+import { FaGithub, FaLinkedin, FaFacebook, FaInstagram, FaWhatsapp, FaTelegramPlane } from "react-icons/fa"
 import {
   SiReact, SiNextdotjs, SiTypescript, SiPython, SiFlask,
   SiHtml5, SiCss, SiTailwindcss,
   SiPostgresql, SiMysql, SiSupabase, SiFigma,
   SiGit, SiVercel, SiFirebase,
 } from "react-icons/si"
-import { FolderOpen, Wrench, Award, Briefcase, GraduationCap, Star, Brain, Palette } from "lucide-react"
+import { FolderOpen, Wrench, Award, Briefcase, GraduationCap, Star, Brain, Palette, Download } from "lucide-react"
 import { usePage } from "../context/PageContext"
 
-const roles = ["Full-Stack Developer", "UI/UX Designer", "AI Integration Engineer"]
+const roles = ["Full-Stack Developer", "UI/UX Designer", "Frontend Developer", "AI Integration Engineer"]
 
 const projects = [
   { title: "Church Management System",  img: "/images/church-management-preview.png",  tag: "Full-Stack" },
@@ -56,8 +56,10 @@ const career = [
 const socials = [
   { href: "https://github.com/edaprgs",                                 Icon: FaGithub    },
   { href: "https://www.linkedin.com/in/eda-grace-paragoso-2877ba40a/", Icon: FaLinkedin  },
-  { href: "#",                                                           Icon: FaFacebook  },
-  { href: "#",                                                           Icon: FaInstagram },
+  { href: "https://www.facebook.com/egprgs/",                           Icon: FaFacebook  },
+  { href: "https://www.instagram.com/__edagrace/",                      Icon: FaInstagram },
+  { href: "https://wa.me/639922916852",                                 Icon: FaWhatsapp  },
+  { href: "https://t.me/+639922916852",                                 Icon: FaTelegramPlane },
 ]
 
 function SkillPill({ label, Icon }) {
@@ -161,6 +163,57 @@ export default function Home() {
       boxSizing: "border-box",
     }}>
 
+      {/* ── Mobile profile block (hidden on desktop) ── */}
+      <div className="mobile-profile-block" style={{
+        flexDirection: "row", alignItems: "center",
+        flexShrink: 0, marginBottom: "1.2rem", gap: "1rem",
+      }}>
+        {/* Photo */}
+        <div style={{
+          width: 80, height: 80, borderRadius: "50%", overflow: "hidden",
+          border: "2.5px solid var(--glass-border)",
+          boxShadow: "0 0 0 4px var(--surface)",
+          flexShrink: 0,
+        }}>
+          <img src="/profile.png" alt="Eda Grace Paragoso"
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "center top" }}/>
+        </div>
+
+        {/* Info */}
+        <div style={{ flex: 1, minWidth: 0, display: "flex", flexDirection: "column", gap: "0.3rem" }}>
+          <p style={{ fontSize: "1rem", fontWeight: 800, color: "var(--body-color)", letterSpacing: "-0.02em", lineHeight: 1.2 }}>
+            Eda Grace Paragoso
+          </p>
+          <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginBottom: "0.2rem" }}>@edaprgs</p>
+          <div style={{ display: "flex", gap: "0.4rem", alignItems: "center", flexWrap: "wrap" }}>
+            <div style={{
+              display: "inline-flex", alignItems: "center", gap: "0.28rem",
+              padding: "0.18rem 0.55rem", borderRadius: 999,
+              background: "rgba(154,24,71,0.13)", border: "1px solid rgba(154,24,71,0.35)",
+              whiteSpace: "nowrap",
+            }}>
+              <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#7a0f30",
+                display: "block", flexShrink: 0, animation: "pulse-dot 2s ease-in-out infinite" }}/>
+              <span style={{ fontSize: "0.58rem", fontWeight: 700,
+                color: "#7a0f30", textTransform: "uppercase" }}>Available</span>
+            </div>
+            <a href="/Paragoso-Resume.pdf" target="_blank" rel="noreferrer"
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "0.28rem",
+                padding: "0.18rem 0.6rem", borderRadius: 999,
+                background: "linear-gradient(135deg, var(--rose-deep), var(--mauve))",
+                color: "#fff", fontSize: "0.58rem", fontWeight: 700,
+                textDecoration: "none", whiteSpace: "nowrap",
+              }}>
+              <Download size={10}/> Resume
+            </a>
+          </div>
+        </div>
+      </div>
+
+      {/* ── Mobile divider (shown below profile block on mobile) ── */}
+      <div className="mobile-profile-divider" style={{ display: "none" }}/>
+
       {/* ── Hero ── */}
       <div style={{ flexShrink: 0, marginBottom: "0.85rem" }}>
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: 0.4 }}
@@ -229,12 +282,15 @@ export default function Home() {
             <p style={{ fontSize: "0.6rem", color: "var(--text-dim)", lineHeight: 1.5 }}>A selection of real apps built to solve real problems.</p>
           </div>
           {/* Right: vertical scroll of images */}
-          <div className="v-scroll-hide" style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column", gap: "0.5rem", overflowY: "auto" }}>
-            {projects.map(p => (
-              <div key={p.title} style={{ flexShrink: 0, borderRadius: 10, overflow: "hidden", border: "1px solid var(--glass-border)" }}>
-                <img src={p.img} alt={p.title} style={{ width: "100%", height: 80, objectFit: "cover", display: "block" }}/>
-              </div>
-            ))}
+          <div style={{ flex: 1, minHeight: 0, position: "relative" }}>
+            <div className="v-scroll-hide projects-img-scroll" style={{ height: "100%", display: "flex", flexDirection: "column", gap: "0.5rem", overflowY: "auto" }}>
+              {projects.map(p => (
+                <div key={p.title} style={{ flexShrink: 0, borderRadius: 10, overflow: "hidden", border: "1px solid var(--glass-border)" }}>
+                  <img src={p.img} alt={p.title} style={{ width: "100%", height: 80, objectFit: "cover", display: "block" }}/>
+                </div>
+              ))}
+            </div>
+            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 60, background: "linear-gradient(to bottom, transparent, rgba(237,224,233,0.96))", pointerEvents: "none" }}/>
           </div>
         </div>
 
@@ -257,7 +313,7 @@ export default function Home() {
         {/* ③ Achievements: flashcard */}
         <div className="home-card" onClick={() => advAch(1)} style={{ cursor: "pointer", position: "relative" }}>
           <CardHeader Icon={Award} title="Achievements" sub="Click to browse · auto-advances"/>
-          <div style={{ flex: 1, minHeight: 0, position: "relative", overflow: "hidden" }}>
+          <div style={{ flex: 1, minHeight: 0, position: "relative", overflow: "hidden", containerType: "size" }}>
             <AnimatePresence mode="wait" initial={false}>
               {(() => {
                 const { Icon, title, sub, accent } = achievements[achIdx]
@@ -273,13 +329,14 @@ export default function Home() {
                       background: `linear-gradient(135deg, ${accent}0f 0%, ${accent}06 100%)`,
                       border: `1px solid ${accent}22`,
                       display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center",
-                      gap: "0.4rem", padding: "0.8rem",
+                      gap: "clamp(0.2rem,2cqmin,0.4rem)", padding: "clamp(0.4rem,3cqmin,0.8rem)",
+                      overflow: "hidden",
                     }}>
-                    <div style={{ width: 44, height: 44, borderRadius: 12, background: `${accent}18`, border: `1.5px solid ${accent}30`, display: "flex", alignItems: "center", justifyContent: "center" }}>
-                      <Icon size={22} style={{ color: accent }}/>
+                    <div style={{ width: "clamp(28px,12cqmin,44px)", height: "clamp(28px,12cqmin,44px)", borderRadius: "clamp(7px,3cqmin,12px)", background: `${accent}18`, border: `1.5px solid ${accent}30`, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
+                      <Icon style={{ color: accent, width: "clamp(13px,6cqmin,22px)", height: "clamp(13px,6cqmin,22px)" }}/>
                     </div>
-                    <p style={{ fontSize: "0.85rem", fontWeight: 800, color: "var(--body-color)", textAlign: "center", lineHeight: 1.2 }}>{title}</p>
-                    <p style={{ fontSize: "0.65rem", color: "var(--text-muted)", textAlign: "center" }}>{sub}</p>
+                    <p style={{ fontSize: "clamp(0.6rem,5cqmin,0.85rem)", fontWeight: 800, color: "var(--body-color)", textAlign: "center", lineHeight: 1.2 }}>{title}</p>
+                    <p style={{ fontSize: "clamp(0.52rem,4cqmin,0.65rem)", color: "var(--text-muted)", textAlign: "center", lineHeight: 1.3 }}>{sub}</p>
                     {/* Dots */}
                     <div style={{ display: "flex", gap: 5, marginTop: 4 }}>
                       {achievements.map((_, i) => (
@@ -300,21 +357,25 @@ export default function Home() {
         {/* ④ Career: big logo icons */}
         <div className="home-card" onClick={() => setPage("experience")} style={{ cursor: "pointer" }}>
           <CardHeader Icon={Briefcase} title="Career" sub="Professional journey & work experience."/>
-          <div style={{ flex: 1, minHeight: 0, display: "flex", alignItems: "center", justifyContent: "center", gap: "1.2rem" }}>
-            {career.map(({ logo, name }) => (
-              <div key={name} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "0.4rem" }}>
-                <div style={{
-                  width: 70, height: 70, borderRadius: 18,
-                  overflow: "hidden", background: "#fff",
-                  border: "1px solid var(--glass-border)",
-                  boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
-                  display: "flex", alignItems: "center", justifyContent: "center",
-                }}>
-                  <img src={logo} alt={name} style={{ width: "85%", height: "85%", objectFit: "contain" }}/>
+          <div style={{ flex: 1, minHeight: 0, containerType: "size", display: "flex", alignItems: "center", justifyContent: "center" }}>
+            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "clamp(0.6rem,4cqw,1.2rem)", width: "100%" }}>
+              {career.map(({ logo, name }) => (
+                <div key={name} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "clamp(0.25rem,1.5cqw,0.4rem)" }}>
+                  <div style={{
+                    width: "clamp(44px,18cqw,70px)", height: "clamp(44px,18cqw,70px)",
+                    borderRadius: "clamp(10px,3cqw,18px)",
+                    overflow: "hidden", background: "#fff",
+                    border: "1px solid var(--glass-border)",
+                    boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    flexShrink: 0,
+                  }}>
+                    <img src={logo} alt={name} style={{ width: "85%", height: "85%", objectFit: "contain" }}/>
+                  </div>
+                  <span style={{ fontSize: "clamp(0.5rem,2.5cqw,0.6rem)", fontWeight: 600, color: "var(--text-dim)" }}>{name}</span>
                 </div>
-                <span style={{ fontSize: "0.6rem", fontWeight: 600, color: "var(--text-dim)" }}>{name}</span>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         </div>
 
