@@ -183,13 +183,60 @@ img { display: block; max-width: 100% }
 .v-scroll-hide { overflow-y: auto; scrollbar-width: none }
 .v-scroll-hide::-webkit-scrollbar { display: none }
 
+/* ─── Mobile nav base ────────────────────────────────────────── */
+.mobile-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.2rem;
+  background: var(--bg-sidebar);
+  border-bottom: 1px solid var(--glass-border);
+  z-index: 9999;
+}
+
 /* ─── Mobile ─────────────────────────────────────────────────── */
 @media (max-width: 1023px) {
   .left-panel  { display: none !important }
-  .right-panel { margin-left: 0; width: 100% }
+  .right-panel { margin-left: 0; width: 100%; padding-top: 3.5rem }
   .ide-section { padding: 2.8rem 1.5rem }
 }
 
 @media (min-width: 1024px) {
   .mobile-nav { display: none !important }
+}
+
+/* ─── Small mobile (≤ 540px) ────────────────────────────────── */
+@media (max-width: 540px) {
+  /* Home: single-column card stack */
+  .home-section {
+    height: auto !important;
+    overflow: visible !important;
+    padding-bottom: 2rem !important;
+  }
+  .home-card-grid {
+    grid-template-columns: 1fr !important;
+    grid-template-rows: auto !important;
+    flex: none !important;
+  }
+  .home-card { min-height: 180px !important; }
+
+  /* About: single column */
+  .about-main-grid  { grid-template-columns: 1fr !important; }
+  .about-stats-grid { grid-template-columns: repeat(2,1fr) !important; }
+  .about-offers-grid { grid-template-columns: 1fr !important; }
+
+  /* Experience: single column on mobile (drawer stacks below) */
+  .experience-grid { grid-template-columns: 1fr !important; }
+
+  /* Skills globe: tighter height */
+  .globe-canvas { height: 380px !important; }
+
+  /* Projects: bottom breathing room */
+  .projects-section { padding-bottom: 3.5rem !important; }
+
+  /* Contact: name + email stacked */
+  .contact-name-email { grid-template-columns: 1fr !important; }
 }

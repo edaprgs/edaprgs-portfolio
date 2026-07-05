@@ -1,6 +1,6 @@
 import { motion, AnimatePresence } from "framer-motion"
-import { useState } from "react"
-import { Database, Palette, MapPin, Calendar, X, Briefcase, ExternalLink } from "lucide-react"
+import { useState, useEffect } from "react"
+import { Database, Palette, MapPin, Calendar, X, Briefcase, ChevronDown } from "lucide-react"
 
 const experiences = [
   {
@@ -244,6 +244,13 @@ function DetailPanel({ exp, onClose }) {
 
 export default function Experience() {
   const [selected, setSelected] = useState(null)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 540)
+
+  useEffect(() => {
+    const handler = () => setIsMobile(window.innerWidth <= 540)
+    window.addEventListener("resize", handler)
+    return () => window.removeEventListener("resize", handler)
+  }, [])
 
   const toggle = (exp) => setSelected(s => s?.role === exp.role ? null : exp)
 
@@ -262,38 +269,82 @@ export default function Experience() {
           My Journey
         </h2>
         <p style={{ fontSize: "0.88rem", color: "var(--text-muted)", marginTop: "0.6rem", lineHeight: 1.7 }}>
-          Click any card to view full details.
+          Tap any card to view full details.
         </p>
       </motion.div>
 
-      <div style={{
-        display: "grid",
-        gridTemplateColumns: selected ? "1fr 1fr" : "1fr",
-        gap: "1rem",
-        alignItems: "start",
-        transition: "grid-template-columns 0.3s ease",
-      }}>
-        {/* Card list */}
+      {isMobile ? (
+        /* Mobile: accordion/drawer layout */
         <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-          {experiences.map(exp => (
-            <RepoCard
-              key={exp.role}
-              exp={exp}
-              isSelected={selected?.role === exp.role}
-              onClick={() => toggle(exp)}
-            />
-          ))}
+          {experiences.map(exp => {
+            const isOpen = selected?.role === exp.role
+            return (
+              <div key={exp.role}>
+                <div onClick={() => toggle(exp)}>
+                  <RepoCard exp={exp} isSelected={isOpen} onClick={() => {}}/>
+                </div>
+                {/* Drawer hint when closed */}
+                {!isOpen && (
+                  <div style={{
+                    display: "flex", alignItems: "center", justifyContent: "center",
+                    padding: "0.3rem", gap: "0.3rem",
+                    fontSize: "0.62rem", color: "var(--text-dim)",
+                    cursor: "pointer",
+                  }} onClick={() => toggle(exp)}>
+                    <ChevronDown size={12}/>
+                    <span>Tap to expand</span>
+                  </div>
+                )}
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ opacity: 0, height: 0 }}
+                      animate={{ opacity: 1, height: "auto" }}
+                      exit={{ opacity: 0, height: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      style={{ overflow: "hidden", marginTop: "0.5rem" }}>
+                      {/* Drawer handle */}
+                      <div style={{ display: "flex", justifyContent: "center", marginBottom: "0.4rem" }}>
+                        <div style={{ width: 36, height: 4, borderRadius: 2, background: "var(--glass-border)" }}/>
+                      </div>
+                      <div style={{ borderRadius: 14, overflow: "hidden" }}>
+                        <DetailPanel exp={exp} onClose={() => setSelected(null)}/>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+            )
+          })}
         </div>
-
-        {/* Detail panel */}
-        <AnimatePresence mode="wait">
-          {selected && (
-            <div style={{ position: "sticky", top: "1rem", minHeight: 420 }}>
-              <DetailPanel exp={selected} onClose={() => setSelected(null)}/>
-            </div>
-          )}
-        </AnimatePresence>
-      </div>
+      ) : (
+        /* Desktop: side-by-side grid */
+        <div className="experience-grid" style={{
+          display: "grid",
+          gridTemplateColumns: selected ? "1fr 1fr" : "1fr",
+          gap: "1rem",
+          alignItems: "start",
+          transition: "grid-template-columns 0.3s ease",
+        }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
+            {experiences.map(exp => (
+              <RepoCard
+                key={exp.role}
+                exp={exp}
+                isSelected={selected?.role === exp.role}
+                onClick={() => toggle(exp)}
+              />
+            ))}
+          </div>
+          <AnimatePresence mode="wait">
+            {selected && (
+              <div style={{ position: "sticky", top: "1rem", minHeight: 420 }}>
+                <DetailPanel exp={selected} onClose={() => setSelected(null)}/>
+              </div>
+            )}
+          </AnimatePresence>
+        </div>
+      )}
     </section>
   )
 }

@@ -124,7 +124,7 @@ export default function Contact() {
           style={{ display: "flex", flexDirection: "column", gap: "0.9rem",
             padding: "1.5rem", borderRadius: 14,
             background: "var(--glass-bg)", border: "1px solid var(--glass-border)" }}>
-          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
+          <div className="contact-name-email" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
             <Field label="Name" type="text" name="user_name" placeholder="Your name" required/>
             <Field label="Email" type="email" name="user_email" placeholder="your@email.com" required/>
           </div>

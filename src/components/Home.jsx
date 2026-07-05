@@ -152,7 +152,7 @@ export default function Home() {
   }
 
   return (
-    <section id="home" style={{
+    <section id="home" className="home-section" style={{
       height: "100vh",
       display: "flex",
       flexDirection: "column",
@@ -215,7 +215,7 @@ export default function Home() {
       </p>
 
       {/* ── Card Grid ── */}
-      <div style={{ flex: 1, minHeight: 0, display: "grid", gridTemplateColumns: "1.5fr 1fr", gridTemplateRows: "minmax(0,1fr) minmax(0,1fr)", gap: "0.65rem" }}>
+      <div className="home-card-grid" style={{ flex: 1, minHeight: 0, display: "grid", gridTemplateColumns: "1.5fr 1fr", gridTemplateRows: "minmax(0,1fr) minmax(0,1fr)", gap: "0.65rem" }}>
 
         {/* ① Projects Showcase: left info + right vertical scroll stack */}
         <div className="home-card" onClick={() => setPage("projects")}

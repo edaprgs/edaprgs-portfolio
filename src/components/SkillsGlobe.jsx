@@ -271,6 +271,7 @@ export default function SkillsGlobe() {
     <div style={{ position: "relative" }}>
       <canvas
         ref={canvasRef}
+        className="globe-canvas"
         style={{ width: "100%", height: 680, cursor: "grab", display: "block" }}
       />
       {/* Legend */}

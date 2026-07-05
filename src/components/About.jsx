@@ -40,7 +40,7 @@ export default function About() {
       </motion.div>
 
       {/* Two-column layout */}
-      <div style={{ display: "grid", gridTemplateColumns: "1fr 260px", gap: "2rem", marginBottom: "2.2rem", alignItems: "start" }}>
+      <div className="about-main-grid" style={{ display: "grid", gridTemplateColumns: "1fr 260px", gap: "2rem", marginBottom: "2.2rem", alignItems: "start" }}>
 
         <div>
           <motion.p {...fade(1)} style={{ fontSize: "0.96rem", color: "var(--text-muted)", lineHeight: 1.9, marginBottom: "1rem" }}>
@@ -85,7 +85,7 @@ export default function About() {
       </div>
 
       {/* Stats row */}
-      <motion.div {...fade(4)} style={{
+      <motion.div {...fade(4)} className="about-stats-grid" style={{
         display: "grid", gridTemplateColumns: "repeat(4, 1fr)",
         gap: "1px", marginBottom: "2.2rem",
         background: "var(--glass-border)", borderRadius: 14,
@@ -107,7 +107,7 @@ export default function About() {
         <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text-dim)", marginBottom: "1rem" }}>
           What I Offer
         </p>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.65rem" }}>
+        <div className="about-offers-grid" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.65rem" }}>
           {offers.map(({ Icon, label, sub }) => (
             <div key={label} style={{
               display: "flex", alignItems: "flex-start", gap: "0.75rem",

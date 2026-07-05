@@ -133,7 +133,7 @@ function ProjectCard({ project, i }) {
 
 export default function Projects() {
   return (
-    <section id="projects" className="ide-section">
+    <section id="projects" className="ide-section projects-section">
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }} transition={{ duration: 0.65 }} style={{ marginBottom: "2rem" }}>
         <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.6rem" }}>

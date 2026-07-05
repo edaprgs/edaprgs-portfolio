@@ -1,12 +1,10 @@
 import { useState } from "react"
-import { useTheme } from "../context/ThemeContext"
 import { usePage } from "../context/PageContext"
-import { Sun, Moon, Menu, X } from "lucide-react"
+import { Menu, X } from "lucide-react"
 
 const links = ["home","about","experience","skills","projects","contact"]
 
 export default function MobileNav() {
-  const { dark, toggle } = useTheme()
   const { page, setPage } = usePage()
   const [open, setOpen] = useState(false)
 
@@ -18,14 +16,9 @@ export default function MobileNav() {
         <span style={{ fontSize:"1rem", fontWeight:700, color:"var(--body-color)" }}>
           Eda Grace <span style={{ color:"var(--rose)" }}>Paragoso</span>
         </span>
-        <div style={{ display:"flex", alignItems:"center", gap:"0.75rem" }}>
-          <button onClick={toggle} style={{ background:"none", border:"none", cursor:"pointer", color:"var(--text-muted)", display:"flex" }}>
-            {dark ? <Sun size={16}/> : <Moon size={16}/>}
-          </button>
-          <button onClick={() => setOpen(o => !o)} style={{ background:"none", border:"none", cursor:"pointer", color:"var(--text-muted)", display:"flex" }}>
-            {open ? <X size={18}/> : <Menu size={18}/>}
-          </button>
-        </div>
+        <button onClick={() => setOpen(o => !o)} style={{ background:"none", border:"none", cursor:"pointer", color:"var(--text-muted)", display:"flex" }}>
+          {open ? <X size={18}/> : <Menu size={18}/>}
+        </button>
       </header>
 
       {open && (
