@@ -44,7 +44,7 @@ const skillsRow2 = [
 const achievements = [
   { Icon: GraduationCap, title: "B.S. Computer Science", sub: "MSU-IIT · 2025",            accent: "#7e3460" },
   { Icon: Star,          title: "3,000+ Users Served",   sub: "Church Membership System",  accent: "#b52a5d" },
-  { Icon: Brain,         title: "79.67% Accuracy",        sub: "CNN Hair Type Recognition", accent: "#9a1847" },
+  { Icon: Brain,         title: "Thesis Research",         sub: "Facial Recognition · MTCNN + LBPH", accent: "#9a1847" },
   { Icon: Palette,       title: "WCAG-Compliant UI",      sub: "Sikai Inc. Internship",     accent: "#c084a8" },
 ]
 
