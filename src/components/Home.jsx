@@ -1,16 +1,16 @@
-import { useState, useEffect, useRef, useCallback } from "react"
+import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { FaGithub, FaLinkedin, FaFacebook, FaInstagram, FaWhatsapp, FaTelegramPlane } from "react-icons/fa"
 import {
-  SiReact, SiNextdotjs, SiTypescript, SiPython, SiFlask,
-  SiHtml5, SiCss, SiTailwindcss,
-  SiPostgresql, SiMysql, SiSupabase, SiFigma,
-  SiGit, SiVercel, SiFirebase,
+  SiReact, SiNextdotjs, SiTypescript, SiPython, SiNodedotjs,
+  SiHtml5, SiCss, SiTailwindcss, SiMongodb,
+  SiPostgresql, SiSupabase, SiFigma,
+  SiGit, SiVercel, SiStripe,
 } from "react-icons/si"
-import { FolderOpen, Wrench, Award, Briefcase, GraduationCap, Star, Brain, Palette, Download } from "lucide-react"
+import { FolderOpen, Wrench, Award, Briefcase, GraduationCap, Star, Palette, Download } from "lucide-react"
 import { usePage } from "../context/PageContext"
 
-const roles = ["Full-Stack Developer", "UI/UX Designer", "Frontend Developer", "AI Integration Engineer"]
+const roles = ["Frontend Developer", "Full-Stack Developer", "UI/UX Designer", "Open to Work"]
 
 const projects = [
   { title: "Church Management System",  img: "/images/church-management-preview.png",  tag: "Full-Stack" },
@@ -25,32 +25,33 @@ const skillsRow1 = [
   { label: "Next.js",   Icon: SiNextdotjs  },
   { label: "TypeScript", Icon: SiTypescript },
   { label: "Python",     Icon: SiPython     },
-  { label: "Flask",      Icon: SiFlask      },
+  { label: "Git",        Icon: SiGit        },
   { label: "HTML5",      Icon: SiHtml5      },
   { label: "CSS3",       Icon: SiCss        },
   { label: "Tailwind",   Icon: SiTailwindcss},
 ]
 
 const skillsRow2 = [
+  { label: "Node.js",    Icon: SiNodedotjs  },
+  { label: "MongoDB",    Icon: SiMongodb    },
   { label: "PostgreSQL", Icon: SiPostgresql },
-  { label: "MySQL",      Icon: SiMysql      },
   { label: "Supabase",   Icon: SiSupabase   },
+  { label: "Stripe",     Icon: SiStripe     },
   { label: "Figma",      Icon: SiFigma      },
-  { label: "Git",        Icon: SiGit        },
   { label: "Vercel",     Icon: SiVercel     },
-  { label: "Firebase",   Icon: SiFirebase   },
 ]
 
 const achievements = [
-  { Icon: GraduationCap, title: "B.S. Computer Science", sub: "MSU-IIT · 2025",            accent: "#7e3460" },
-  { Icon: Star,          title: "3,000+ Users Served",   sub: "Church Membership System",  accent: "#b52a5d" },
-  { Icon: Brain,         title: "Thesis Research",         sub: "Facial Recognition · MTCNN + LBPH", accent: "#9a1847" },
+  { Icon: GraduationCap, title: "B.S. Computer Science", sub: "MSU-IIT · Cum Laude · 2025", accent: "#7e3460" },
+  { Icon: Star,          title: "Shipped at Nudgine",     sub: "Production frontend · US AI startup", accent: "#b52a5d" },
+  { Icon: Star,          title: "3,000+ Users Served",    sub: "Church Membership System",  accent: "#b52a5d" },
   { Icon: Palette,       title: "WCAG-Compliant UI",      sub: "Sikai Inc. Internship",     accent: "#c084a8" },
 ]
 
 const career = [
-  { logo: "/images/uccp-logo.png",   name: "UCCP",   role: "Full-Stack Dev & AI Integrator", color: "#7e3460" },
-  { logo: "/images/etanom-logo.png", name: "eTanom", role: "UI/UX Design Intern",            color: "#2d7a2d" },
+  { initials: "N", name: "Nudgine", role: "Frontend Developer", period: "2026", color: "#b52a5d" },
+  { logo: "/images/uccp-logo.png", name: "UCCP", role: "Full-Stack & AI", period: "2025-2026", color: "#7e3460" },
+  { logo: "/images/etanom-logo.png", name: "Sikai", role: "UI/UX Intern", period: "2024", color: "#2d7a2d" },
 ]
 
 const socials = [
@@ -210,7 +211,7 @@ export default function Home() {
               <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#7a0f30",
                 display: "block", flexShrink: 0, animation: "pulse-dot 2s ease-in-out infinite" }}/>
               <span style={{ fontSize: "0.58rem", fontWeight: 700,
-                color: "#7a0f30", textTransform: "uppercase" }}>Available</span>
+                color: "#7a0f30", textTransform: "uppercase" }}>Open to Work</span>
             </div>
             <a href="/Paragoso-Resume.pdf" target="_blank" rel="noreferrer"
               style={{
@@ -242,15 +243,25 @@ export default function Home() {
         </motion.h1>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.12 }}
-          style={{ fontSize: "0.8rem", fontWeight: 500, color: "var(--text-muted)", marginBottom: "0.55rem", minHeight: "1.3em", display: "flex", alignItems: "center", gap: "0.35rem" }}>
+          style={{ fontSize: "0.8rem", fontWeight: 500, color: "var(--text-muted)", marginBottom: "0.55rem", minHeight: "1.3em", display: "flex", alignItems: "center", gap: "0.35rem", flexWrap: "wrap" }}>
           <span style={{ color: "var(--rose)", opacity: 0.5 }}>·</span>
           <span>{displayed}</span>
           <span style={{ display: "inline-block", width: 2, height: "0.85em", background: "var(--rose)", verticalAlign: "middle", animation: "blink 1.1s step-end infinite" }}/>
+          <span style={{
+            display: "inline-flex", alignItems: "center", gap: "0.28rem",
+            marginLeft: "0.35rem", padding: "0.12rem 0.5rem", borderRadius: 999,
+            background: "rgba(154,24,71,0.12)", border: "1px solid rgba(154,24,71,0.28)",
+            fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.08em",
+            color: "#7a0f30", textTransform: "uppercase", whiteSpace: "nowrap",
+          }}>
+            <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#7a0f30", display: "block", animation: "pulse-dot 2s ease-in-out infinite" }}/>
+            Open to Work
+          </span>
         </motion.div>
 
         <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }}
           style={{ fontSize: "0.78rem", color: "var(--text-muted)", lineHeight: 1.65, marginBottom: "0.8rem" }}>
-          I ship software real people use - 3,000+ members on a production system I built as a volunteer. CS graduate from MSU-IIT, focused on Next.js, TypeScript, and AI integration.
+          Frontend developer actively seeking a full-time role. Recently shipped production marketing, auth, and billing for a US AI startup, plus a membership platform serving 3,000+ live records.
         </motion.p>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.24 }}
@@ -265,7 +276,7 @@ export default function Home() {
             style={{ cursor: "pointer", padding: "0.46rem 1rem", borderRadius: 8, background: "var(--surface)", border: "1px solid var(--glass-border)", color: "var(--body-color)", fontSize: "0.74rem", fontWeight: 500, transition: "all 0.2s" }}
             onMouseEnter={e => { e.currentTarget.style.borderColor = "var(--rose)"; e.currentTarget.style.color = "var(--rose)" }}
             onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--glass-border)"; e.currentTarget.style.color = "var(--body-color)" }}>
-            Contact Me
+            Hire Me
           </button>
           {socials.map(({ href, Icon }) => (
             <a key={href} href={href} target={href !== "#" ? "_blank" : undefined} rel="noreferrer" style={socialBtn}
@@ -371,26 +382,27 @@ export default function Home() {
 
         {/* ④ Career: big logo icons */}
         <div className="home-card" onClick={() => setPage("experience")} style={{ cursor: "pointer" }}>
-          <CardHeader Icon={Briefcase} title="Career" sub="Professional journey & work experience."/>
-          <div style={{ flex: 1, minHeight: 0, containerType: "size", display: "flex", alignItems: "center", justifyContent: "center" }}>
-            <div style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "clamp(0.6rem,4cqw,1.2rem)", width: "100%" }}>
-              {career.map(({ logo, name }) => (
-                <div key={name} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "clamp(0.25rem,1.5cqw,0.4rem)" }}>
-                  <div style={{
-                    width: "clamp(44px,18cqw,70px)", height: "clamp(44px,18cqw,70px)",
-                    borderRadius: "clamp(10px,3cqw,18px)",
-                    overflow: "hidden", background: "#fff",
-                    border: "1px solid var(--glass-border)",
-                    boxShadow: "0 2px 12px rgba(0,0,0,0.08)",
-                    display: "flex", alignItems: "center", justifyContent: "center",
-                    flexShrink: 0,
-                  }}>
-                    <img src={logo} alt={name} style={{ width: "85%", height: "85%", objectFit: "contain" }}/>
-                  </div>
-                  <span style={{ fontSize: "clamp(0.5rem,2.5cqw,0.6rem)", fontWeight: 600, color: "var(--text-dim)" }}>{name}</span>
+          <CardHeader Icon={Briefcase} title="Career" sub="Most recent first · click for details"/>
+          <div style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column", justifyContent: "center", gap: "0.45rem" }}>
+            {career.map(({ logo, initials, name, role, period, color }) => (
+              <div key={name} style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
+                <div style={{
+                  width: 28, height: 28, borderRadius: 7, overflow: "hidden", flexShrink: 0,
+                  background: logo ? "#fff" : `${color}18`,
+                  border: "1px solid var(--glass-border)",
+                  display: "flex", alignItems: "center", justifyContent: "center",
+                }}>
+                  {logo
+                    ? <img src={logo} alt="" style={{ width: "80%", height: "80%", objectFit: "contain" }}/>
+                    : <span style={{ fontSize: "0.7rem", fontWeight: 800, color }}>{initials}</span>}
                 </div>
-              ))}
-            </div>
+                <div style={{ minWidth: 0, flex: 1 }}>
+                  <p style={{ fontSize: "0.7rem", fontWeight: 700, color: "var(--body-color)", lineHeight: 1.2 }}>{name}</p>
+                  <p style={{ fontSize: "0.58rem", color: "var(--text-dim)", lineHeight: 1.3 }}>{role}</p>
+                </div>
+                <span style={{ fontSize: "0.55rem", color: "var(--text-dim)", flexShrink: 0 }}>{period}</span>
+              </div>
+            ))}
           </div>
         </div>
 

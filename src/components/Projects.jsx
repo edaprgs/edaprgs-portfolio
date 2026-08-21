@@ -1,9 +1,18 @@
 import { motion } from "framer-motion"
-import { Church, Sprout, Hospital, Brain, ExternalLink, Timer, FolderOpen } from "lucide-react"
+import { Church, Sprout, Hospital, Brain, ExternalLink, Timer, FolderOpen, Sparkles } from "lucide-react"
 import { FaGithub } from "react-icons/fa"
 import { useState } from "react"
 
 const projects = [
+  {
+    title: "Nudgine AI Meeting Guidance",
+    icon: <Sparkles size={18}/>,
+    desc: "Production frontend for a US AI startup building real-time meeting guidance. Owned marketing, authentication and onboarding, Stripe billing, legal pages, and a shared component library on Next.js 16 and React 19.",
+    tech: ["Next.js 16", "React 19", "TypeScript", "Tailwind CSS 4", "MongoDB", "Stripe", "Zod"],
+    accent: "#b52a5d",
+    live: "https://www.nudgine.ai/",
+    liveLabel: "Live Product",
+  },
   {
     title: "Church Membership System",
     icon: <Church size={18}/>,
@@ -28,7 +37,7 @@ const projects = [
     desc: "Multi-role healthcare platform for small clinics with real-time cross-role notifications via SocketIO, Cloudinary file uploads, automated credential emails, and prescription assistance based on lab results and patient history. Supports four roles: Admin, Receptionist, Doctor, and Medical Technician.",
     tech: ["Python", "Flask", "MySQL", "Flask-SocketIO", "Flask-Login", "Flask-Mail", "Cloudinary", "Jinja2"],
     accent: "#9a6bc4",
-    github: "https://github.com/edaprgs/Clinic-Management-System",
+    github: "https://github.com/edaprgs/clinic-management-system",
     image: "/images/clinic-management-preview.png",
   },
   {
@@ -37,7 +46,7 @@ const projects = [
     desc: "Deep learning classifier for four hair types trained on a custom 6,000-image dataset with data augmentation. Built with TensorFlow and Keras, achieving 79.67% test accuracy over 20 epochs.",
     tech: ["Python", "TensorFlow", "Keras", "scikit-learn", "CNN", "Data Augmentation"],
     accent: "#c084a8",
-    github: "https://github.com/edaprgs/CNN-Hair-Type-Recognition",
+    github: "https://github.com/edaprgs/cnn-hair-type-recognition",
     image: "/images/hair-cnn-preview.png",
   },
   {
@@ -70,9 +79,21 @@ function ProjectCard({ project, i }) {
       onMouseLeave={() => setHovered(false)}>
 
       <div style={{ position: "relative", overflow: "hidden", height: 175, flexShrink: 0 }}>
-        <img src={project.image} alt={project.title}
-          style={{ width: "100%", height: "100%", objectFit: "cover",
-            transform: hovered ? "scale(1.05)" : "scale(1)", transition: "transform 0.6s" }}/>
+        {project.image ? (
+          <img src={project.image} alt={project.title}
+            style={{ width: "100%", height: "100%", objectFit: "cover",
+              transform: hovered ? "scale(1.05)" : "scale(1)", transition: "transform 0.6s" }}/>
+        ) : (
+          <div style={{
+            width: "100%", height: "100%",
+            background: `radial-gradient(circle at 30% 20%, ${project.accent}33, transparent 50%), linear-gradient(135deg, ${project.accent}18, #1c0d1608)`,
+            display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8,
+            transform: hovered ? "scale(1.04)" : "scale(1)", transition: "transform 0.6s",
+          }}>
+            <span style={{ fontSize: "2.6rem", fontWeight: 800, color: project.accent, letterSpacing: "-0.04em", lineHeight: 1 }}>N</span>
+            <span style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: project.accent }}>Live product</span>
+          </div>
+        )}
         <div style={{ position: "absolute", inset: 0,
           background: `linear-gradient(to top, var(--bg) 0%, ${project.accent}06 100%)` }}/>
       </div>
@@ -122,7 +143,7 @@ function ProjectCard({ project, i }) {
                 transition: "background 0.2s" }}
               onMouseEnter={e => e.currentTarget.style.background = `${project.accent}28`}
               onMouseLeave={e => e.currentTarget.style.background = `${project.accent}18`}>
-              <ExternalLink size={13}/> Live Demo
+              <ExternalLink size={13}/> {project.liveLabel || "Live Demo"}
             </a>
           )}
         </div>
@@ -147,6 +168,9 @@ export default function Projects() {
           letterSpacing: "-0.02em", lineHeight: 1.1 }} className="grad-text">
           What I've Built
         </h2>
+        <p style={{ fontSize: "0.88rem", color: "var(--text-muted)", marginTop: "0.6rem", lineHeight: 1.7 }}>
+          Selected production work: SaaS frontend, membership platforms, and design systems.
+        </p>
       </motion.div>
 
       <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: "1.2rem" }}>

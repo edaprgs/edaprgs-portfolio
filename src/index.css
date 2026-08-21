@@ -202,7 +202,20 @@ img { display: block; max-width: 100% }
 @media (max-width: 1023px) {
   .left-panel  { display: none !important }
   .right-panel { margin-left: 0; width: 100%; padding-top: 3.5rem }
-  .ide-section { padding: 2.8rem 1.5rem }
+  .ide-section { padding: 2.4rem 1.4rem }
+  .home-section {
+    height: auto !important;
+    overflow: visible !important;
+    min-height: calc(100dvh - 3.5rem);
+    padding: 1.2rem 1.4rem 2rem !important;
+  }
+  .home-card-grid {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: auto !important;
+    flex: none !important;
+  }
+  .home-card { min-height: 200px !important; }
+  .about-main-grid { grid-template-columns: 1fr !important; }
 }
 
 @media (min-width: 1024px) {
@@ -224,38 +237,24 @@ img { display: block; max-width: 100% }
   }
 }
 
-/* ─── Small mobile (≤ 540px) ────────────────────────────────── */
-@media (max-width: 540px) {
-  /* Home: single-column card stack */
-  .home-section {
-    height: auto !important;
-    overflow: visible !important;
-    padding-bottom: 2rem !important;
-  }
+/* ─── Small tablets & phones (≤ 720px) ──────────────────────── */
+@media (max-width: 720px) {
   .home-card-grid {
     grid-template-columns: 1fr !important;
     grid-template-rows: auto !important;
     flex: none !important;
   }
   .home-card { min-height: 180px !important; }
-
-  /* About: single column */
   .about-main-grid  { grid-template-columns: 1fr !important; }
   .about-stats-grid { grid-template-columns: repeat(2,1fr) !important; }
   .about-offers-grid { grid-template-columns: 1fr !important; }
-
-  /* Experience: single column on mobile (drawer stacks below) */
   .experience-grid { grid-template-columns: 1fr !important; }
-
-  /* Projects card: cap image scroll so card doesn't expand to show all images */
   .projects-img-scroll { max-height: 220px !important; }
-
-  /* Skills globe: tighter height */
   .globe-canvas { height: 380px !important; }
-
-  /* Projects: bottom breathing room */
   .projects-section { padding-bottom: 3.5rem !important; }
-
-  /* Contact: name + email stacked */
   .contact-name-email { grid-template-columns: 1fr !important; }
+}
+
+@media (max-width: 540px) {
+  .ide-section { padding: 2rem 1.1rem }
 }

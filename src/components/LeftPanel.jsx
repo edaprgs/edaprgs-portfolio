@@ -64,7 +64,7 @@ export default function LeftPanel() {
             display: "block", flexShrink: 0, animation: "pulse-dot 2s ease-in-out infinite" }}/>
           <span style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.08em",
             color: "#7a0f30", textTransform: "uppercase" }}>
-            Available
+            Open to Work
           </span>
         </motion.div>
 

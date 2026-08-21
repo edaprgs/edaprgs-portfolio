@@ -1,33 +1,57 @@
 import { motion, AnimatePresence } from "framer-motion"
 import { useState } from "react"
-import { Database, Palette, MapPin, Calendar, ChevronDown, Briefcase } from "lucide-react"
+import { Database, Palette, MapPin, Calendar, ChevronDown, Briefcase, ExternalLink, Code2 } from "lucide-react"
 
 const experiences = [
   {
-    role: "Full-Stack Developer & AI Integration Engineer",
-    type: "Volunteer",
-    company: "United Church of Christ in the Philippines, Iligan",
-    companyShort: "UCCP Iligan",
-    logo: "/images/uccp-logo.png",
-    period: "Jul 2025 · Present",
-    location: "Iligan City, Philippines",
+    id: "nudgine",
+    role: "Frontend Developer / Software Developer",
+    type: "Contract",
+    company: "Nudgine LLC",
+    companyShort: "Nudgine",
+    initials: "N",
+    period: "Jun 2026 · Aug 2026",
+    location: "Alpine, Utah, USA · Remote",
     color: "#b52a5d",
-    Icon: Database,
-    badge: "Live in Production · 3,000+ members · AI-powered",
-    shortDesc: "Production-grade church membership system serving 3,000+ active records with a three-tier role system, AI-powered reporting via Gemini, and configurable CSV exports.",
-    tech: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Gemini API", "Zod", "Recharts", "Vercel"],
+    Icon: Code2,
+    badge: "US AI startup · Next.js 16 · React 19 · Live product",
+    shortDesc: "Shipped the production frontend for real-time AI meeting guidance software, covering marketing, auth, onboarding, pricing, and a shared component system used across 10+ pages.",
+    live: "https://www.nudgine.ai/",
+    tech: ["Next.js", "React", "TypeScript", "Tailwind CSS", "MongoDB", "Stripe", "Zod", "Node.js"],
     bullets: [
-      "Built a production-grade church membership system using Next.js (App Router), TypeScript, and Supabase serving 3,000+ active member records.",
-      "Integrated the Gemini API for AI-powered report summarization and natural language Q&A over live membership data.",
-      "Implemented a three-tier role system (Admin, Staff, Member) via Next.js Middleware with fine-grained access control and zero client-side enforcement gaps.",
-      "Designed a 40+ field normalized PostgreSQL schema with Row Level Security covering personal, family, church, educational, and ministry data.",
-      "Built a configurable reports module with live search, multi-filter, toggleable columns, and one-click CSV export, cutting manual reporting time by ~80%.",
-      "Implemented 1,000-row batched pagination to reliably fetch all records beyond Supabase's default query ceiling.",
-      "Added CSP security headers, X-Frame-Options DENY, and Referrer Policy to the Next.js config for production hardening.",
-      "Migrated 3,000+ historical records to the new schema with zero data loss; deployed to Vercel with CI/CD.",
+      "Redesigned and shipped the marketing experience end-to-end and extracted a shared component library reused across 10+ marketing and auth pages on Next.js 16, React 19, TypeScript, and Tailwind CSS 4.",
+      "Built the pricing page (usage-based Pro-plan slider, plan comparison, billing FAQ) plus SEO-optimized Product, How It Works, Use Cases, Security, About, FAQs, Blog, and Changelog pages.",
+      "Rebuilt Login, Signup, and the Auth Modal on a shared foundation with Google OAuth, invisible reCAPTCHA v2, and a sitewide typography system.",
+      "Delivered a production password-reset and account-security system spanning 5 API routes and 3 UI pages, with hashed reset tokens, TTL expiration, atomic token invalidation, and 25 passing integration tests.",
+      "Engineered progressive exponential-backoff brute-force protection and built post-signup onboarding that routes users into Stripe Checkout, contact-sales, or the free workspace.",
+      "Shipped public legal pages and a Contact flow, then ran WCAG, keyboard, dark-mode, and cross-device audits (44px touch targets) on every PR.",
     ],
   },
   {
+    id: "uccp",
+    role: "Full-Stack Developer & AI Integration",
+    type: "Contract",
+    company: "United Church of Christ in the Philippines, Iligan",
+    companyShort: "UCCP Iligan",
+    logo: "/images/uccp-logo.png",
+    period: "Jul 2025 · Jul 2026",
+    location: "Iligan City, Philippines",
+    color: "#b52a5d",
+    Icon: Database,
+    badge: "Live in production · 3,000+ members · AI-powered",
+    shortDesc: "Production-grade church membership system serving 3,000+ active records with a three-tier role system, AI-powered reporting via Gemini, and configurable CSV exports.",
+    live: "https://uccpiligan.vercel.app/",
+    tech: ["Next.js", "TypeScript", "Supabase", "PostgreSQL", "Gemini API", "Zod", "Recharts", "Vercel"],
+    bullets: [
+      "Architected and shipped a production membership system in Next.js (App Router), TypeScript, and Supabase, managing 3,000+ live records across a 40+ field normalized PostgreSQL schema.",
+      "Built two Gemini API features: AI report summarization over filtered member exports, and a conversational Q&A interface for non-technical admins.",
+      "Implemented server-side RBAC via Next.js Middleware, verifying JWT sessions on every request and routing Admin, Staff, and Member users to separate portals.",
+      "Developed a configurable reports module with live search, multi-criteria filtering, toggleable columns, and one-click CSV export, cutting reporting time by ~80%.",
+      "Deployed to Vercel with CI/CD on every push to main; migrated 3,000+ historical records with zero data loss at go-live.",
+    ],
+  },
+  {
+    id: "sikai",
     role: "UI/UX Design Intern",
     type: "Internship",
     company: "Sikai Inc. (eTanom)",
@@ -41,21 +65,25 @@ const experiences = [
     shortDesc: "Designed the eTanom Planter's Interface, a reforestation platform, covering responsive web and mobile layouts across 8+ end-to-end user flows.",
     tech: ["Figma", "Prototyping", "WCAG", "UI/UX", "Responsive Design"],
     bullets: [
-      "Designed the eTanom Planter's Interface, a reforestation platform, covering responsive web and mobile layouts.",
-      "Prototyped 8+ end-to-end user flows: OTP onboarding, proof-of-planting photo uploads, earnings tracking, and in-app messaging.",
-      "Built a WCAG-compliant color system across 9 shade levels with AA/AAA contrast ratios on both light and dark surfaces.",
-      "Delivered annotated Figma handoffs with full interaction states and component specs, reducing dev clarification rounds for a 4-person engineering team.",
+      "Designed the eTanom Planter's Interface with responsive web and mobile layouts covering 8+ end-to-end flows: OTP onboarding, proof-of-planting uploads, earnings tracking, and in-app messaging.",
+      "Built a WCAG-compliant color system with documented contrast ratios across 9 shade levels (AA/AAA on light and dark surfaces).",
+      "Delivered annotated Figma handoffs with full interaction states, cutting developer clarification rounds for a 4-person engineering team.",
     ],
   },
 ]
 
 const TECH_COLORS = {
   "Next.js": "#000",
+  "React": "#61dafb",
   "TypeScript": "#3178c6",
+  "Tailwind CSS": "#38bdf8",
+  "MongoDB": "#00ed64",
+  "Stripe": "#635bff",
+  "Zod": "#3068b7",
+  "Node.js": "#5fa04e",
   "Supabase": "#3ecf8e",
   "PostgreSQL": "#336791",
   "Gemini API": "#8b5cf6",
-  "Zod": "#3068b7",
   "Recharts": "#e8577a",
   "Vercel": "#000",
   "Figma": "#f24e1e",
@@ -63,6 +91,25 @@ const TECH_COLORS = {
   "WCAG": "#1a7f5a",
   "UI/UX": "#b52a5d",
   "Responsive Design": "#0ea5e9",
+}
+
+function CompanyMark({ exp, size = 20 }) {
+  return (
+    <div style={{
+      width: size, height: size, borderRadius: 4, overflow: "hidden", flexShrink: 0,
+      background: exp.logo ? "#fff" : `${exp.color}18`,
+      border: "1px solid var(--glass-border)",
+      display: "flex", alignItems: "center", justifyContent: "center",
+    }}>
+      {exp.logo ? (
+        <img src={exp.logo} alt="" style={{ width: "90%", height: "90%", objectFit: "contain" }}/>
+      ) : (
+        <span style={{ fontSize: size * 0.48, fontWeight: 800, color: exp.color, lineHeight: 1 }}>
+          {exp.initials}
+        </span>
+      )}
+    </div>
+  )
 }
 
 function AccordionCard({ exp, isOpen, onToggle, index }) {
@@ -80,25 +127,17 @@ function AccordionCard({ exp, isOpen, onToggle, index }) {
         transition: "border-color 0.2s",
       }}>
 
-      {/* ── Card header — GitHub repo card style ── */}
       <button
         onClick={onToggle}
+        aria-expanded={isOpen}
         style={{
           width: "100%", display: "flex", flexDirection: "column",
           padding: "1rem 1.2rem", background: "transparent", border: "none",
           cursor: "pointer", textAlign: "left", gap: "0.55rem",
         }}>
 
-        {/* Row 1: icon + name + badge + chevron */}
         <div style={{ display: "flex", alignItems: "center", gap: "0.55rem", width: "100%" }}>
-          {/* Logo */}
-          <div style={{
-            width: 20, height: 20, borderRadius: 4, overflow: "hidden", flexShrink: 0,
-            background: "#fff", border: "1px solid var(--glass-border)",
-            display: "flex", alignItems: "center", justifyContent: "center",
-          }}>
-            <img src={exp.logo} alt={exp.companyShort} style={{ width: "90%", height: "90%", objectFit: "contain" }}/>
-          </div>
+          <CompanyMark exp={exp} size={22}/>
 
           <span style={{ fontSize: "0.88rem", fontWeight: 700, color: exp.color, flex: 1, minWidth: 0 }}>
             {exp.companyShort}
@@ -118,7 +157,10 @@ function AccordionCard({ exp, isOpen, onToggle, index }) {
           </motion.div>
         </div>
 
-        {/* Row 2: short description */}
+        <p style={{ fontSize: "0.8rem", fontWeight: 600, color: "var(--body-color)", lineHeight: 1.4 }}>
+          {exp.role}
+        </p>
+
         <p style={{
           fontSize: "0.8rem", color: "var(--text-muted)", lineHeight: 1.6,
           display: "-webkit-box", WebkitLineClamp: isOpen ? undefined : 2,
@@ -127,7 +169,6 @@ function AccordionCard({ exp, isOpen, onToggle, index }) {
           {exp.shortDesc}
         </p>
 
-        {/* Row 3: tech dots + period (GitHub footer row) */}
         <div style={{ display: "flex", alignItems: "center", gap: "1rem", flexWrap: "wrap" }}>
           {exp.tech.slice(0, 3).map(t => (
             <span key={t} style={{ display: "flex", alignItems: "center", gap: "0.3rem", fontSize: "0.72rem", color: "var(--text-dim)" }}>
@@ -141,7 +182,6 @@ function AccordionCard({ exp, isOpen, onToggle, index }) {
         </div>
       </button>
 
-      {/* ── Expanded drawer ── */}
       <AnimatePresence initial={false}>
         {isOpen && (
           <motion.div
@@ -155,8 +195,7 @@ function AccordionCard({ exp, isOpen, onToggle, index }) {
             <div style={{ padding: "0 1.2rem 1.2rem" }}>
               <div style={{ height: 1, background: "var(--divider)", marginBottom: "1rem" }}/>
 
-              {/* Badge */}
-              <div style={{ marginBottom: "1rem" }}>
+              <div style={{ display: "flex", flexWrap: "wrap", alignItems: "center", gap: "0.5rem", marginBottom: "1rem" }}>
                 <span style={{
                   display: "inline-flex", alignItems: "center", gap: "0.35rem",
                   padding: "0.22rem 0.8rem", borderRadius: 999,
@@ -165,9 +204,21 @@ function AccordionCard({ exp, isOpen, onToggle, index }) {
                 }}>
                   ✦ {exp.badge}
                 </span>
+                <span style={{ display: "inline-flex", alignItems: "center", gap: "0.3rem", fontSize: "0.72rem", color: "var(--text-dim)" }}>
+                  <MapPin size={11}/> {exp.location}
+                </span>
+                {exp.live && (
+                  <a href={exp.live} target="_blank" rel="noopener noreferrer"
+                    onClick={e => e.stopPropagation()}
+                    style={{
+                      display: "inline-flex", alignItems: "center", gap: "0.3rem",
+                      marginLeft: "auto", fontSize: "0.72rem", fontWeight: 600, color: exp.color,
+                    }}>
+                    <ExternalLink size={12}/> Live
+                  </a>
+                )}
               </div>
 
-              {/* Highlights */}
               <p style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-dim)", marginBottom: "0.6rem" }}>
                 Highlights
               </p>
@@ -180,7 +231,6 @@ function AccordionCard({ exp, isOpen, onToggle, index }) {
                 ))}
               </ul>
 
-              {/* Tech stack */}
               <p style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.1em", textTransform: "uppercase", color: "var(--text-dim)", marginBottom: "0.5rem" }}>
                 Tech Stack
               </p>
@@ -208,7 +258,7 @@ function AccordionCard({ exp, isOpen, onToggle, index }) {
 export default function Experience() {
   const [openRole, setOpenRole] = useState(null)
 
-  const toggle = (role) => setOpenRole(r => r === role ? null : role)
+  const toggle = (id) => setOpenRole(r => r === id ? null : id)
 
   return (
     <section id="experience" className="ide-section">
@@ -224,21 +274,21 @@ export default function Experience() {
         </div>
         <h2 style={{ fontSize: "clamp(1.8rem, 3vw, 2.6rem)", fontWeight: 700, letterSpacing: "-0.02em", lineHeight: 1.1 }}
           className="grad-text">
-          My Journey
+          Career
         </h2>
         <p style={{ fontSize: "0.88rem", color: "var(--text-muted)", marginTop: "0.6rem", lineHeight: 1.7 }}>
-          From church pews to production servers.
+          Contract frontend work at a US AI startup, production full-stack, and design internship.
         </p>
       </motion.div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
         {experiences.map((exp, i) => (
           <AccordionCard
-            key={exp.role}
+            key={exp.id}
             exp={exp}
             index={i}
-            isOpen={openRole === exp.role}
-            onToggle={() => toggle(exp.role)}
+            isOpen={openRole === exp.id}
+            onToggle={() => toggle(exp.id)}
           />
         ))}
       </div>

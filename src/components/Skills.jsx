@@ -3,9 +3,9 @@ import SkillsGlobe from "./SkillsGlobe"
 import {
   SiReact, SiNextdotjs, SiTypescript, SiJavascript, SiPython,
   SiHtml5, SiCss, SiTailwindcss, SiSupabase, SiPostgresql,
-  SiMysql, SiFlask, SiNodedotjs, SiSocketdotio, SiCloudinary,
+  SiMysql, SiFlask, SiNodedotjs, SiSocketdotio, SiMongodb,
   SiGooglegemini, SiTensorflow, SiFigma, SiGit, SiVercel,
-  SiFramer, SiPostman,
+  SiFramer, SiStripe, SiZod, SiGithubactions, SiPnpm,
 } from "react-icons/si"
 import { Wrench } from "lucide-react"
 
@@ -22,24 +22,28 @@ const ICON_MAP = {
   "Supabase":         SiSupabase,
   "PostgreSQL":       SiPostgresql,
   "MySQL":            SiMysql,
+  "MongoDB":          SiMongodb,
   "Flask":            SiFlask,
   "Node.js":          SiNodedotjs,
-  "SocketIO":         SiSocketdotio,
-  "Cloudinary":       SiCloudinary,
+  "WebSockets":       SiSocketdotio,
   "Gemini API":       SiGooglegemini,
   "TensorFlow":       SiTensorflow,
   "Figma":            SiFigma,
   "Git":              SiGit,
   "Vercel":           SiVercel,
-  "Postman":          SiPostman,
+  "Stripe":           SiStripe,
+  "Zod":              SiZod,
+  "GitHub Actions":   SiGithubactions,
+  "pnpm":             SiPnpm,
 }
 
 const categories = [
-  { label: "Languages",      color: "#9a1847",  skills: ["JavaScript", "TypeScript", "Python", "HTML5", "CSS3", "SQL"] },
-  { label: "Frontend",       color: "#7e3460",  skills: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "Shadcn UI"] },
-  { label: "Backend & Data", color: "#5b2a82",  skills: ["Supabase", "PostgreSQL", "MySQL", "Flask", "Node.js", "SocketIO"] },
-  { label: "AI & LLM",       color: "#c084a8",  skills: ["Gemini API", "TensorFlow", "Keras", "CNN", "Prompt Engineering"] },
-  { label: "Tools & Design", color: "#b52a5d",  skills: ["Figma", "Git", "Vercel", "Postman", "Cloudinary", "WCAG"] },
+  { label: "Languages",              color: "#9a1847", skills: ["JavaScript", "TypeScript", "Python", "HTML5", "CSS3", "SQL"] },
+  { label: "Frontend",               color: "#7e3460", skills: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "Shadcn UI"] },
+  { label: "Backend & Data",         color: "#5b2a82", skills: ["Node.js", "MongoDB", "Supabase", "PostgreSQL", "MySQL", "Flask", "REST APIs", "WebSockets"] },
+  { label: "Auth, Payments & Security", color: "#7e3460", skills: ["JWT", "Google OAuth", "bcrypt", "reCAPTCHA", "Stripe", "Zod"] },
+  { label: "AI & LLM",               color: "#c084a8", skills: ["Gemini API", "OpenAI", "Prompt Engineering", "TensorFlow", "Keras"] },
+  { label: "Tools & Design",         color: "#b52a5d", skills: ["Figma", "Git", "GitHub Actions", "Vercel", "pnpm", "Turborepo", "WCAG"] },
 ]
 
 export default function Skills() {
@@ -58,15 +62,16 @@ export default function Skills() {
           letterSpacing: "-0.02em", lineHeight: 1.1 }} className="grad-text">
           Skills & Technologies
         </h2>
+        <p style={{ fontSize: "0.88rem", color: "var(--text-muted)", marginTop: "0.6rem", lineHeight: 1.7 }}>
+          Frontend-first, with enough backend, auth, and billing depth to ship a product end-to-end.
+        </p>
       </motion.div>
 
-      {/* Globe */}
       <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
         transition={{ duration: 1 }} style={{ marginBottom: "1.2rem", marginTop: "-0.5rem" }}>
         <SkillsGlobe/>
       </motion.div>
 
-      {/* Category breakdown */}
       <div style={{ display: "flex", flexDirection: "column", gap: "1.4rem" }}>
         {categories.map(({ label, color, skills }, i) => (
           <motion.div key={label}

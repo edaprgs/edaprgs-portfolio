@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { GraduationCap, MapPin, Sparkles, Code2, Palette, BrainCircuit, Layers, User } from "lucide-react"
+import { GraduationCap, MapPin, Sparkles, Code2, Palette, ShieldCheck, Layers, User } from "lucide-react"
 
 const fade = (i = 0) => ({
   initial: { opacity: 0, y: 20 },
@@ -9,17 +9,17 @@ const fade = (i = 0) => ({
 })
 
 const stats = [
-  { num: "5+",   label: "Projects Built",      color: "var(--rose)" },
-  { num: "3K+",  label: "Users Served",         color: "var(--mauve)" },
-  { num: "2025", label: "CS Graduate",          color: "var(--rose)" },
-  { num: "2",    label: "Professional Roles",   color: "var(--mauve)" },
+  { num: "3",    label: "Professional Roles", color: "var(--rose)" },
+  { num: "3K+",  label: "Users Served",       color: "var(--mauve)" },
+  { num: "2025", label: "CS · Cum Laude",     color: "var(--rose)" },
+  { num: "Now",  label: "Open to Work",       color: "var(--mauve)" },
 ]
 
 const offers = [
-  { Icon: Code2,        label: "Full-Stack Development",  sub: "React · Next.js · Supabase · Flask" },
-  { Icon: Palette,      label: "UI/UX Design",            sub: "Figma · Prototyping · WCAG" },
-  { Icon: BrainCircuit, label: "AI Integration",          sub: "Gemini API · TensorFlow · Prompt Engineering" },
-  { Icon: Layers,       label: "Database Design",         sub: "PostgreSQL · MySQL · Schema Design" },
+  { Icon: Code2,       label: "Frontend Engineering",  sub: "React 19 · Next.js 16 · Tailwind CSS 4" },
+  { Icon: Layers,      label: "Full-Stack Delivery",   sub: "Node.js · MongoDB · Supabase · PostgreSQL" },
+  { Icon: ShieldCheck, label: "Auth & Payments",       sub: "OAuth · Stripe · Rate limiting · reCAPTCHA" },
+  { Icon: Palette,     label: "UI Systems",            sub: "Figma · Design tokens · WCAG · Design-to-code" },
 ]
 
 export default function About() {
@@ -39,24 +39,25 @@ export default function About() {
         </h2>
       </motion.div>
 
-      {/* Two-column layout */}
       <div className="about-main-grid" style={{ display: "grid", gridTemplateColumns: "1fr 260px", gap: "2rem", marginBottom: "2.2rem", alignItems: "start" }}>
 
         <div>
           <motion.p {...fade(1)} style={{ fontSize: "0.96rem", color: "var(--text-muted)", lineHeight: 1.9, marginBottom: "1rem" }}>
-            I'm a <span style={{ color: "var(--rose)", fontWeight: 600 }}>Computer Science graduate</span> from{" "}
-            <span style={{ color: "var(--body-color)", fontWeight: 500 }}>Mindanao State University, Iligan Institute of Technology</span>,
-            passionate about building web applications that are fast, functional, and beautifully designed.
+            I'm a <span style={{ color: "var(--rose)", fontWeight: 600 }}>Computer Science graduate (Cum Laude)</span> from{" "}
+            <span style={{ color: "var(--body-color)", fontWeight: 500 }}>Mindanao State University, Iligan Institute of Technology</span>.
+            I build production frontends that are fast, accessible, and grounded in a real design system.
           </motion.p>
           <motion.p {...fade(2)} style={{ fontSize: "0.96rem", color: "var(--text-muted)", lineHeight: 1.9, marginBottom: "1rem" }}>
-            My work spans crafting pixel-perfect interfaces in{" "}
-            <span style={{ color: "var(--body-color)", fontWeight: 500 }}>React and Next.js</span> to architecting backends with{" "}
-            <span style={{ color: "var(--body-color)", fontWeight: 500 }}>Supabase, Flask, and PostgreSQL</span>, and integrating AI through the{" "}
-            <span style={{ color: "var(--body-color)", fontWeight: 500 }}>Gemini API</span> for real-world impact.
+            Most recently I shipped the production frontend for{" "}
+            <span style={{ color: "var(--body-color)", fontWeight: 500 }}>Nudgine</span>, a US-based AI startup.
+            The work covered marketing pages, authentication and onboarding, Stripe billing flows, and a shared component library on{" "}
+            <span style={{ color: "var(--body-color)", fontWeight: 500 }}>Next.js 16 and React 19</span>.
+            Before that I delivered a Next.js + Supabase membership platform serving{" "}
+            <span style={{ color: "var(--body-color)", fontWeight: 500 }}>3,000+ live records</span> with Gemini-powered reporting.
           </motion.p>
           <motion.p {...fade(3)} style={{ fontSize: "0.96rem", color: "var(--text-muted)", lineHeight: 1.9 }}>
-            I believe great software needs both strong engineering <span style={{ color: "var(--rose)", fontWeight: 500 }}>and</span> great design.
-            Currently open to full-time opportunities across the stack.
+            I'm <span style={{ color: "var(--rose)", fontWeight: 600 }}>actively seeking a full-time Frontend Developer role</span>.
+            I am remote-first, and I want room to own UI systems, design-to-code, and the product details that make software feel finished.
           </motion.p>
         </div>
 
@@ -67,9 +68,9 @@ export default function About() {
         }}>
           <p style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text-dim)", marginBottom: "0.1rem" }}>Quick Facts</p>
           {[
-            { Icon: GraduationCap, color: "var(--rose)", primary: "B.S. Computer Science", secondary: "MSU-IIT · 2025" },
-            { Icon: MapPin,        color: "var(--mauve)", primary: "General Trias, Cavite", secondary: "Philippines" },
-            { Icon: Sparkles,      color: "var(--rose)", primary: "Open to opportunities", secondary: "Full-stack · AI · Remote or on-site PH" },
+            { Icon: GraduationCap, color: "var(--rose)",  primary: "B.S. Computer Science", secondary: "MSU-IIT · Cum Laude · 2025" },
+            { Icon: MapPin,        color: "var(--mauve)", primary: "General Trias, Cavite", secondary: "Philippines · Remote-ready" },
+            { Icon: Sparkles,      color: "var(--rose)",  primary: "Open to work",          secondary: "Frontend · Full-time · Remote" },
           ].map(({ Icon, color, primary, secondary }, i) => (
             <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "0.7rem" }}>
               <div style={{ width: 30, height: 30, borderRadius: 8, background: "var(--surface-2)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
@@ -84,7 +85,6 @@ export default function About() {
         </motion.div>
       </div>
 
-      {/* Stats row */}
       <motion.div {...fade(4)} className="about-stats-grid" style={{
         display: "grid", gridTemplateColumns: "repeat(4, 1fr)",
         gap: "1px", marginBottom: "2.2rem",
@@ -102,7 +102,6 @@ export default function About() {
         ))}
       </motion.div>
 
-      {/* What I offer */}
       <motion.div {...fade(5)}>
         <p style={{ fontSize: "0.72rem", fontWeight: 700, letterSpacing: "0.12em", textTransform: "uppercase", color: "var(--text-dim)", marginBottom: "1rem" }}>
           What I Offer

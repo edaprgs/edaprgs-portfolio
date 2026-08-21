@@ -61,7 +61,7 @@ export default function Contact() {
           Let's Connect
         </h2>
         <p style={{ fontSize: "0.88rem", color: "var(--text-muted)", lineHeight: 1.7 }}>
-          Open to full-time roles, freelance projects, or just a friendly chat. I reply within 24 hours.
+          Actively seeking a full-time Frontend Developer role. Remote-first, available to start, and I reply within 24 hours.
         </p>
       </motion.div>
 
@@ -74,7 +74,7 @@ export default function Contact() {
           animation: "pulse-dot 2s ease-in-out infinite", boxShadow: "0 0 6px rgba(122,15,48,0.4)", display: "block" }}/>
         <span style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.1em",
           color: "#7a0f30", textTransform: "uppercase" }}>
-          Available for opportunities
+          Open to work · Frontend roles
         </span>
       </motion.div>
 
