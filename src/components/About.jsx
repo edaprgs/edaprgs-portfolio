@@ -45,7 +45,7 @@ export default function About() {
           <motion.p {...fade(1)} style={{ fontSize: "0.96rem", color: "var(--text-muted)", lineHeight: 1.9, marginBottom: "1rem" }}>
             I'm a <span style={{ color: "var(--rose)", fontWeight: 600 }}>Computer Science graduate (Cum Laude)</span> from{" "}
             <span style={{ color: "var(--body-color)", fontWeight: 500 }}>Mindanao State University, Iligan Institute of Technology</span>.
-            I build production frontends that are fast, accessible, and grounded in a real design system.
+            I build production full-stack applications that are fast, accessible, and grounded in a real design system.
           </motion.p>
           <motion.p {...fade(2)} style={{ fontSize: "0.96rem", color: "var(--text-muted)", lineHeight: 1.9, marginBottom: "1rem" }}>
             Most recently I shipped the production frontend for{" "}
@@ -54,10 +54,11 @@ export default function About() {
             <span style={{ color: "var(--body-color)", fontWeight: 500 }}>Next.js 16 and React 19</span>.
             Before that I delivered a Next.js + Supabase membership platform serving{" "}
             <span style={{ color: "var(--body-color)", fontWeight: 500 }}>3,000+ live records</span> with Gemini-powered reporting.
+            My undergraduate thesis is a computer vision pipeline for facial recognition under varying lighting.
           </motion.p>
           <motion.p {...fade(3)} style={{ fontSize: "0.96rem", color: "var(--text-muted)", lineHeight: 1.9 }}>
-            I'm <span style={{ color: "var(--rose)", fontWeight: 600 }}>actively seeking a full-time Frontend Developer role</span>.
-            I am remote-first, and I want room to own UI systems, design-to-code, and the product details that make software feel finished.
+            I'm <span style={{ color: "var(--rose)", fontWeight: 600 }}>actively seeking a full-time Full-Stack Developer role</span>.
+            I am remote-first, and I want room to own UI systems, backend flows, and the product details that make software feel finished.
           </motion.p>
         </div>
 
@@ -70,7 +71,7 @@ export default function About() {
           {[
             { Icon: GraduationCap, color: "var(--rose)",  primary: "B.S. Computer Science", secondary: "MSU-IIT · Cum Laude · 2025" },
             { Icon: MapPin,        color: "var(--mauve)", primary: "General Trias, Cavite", secondary: "Philippines · Remote-ready" },
-            { Icon: Sparkles,      color: "var(--rose)",  primary: "Open to work",          secondary: "Frontend · Full-time · Remote" },
+            { Icon: Sparkles,      color: "var(--rose)",  primary: "Open to work",          secondary: "Full-stack · Full-time · Remote" },
           ].map(({ Icon, color, primary, secondary }, i) => (
             <div key={i} style={{ display: "flex", alignItems: "flex-start", gap: "0.7rem" }}>
               <div style={{ width: 30, height: 30, borderRadius: 8, background: "var(--surface-2)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>

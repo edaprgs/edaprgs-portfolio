@@ -21,7 +21,7 @@ const SKILLS = [
   { label: "WebSockets",   cat: 1 },
   { label: "Gemini API",   cat: 2 },
   { label: "TensorFlow",   cat: 2 },
-  { label: "Keras",        cat: 2 },
+  { label: "OpenCV",       cat: 2 },
   { label: "Prompt Eng.",  cat: 2 },
   { label: "Figma",        cat: 3 },
   { label: "Git",          cat: 3 },
@@ -273,7 +273,7 @@ export default function SkillsGlobe() {
   const legend = [
     { label: "Frontend",        color: CAT_COLORS[0] },
     { label: "Backend & Data",  color: CAT_COLORS[1] },
-    { label: "AI & LLM",        color: CAT_COLORS[2] },
+    { label: "AI, ML & Vision", color: CAT_COLORS[2] },
     { label: "Tools & Design",  color: CAT_COLORS[3] },
   ]
 

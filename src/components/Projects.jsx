@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { Church, Sprout, Hospital, Brain, ExternalLink, Timer, FolderOpen, Sparkles } from "lucide-react"
+import { Church, Sprout, Hospital, Brain, ExternalLink, Timer, FolderOpen, Sparkles, ScanFace } from "lucide-react"
 import { FaGithub } from "react-icons/fa"
 import { useState } from "react"
 
@@ -12,6 +12,8 @@ const projects = [
     accent: "#b52a5d",
     live: "https://www.nudgine.ai/",
     liveLabel: "Live Product",
+    mark: "N",
+    placeholderLabel: "Live product",
   },
   {
     title: "Church Membership System",
@@ -39,6 +41,15 @@ const projects = [
     accent: "#9a6bc4",
     github: "https://github.com/edaprgs/clinic-management-system",
     image: "/images/clinic-management-preview.png",
+  },
+  {
+    title: "Facial Recognition Under Varying Lighting",
+    icon: <ScanFace size={18}/>,
+    desc: "Undergraduate thesis combining MTCNN for face detection and LBPH for recognition, designed to hold up under inconsistent lighting. Curated a 20,500-image dataset, applied CLAHE illumination normalization, and benchmarked accuracy, precision, recall, and F1 against a FaceNet baseline. Hit up to 99.6% detection accuracy under medium lighting, with a Flask app for live visualization and model tuning.",
+    tech: ["Python", "OpenCV", "MTCNN", "LBPH", "CLAHE", "Flask", "Computer Vision"],
+    accent: "#9a1847",
+    mark: "FR",
+    placeholderLabel: "Thesis · 2025",
   },
   {
     title: "CNN Hair Type Recognition",
@@ -90,8 +101,8 @@ function ProjectCard({ project, i }) {
             display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", gap: 8,
             transform: hovered ? "scale(1.04)" : "scale(1)", transition: "transform 0.6s",
           }}>
-            <span style={{ fontSize: "2.6rem", fontWeight: 800, color: project.accent, letterSpacing: "-0.04em", lineHeight: 1 }}>N</span>
-            <span style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: project.accent }}>Live product</span>
+            <span style={{ fontSize: project.mark && project.mark.length > 1 ? "1.8rem" : "2.6rem", fontWeight: 800, color: project.accent, letterSpacing: "-0.04em", lineHeight: 1 }}>{project.mark || project.title.charAt(0)}</span>
+            <span style={{ fontSize: "0.62rem", fontWeight: 700, letterSpacing: "0.16em", textTransform: "uppercase", color: project.accent }}>{project.placeholderLabel || "Project"}</span>
           </div>
         )}
         <div style={{ position: "absolute", inset: 0,
@@ -169,7 +180,7 @@ export default function Projects() {
           What I've Built
         </h2>
         <p style={{ fontSize: "0.88rem", color: "var(--text-muted)", marginTop: "0.6rem", lineHeight: 1.7 }}>
-          Selected production work: SaaS frontend, membership platforms, and design systems.
+          Selected production work: SaaS platforms, membership systems, design, and computer vision research.
         </p>
       </motion.div>
 

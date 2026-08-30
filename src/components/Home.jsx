@@ -7,10 +7,10 @@ import {
   SiPostgresql, SiSupabase, SiFigma,
   SiGit, SiVercel, SiStripe,
 } from "react-icons/si"
-import { FolderOpen, Wrench, Award, Briefcase, GraduationCap, Star, Palette, Download } from "lucide-react"
+import { FolderOpen, Wrench, Award, Briefcase, GraduationCap, Star, Download, Brain } from "lucide-react"
 import { usePage } from "../context/PageContext"
 
-const roles = ["Frontend Developer", "Full-Stack Developer", "UI/UX Designer", "Open to Work"]
+const roles = ["Full-Stack Developer", "Frontend Developer", "UI/UX Designer", "Open to Work"]
 
 const projects = [
   { title: "Church Management System",  img: "/images/church-management-preview.png",  tag: "Full-Stack" },
@@ -45,7 +45,7 @@ const achievements = [
   { Icon: GraduationCap, title: "B.S. Computer Science", sub: "MSU-IIT · Cum Laude · 2025", accent: "#7e3460" },
   { Icon: Star,          title: "Shipped at Nudgine",     sub: "Production frontend · US AI startup", accent: "#b52a5d" },
   { Icon: Star,          title: "3,000+ Users Served",    sub: "Church Membership System",  accent: "#b52a5d" },
-  { Icon: Palette,       title: "WCAG-Compliant UI",      sub: "Sikai Inc. Internship",     accent: "#c084a8" },
+  { Icon: Brain,         title: "Undergraduate Thesis",   sub: "MTCNN + LBPH · Defended 2025", accent: "#9a1847" },
 ]
 
 const career = [
@@ -261,7 +261,7 @@ export default function Home() {
 
         <motion.p initial={{ opacity: 0, y: 8 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.18 }}
           style={{ fontSize: "0.78rem", color: "var(--text-muted)", lineHeight: 1.65, marginBottom: "0.8rem" }}>
-          Frontend developer actively seeking a full-time role. Recently shipped production marketing, auth, and billing for a US AI startup, plus a membership platform serving 3,000+ live records.
+          Full-stack developer actively seeking a full-time role. Recently shipped production systems for a US AI startup, plus a membership platform serving 3,000+ live records.
         </motion.p>
 
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.24 }}
