@@ -67,13 +67,11 @@ export default function Contact() {
 
       {/* Available */}
       <motion.div initial={{ opacity: 0, y: 8 }} whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }} style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem",
-          marginBottom: "2rem", padding: "0.3rem 0.85rem", borderRadius: 999,
-          background: "rgba(154,24,71,0.10)", border: "1px solid rgba(154,24,71,0.30)" }}>
-        <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#7a0f30",
-          animation: "pulse-dot 2s ease-in-out infinite", boxShadow: "0 0 6px rgba(122,15,48,0.4)", display: "block" }}/>
+        viewport={{ once: true }} className="status-badge" style={{
+          marginBottom: "2rem", padding: "0.3rem 0.85rem", borderRadius: 999 }}>
+        <span className="status-dot"/>
         <span style={{ fontSize: "0.68rem", fontWeight: 700, letterSpacing: "0.1em",
-          color: "#7a0f30", textTransform: "uppercase" }}>
+          textTransform: "uppercase" }}>
           Open to work · Full-stack roles
         </span>
       </motion.div>

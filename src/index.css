@@ -1,9 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
 @import "tailwindcss";
 
-/* ─── Light Theme (only theme) ───────────────────────────────── */
+/* ─── Light Theme ────────────────────────────────────────────── */
 :root,
 [data-theme="light"] {
+  color-scheme: light;
   --bg:           #ede0e9;
   --bg-sidebar:   #ede0e9;
   --bg-panel:     #ede0e9;
@@ -25,15 +26,59 @@
   --tag-border:   rgba(160,50,90,0.2);
   --divider:      rgba(100,30,60,0.10);
   --scrollbar:    rgba(160,50,90,0.2);
+  --status-bg:    rgba(154,24,71,0.13);
+  --status-border: rgba(154,24,71,0.35);
+  --status-color: #7a0f30;
+  --card-hover-border: rgba(154,24,71,0.35);
+  --card-hover-shadow: rgba(154,24,71,0.08);
+  --globe-label-rgb: 28,13,22;
+  --globe-ring-rgb: 154,24,71;
+}
+
+/* ─── Dark Theme ─────────────────────────────────────────────── */
+[data-theme="dark"] {
+  color-scheme: dark;
+  --bg:           #140d12;
+  --bg-sidebar:   #120b10;
+  --bg-panel:     #140d12;
+  --bg-editor:    #1a1016;
+  --body-color:   #f4e8ee;
+  --text-muted:   rgba(244,232,238,0.78);
+  --text-dim:     rgba(244,232,238,0.55);
+
+  --rose:         #e879a0;
+  --rose-deep:    #d44a7a;
+  --mauve:        #c084a8;
+
+  --glass-bg:     rgba(255,255,255,0.06);
+  --glass-border: rgba(232,121,160,0.18);
+  --surface:      rgba(232,121,160,0.08);
+  --surface-2:    rgba(232,121,160,0.14);
+  --nav-active:   rgba(232,121,160,0.12);
+  --tag-bg:       rgba(232,121,160,0.10);
+  --tag-border:   rgba(232,121,160,0.22);
+  --divider:      rgba(232,121,160,0.12);
+  --scrollbar:    rgba(232,121,160,0.28);
+  --status-bg:    rgba(232,121,160,0.14);
+  --status-border: rgba(232,121,160,0.32);
+  --status-color: #f3c1d4;
+  --card-hover-border: rgba(232,121,160,0.42);
+  --card-hover-shadow: rgba(232,121,160,0.12);
+  --globe-label-rgb: 244,232,238;
+  --globe-ring-rgb: 232,121,160;
 }
 
 /* ─── Reset & Base ───────────────────────────────────────────── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0 }
 html { scroll-behavior: smooth }
 
-body {
+html, body {
   background: var(--bg);
   color: var(--body-color);
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+body {
   font-family: 'Inter', system-ui, sans-serif;
   font-size: 15px;
   line-height: 1.7;
@@ -128,7 +173,7 @@ img { display: block; max-width: 100% }
 /* ─── Animations ─────────────────────────────────────────────── */
 @keyframes blink     { 0%,100%{opacity:1} 50%{opacity:0} }
 @keyframes float-y   { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-@keyframes pulse-dot { 0%,100%{box-shadow:0 0 0 0 rgba(154,24,71,0.4)} 50%{box-shadow:0 0 0 5px transparent} }
+@keyframes pulse-dot { 0%,100%{box-shadow:0 0 0 0 var(--status-border)} 50%{box-shadow:0 0 0 5px transparent} }
 @keyframes drift1    { 0%,100%{transform:translate(0,0)} 50%{transform:translate(40px,-30px)} }
 @keyframes drift2    { 0%,100%{transform:translate(0,0)} 50%{transform:translate(-30px,40px)} }
 @keyframes drift3    { 0%,100%{transform:translate(0,0)} 50%{transform:translate(20px,25px)} }
@@ -163,7 +208,25 @@ img { display: block; max-width: 100% }
   overflow: hidden;
   min-height: 0;
 }
-.home-card:hover { border-color: rgba(154,24,71,0.35); box-shadow: 0 4px 20px rgba(154,24,71,0.08); transform: translateY(-1px); }
+.home-card:hover { border-color: var(--card-hover-border); box-shadow: 0 4px 20px var(--card-hover-shadow); transform: translateY(-1px); }
+
+.status-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: var(--status-bg);
+  border: 1px solid var(--status-border);
+  color: var(--status-color);
+}
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--status-color);
+  display: block;
+  flex-shrink: 0;
+  animation: pulse-dot 2s ease-in-out infinite;
+}
 .home-card { transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s; }
 
 .home-card-title {

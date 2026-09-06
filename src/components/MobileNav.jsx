@@ -1,5 +1,6 @@
 import { useState } from "react"
 import { usePage } from "../context/PageContext"
+import ThemeToggle from "./ThemeToggle"
 
 const links = ["home","about","experience","skills","projects","contact"]
 
@@ -40,12 +41,29 @@ export default function MobileNav() {
   return (
     <>
       <header className="mobile-nav">
-        <span style={{ fontSize:"1rem", fontWeight:700, color:"var(--body-color)" }}>
+        <button
+          type="button"
+          onClick={() => go("home")}
+          aria-label="Go to home"
+          style={{
+            background: "none",
+            border: "none",
+            padding: 0,
+            cursor: "pointer",
+            fontSize: "1rem",
+            fontWeight: 700,
+            color: "var(--body-color)",
+            fontFamily: "inherit",
+          }}
+        >
           Eda Grace <span style={{ color:"var(--rose)" }}>Paragoso</span>
-        </span>
-        <button onClick={() => setOpen(o => !o)} style={{ background:"none", border:"none", cursor:"pointer", padding: "3px", display:"flex", alignItems:"center", justifyContent:"center" }}>
-          <HamburgerIcon open={open} />
         </button>
+        <div style={{ display: "flex", alignItems: "center", gap: "0.55rem" }}>
+          <ThemeToggle />
+          <button onClick={() => setOpen(o => !o)} aria-label={open ? "Close menu" : "Open menu"} style={{ background:"none", border:"none", cursor:"pointer", padding: "3px", display:"flex", alignItems:"center", justifyContent:"center" }}>
+            <HamburgerIcon open={open} />
+          </button>
+        </div>
       </header>
 
       {open && (

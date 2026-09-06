@@ -115,7 +115,7 @@ export default function About() {
               background: "var(--glass-bg)", border: "1px solid var(--glass-border)",
               transition: "border-color 0.2s",
             }}
-              onMouseEnter={e => e.currentTarget.style.borderColor = "rgba(154,24,71,0.3)"}
+              onMouseEnter={e => e.currentTarget.style.borderColor = "var(--card-hover-border)"}
               onMouseLeave={e => e.currentTarget.style.borderColor = "var(--glass-border)"}>
               <div style={{ width: 32, height: 32, borderRadius: 9, background: "var(--surface-2)", display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0 }}>
                 <Icon size={15} style={{ color: "var(--rose)" }}/>

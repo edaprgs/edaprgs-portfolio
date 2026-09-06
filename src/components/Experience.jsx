@@ -139,14 +139,14 @@ function AccordionCard({ exp, isOpen, onToggle, index }) {
         <div style={{ display: "flex", alignItems: "center", gap: "0.55rem", width: "100%" }}>
           <CompanyMark exp={exp} size={22}/>
 
-          <span style={{ fontSize: "0.88rem", fontWeight: 700, color: exp.color, flex: 1, minWidth: 0 }}>
+          <span style={{ fontSize: "0.88rem", fontWeight: 700, color: "var(--status-color)", flex: 1, minWidth: 0 }}>
             {exp.companyShort}
           </span>
 
           <span style={{
-            fontSize: "0.65rem", fontWeight: 500, padding: "1px 9px", borderRadius: 999,
-            border: `1px solid ${exp.color}30`, color: exp.color,
-            background: `${exp.color}0c`, letterSpacing: "0.04em", flexShrink: 0,
+            fontSize: "0.65rem", fontWeight: 700, padding: "1px 9px", borderRadius: 999,
+            border: "1px solid var(--status-border)", color: "var(--body-color)",
+            background: "var(--status-bg)", letterSpacing: "0.04em", flexShrink: 0,
           }}>{exp.type}</span>
 
           <motion.div

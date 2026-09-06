@@ -1,7 +1,7 @@
 const orbs = [
-  { w:500, h:500, left:"5%",  top:"10%",  color:"rgba(181,42,93,0.07)",  anim:"drift1 18s ease-in-out infinite" },
-  { w:420, h:420, right:"8%", bottom:"15%", color:"rgba(126,52,96,0.06)", anim:"drift2 22s ease-in-out infinite" },
-  { w:350, h:350, left:"55%", top:"45%",  color:"rgba(154,24,71,0.05)",  anim:"drift3 26s ease-in-out infinite" },
+  { w:500, h:500, left:"5%",  top:"10%",  color:"color-mix(in srgb, var(--rose) 14%, transparent)",  anim:"drift1 18s ease-in-out infinite" },
+  { w:420, h:420, right:"8%", bottom:"15%", color:"color-mix(in srgb, var(--mauve) 12%, transparent)", anim:"drift2 22s ease-in-out infinite" },
+  { w:350, h:350, left:"55%", top:"45%",  color:"color-mix(in srgb, var(--rose-deep) 10%, transparent)",  anim:"drift3 26s ease-in-out infinite" },
 ]
 
 export default function Background() {

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback, useState } from "react"
+import { useTheme } from "../context/ThemeContext"
 
 const SKILLS = [
   { label: "React",         cat: 0 },
@@ -62,10 +63,21 @@ function hexToRgb(hex) {
 }
 
 export default function SkillsGlobe() {
+  const { theme } = useTheme()
   const canvasRef = useRef()
+  const labelRgb = useRef("28,13,22")
+  const ringRgb = useRef("154,24,71")
   const [canvasHeight, setCanvasHeight] = useState(
     window.innerWidth <= 640 ? 340 : 680
   )
+
+  useEffect(() => {
+    const styles = getComputedStyle(document.documentElement)
+    const nextLabel = styles.getPropertyValue("--globe-label-rgb").trim()
+    const nextRing = styles.getPropertyValue("--globe-ring-rgb").trim()
+    if (nextLabel) labelRgb.current = nextLabel
+    if (nextRing) ringRgb.current = nextRing
+  }, [theme])
 
   useEffect(() => {
     const update = () => setCanvasHeight(window.innerWidth <= 640 ? 340 : 680)
@@ -114,28 +126,28 @@ export default function SkillsGlobe() {
         const cy = CY - lat * R
         ctx.beginPath()
         ctx.ellipse(CX, cy, ry, ry * 0.28, 0, 0, Math.PI * 2)
-        ctx.strokeStyle = `rgba(154,24,71,${ringAlpha})`
+        ctx.strokeStyle = `rgba(${ringRgb.current},${ringAlpha})`
         ctx.stroke()
       })
 
       // outer sphere circle
       ctx.beginPath()
       ctx.arc(CX, CY, R, 0, Math.PI * 2)
-      ctx.strokeStyle = `rgba(154,24,71,0.14)`
+      ctx.strokeStyle = `rgba(${ringRgb.current},0.14)`
       ctx.lineWidth = 1 * dpr * 0.5
       ctx.stroke()
 
       // equator
       ctx.beginPath()
       ctx.ellipse(CX, CY, R, R * 0.28, 0, 0, Math.PI * 2)
-      ctx.strokeStyle = `rgba(154,24,71,0.18)`
+      ctx.strokeStyle = `rgba(${ringRgb.current},0.18)`
       ctx.lineWidth = 1.2 * dpr * 0.5
       ctx.stroke()
       ctx.restore()
 
       // ── Center glow ─────────────────────────────────────────
       const grd = ctx.createRadialGradient(CX, CY, 0, CX, CY, R * 0.5)
-      grd.addColorStop(0, "rgba(181,42,93,0.07)")
+      grd.addColorStop(0, `rgba(${ringRgb.current},0.07)`)
       grd.addColorStop(1, "transparent")
       ctx.beginPath()
       ctx.arc(CX, CY, R * 0.5, 0, Math.PI * 2)
@@ -217,7 +229,7 @@ export default function SkillsGlobe() {
         if (depth > 0.18) {
           ctx.font = `${depth > 0.6 ? 600 : 400} ${fontSize}px Inter, sans-serif`
           ctx.textAlign = "center"
-          ctx.fillStyle = `rgba(28,13,22,${opacity * 0.92})`
+          ctx.fillStyle = `rgba(${labelRgb.current},${opacity * 0.92})`
           ctx.fillText(label, sx, sy - dotR - 4 * dpr * 0.5)
         }
       })

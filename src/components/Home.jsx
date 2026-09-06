@@ -202,16 +202,12 @@ export default function Home() {
           </p>
           <p style={{ fontSize: "0.78rem", color: "var(--text-muted)", marginBottom: "0.2rem" }}>@edaprgs</p>
           <div style={{ display: "flex", gap: "0.4rem", alignItems: "center", flexWrap: "wrap" }}>
-            <div style={{
-              display: "inline-flex", alignItems: "center", gap: "0.28rem",
+            <div className="status-badge" style={{
               padding: "0.18rem 0.55rem", borderRadius: 999,
-              background: "rgba(154,24,71,0.13)", border: "1px solid rgba(154,24,71,0.35)",
               whiteSpace: "nowrap",
             }}>
-              <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#7a0f30",
-                display: "block", flexShrink: 0, animation: "pulse-dot 2s ease-in-out infinite" }}/>
-              <span style={{ fontSize: "0.58rem", fontWeight: 700,
-                color: "#7a0f30", textTransform: "uppercase" }}>Open to Work</span>
+              <span className="status-dot" style={{ width: 5, height: 5 }}/>
+              <span style={{ fontSize: "0.58rem", fontWeight: 700, textTransform: "uppercase" }}>Open to Work</span>
             </div>
             <a href="/Paragoso-Resume.pdf" target="_blank" rel="noreferrer"
               style={{
@@ -247,14 +243,12 @@ export default function Home() {
           <span style={{ color: "var(--rose)", opacity: 0.5 }}>·</span>
           <span>{displayed}</span>
           <span style={{ display: "inline-block", width: 2, height: "0.85em", background: "var(--rose)", verticalAlign: "middle", animation: "blink 1.1s step-end infinite" }}/>
-          <span style={{
-            display: "inline-flex", alignItems: "center", gap: "0.28rem",
+          <span className="status-badge" style={{
             marginLeft: "0.35rem", padding: "0.12rem 0.5rem", borderRadius: 999,
-            background: "rgba(154,24,71,0.12)", border: "1px solid rgba(154,24,71,0.28)",
             fontSize: "0.58rem", fontWeight: 700, letterSpacing: "0.08em",
-            color: "#7a0f30", textTransform: "uppercase", whiteSpace: "nowrap",
+            textTransform: "uppercase", whiteSpace: "nowrap",
           }}>
-            <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#7a0f30", display: "block", animation: "pulse-dot 2s ease-in-out infinite" }}/>
+            <span className="status-dot" style={{ width: 5, height: 5 }}/>
             Open to Work
           </span>
         </motion.div>
@@ -316,7 +310,7 @@ export default function Home() {
                 </div>
               ))}
             </div>
-            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 60, background: "linear-gradient(to bottom, transparent, rgba(237,224,233,0.96))", pointerEvents: "none" }}/>
+            <div style={{ position: "absolute", bottom: 0, left: 0, right: 0, height: 60, background: "linear-gradient(to bottom, transparent, var(--bg))", pointerEvents: "none" }}/>
           </div>
         </div>
 

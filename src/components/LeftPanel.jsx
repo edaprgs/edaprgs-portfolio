@@ -1,6 +1,7 @@
 import { usePage } from "../context/PageContext"
 import { Home as HomeIcon, User, Briefcase, FolderOpen, Wrench, Mail, Download } from "lucide-react"
 import { motion } from "framer-motion"
+import ThemeToggle from "./ThemeToggle"
 
 const navItems = [
   { id: "home",       label: "Home",       Icon: HomeIcon },
@@ -54,16 +55,14 @@ export default function LeftPanel() {
 
         {/* Available badge */}
         <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.16 }}
+          className="status-badge"
           style={{
-            display: "inline-flex", alignItems: "center", gap: "0.4rem",
             padding: "0.32rem 0.85rem", borderRadius: 999,
-            background: "rgba(154,24,71,0.13)", border: "1px solid rgba(154,24,71,0.35)",
             marginBottom: "0.85rem",
           }}>
-          <span style={{ width: 7, height: 7, borderRadius: "50%", background: "#7a0f30",
-            display: "block", flexShrink: 0, animation: "pulse-dot 2s ease-in-out infinite" }}/>
+          <span className="status-dot"/>
           <span style={{ fontSize: "0.7rem", fontWeight: 700, letterSpacing: "0.08em",
-            color: "#7a0f30", textTransform: "uppercase" }}>
+            textTransform: "uppercase" }}>
             Open to Work
           </span>
         </motion.div>
@@ -125,11 +124,11 @@ export default function LeftPanel() {
       {/* Divider */}
       <div style={{ height: 1, background: "var(--glass-border)", margin: "0.5rem 0" }}/>
 
-      {/* Copyright */}
-      <div style={{ textAlign: "center" }}>
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: "0.6rem" }}>
         <p style={{ fontSize: "0.72rem", color: "var(--text-muted)", lineHeight: 1.6 }}>
           © 2026 Eda Grace Paragoso
         </p>
+        <ThemeToggle />
       </div>
     </div>
   )
