@@ -3,6 +3,7 @@ import emailjs from "@emailjs/browser"
 import { useRef, useState } from "react"
 import { CheckCircle2, Send } from "lucide-react"
 import { motion } from "framer-motion"
+import { CONTACT_EMAIL } from "../contactEmail"
 
 function Field({ as: Tag = "input", label, ...props }) {
   const [focused, setFocused] = useState(false)
@@ -39,11 +40,20 @@ export default function Contact() {
   const send = e => {
     e.preventDefault()
     setStatus("sending")
-    emailjs.sendForm(
+    const data = new FormData(form.current)
+    emailjs.send(
       import.meta.env.VITE_EMAILJS_SERVICE_ID,
       import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
-      form.current,
-      import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+      {
+        user_name: data.get("user_name"),
+        user_email: data.get("user_email"),
+        subject: data.get("subject"),
+        message: data.get("message"),
+        to_email: CONTACT_EMAIL,
+        to_name: "Eda Grace Paragoso",
+        reply_to: data.get("user_email"),
+      },
+      { publicKey: import.meta.env.VITE_EMAILJS_PUBLIC_KEY }
     ).then(() => { setStatus("ok"); form.current.reset() })
      .catch(() => setStatus("err"))
   }
@@ -83,7 +93,7 @@ export default function Contact() {
           style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
           {[
             { Icon: FaMapMarkerAlt, text: "General Trias, Cavite, Philippines", href: null, color: "var(--mauve)" },
-            { Icon: FaEnvelope, text: "edaparagoso2002@gmail.com", href: "mailto:edaparagoso2002@gmail.com", color: "var(--rose)" },
+            { Icon: FaEnvelope, text: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}`, color: "var(--rose)" },
             { Icon: FaPhone, text: "+63 992-291-6852", href: "tel:+639922916852", color: "var(--rose)" },
           ].map(({ Icon, text, href, color }) => (
             <div key={text} style={{ display: "flex", alignItems: "center", gap: "0.7rem", cursor: href ? "pointer" : "default" }}
@@ -101,7 +111,7 @@ export default function Contact() {
             {[
               { href: "https://github.com/edaprgs", Icon: FaGithub },
               { href: "https://www.linkedin.com/in/eda-grace-paragoso-2877ba40a/", Icon: FaLinkedin },
-              { href: "mailto:edaparagoso2002@gmail.com", Icon: FaEnvelope },
+              { href: `mailto:${CONTACT_EMAIL}`, Icon: FaEnvelope },
             ].map(({ href, Icon }) => (
               <a key={href} href={href} target="_blank" rel="noreferrer"
                 style={{ width: 36, height: 36, borderRadius: 9, display: "flex", alignItems: "center",
@@ -122,6 +132,7 @@ export default function Contact() {
           style={{ display: "flex", flexDirection: "column", gap: "0.9rem",
             padding: "1.5rem", borderRadius: 14,
             background: "var(--glass-bg)", border: "1px solid var(--glass-border)" }}>
+          <input type="hidden" name="to_email" value={CONTACT_EMAIL} />
           <div className="contact-name-email" style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "0.75rem" }}>
             <Field label="Name" type="text" name="user_name" placeholder="Your name" required/>
             <Field label="Email" type="email" name="user_email" placeholder="your@email.com" required/>
@@ -147,12 +158,12 @@ export default function Contact() {
           {status === "ok" && (
             <motion.p initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }}
               style={{ display: "flex", alignItems: "center", justifyContent: "center", gap: "0.4rem",
-                fontSize: "0.82rem", color: "#86efac", textAlign: "center" }}>
+                fontSize: "0.82rem", fontWeight: 600, color: "var(--success)", textAlign: "center" }}>
               <CheckCircle2 size={14}/> Message sent! I'll get back to you soon.
             </motion.p>
           )}
           {status === "err" && (
-            <p style={{ fontSize: "0.82rem", color: "#fca5a5", textAlign: "center" }}>
+            <p style={{ fontSize: "0.82rem", fontWeight: 600, color: "var(--error)", textAlign: "center" }}>
               Something went wrong. Please email me directly.
             </p>
           )}

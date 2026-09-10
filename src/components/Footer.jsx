@@ -1,4 +1,5 @@
 import { FaGithub, FaLinkedin, FaEnvelope } from "react-icons/fa"
+import { CONTACT_EMAIL } from "../contactEmail"
 
 export default function Footer() {
   return (
@@ -13,7 +14,7 @@ export default function Footer() {
           {[
             { href: "https://github.com/edaprgs", Icon: FaGithub },
             { href: "https://www.linkedin.com/in/eda-grace-paragoso-2877ba40a/", Icon: FaLinkedin },
-            { href: "mailto:edaparagoso2002@gmail.com", Icon: FaEnvelope },
+            { href: `mailto:${CONTACT_EMAIL}`, Icon: FaEnvelope },
           ].map(({ href, Icon }) => (
             <a key={href} href={href} target="_blank" rel="noreferrer"
               style={{ width: 32, height: 32, borderRadius: 8, display: "flex", alignItems: "center",
