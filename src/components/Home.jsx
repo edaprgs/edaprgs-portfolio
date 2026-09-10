@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import { FaGithub, FaLinkedin, FaFacebook, FaInstagram, FaWhatsapp, FaTelegramPlane } from "react-icons/fa"
+import { FaGithub, FaLinkedin, FaFacebook, FaInstagram, FaWhatsapp, FaTelegramPlane, FaDiscord } from "react-icons/fa"
 import {
   SiReact, SiNextdotjs, SiTypescript, SiPython, SiNodedotjs,
   SiHtml5, SiCss, SiTailwindcss, SiMongodb,
@@ -61,6 +61,7 @@ const socials = [
   { href: "https://www.instagram.com/__edagrace/",                      Icon: FaInstagram },
   { href: "https://wa.me/639922916852",                                 Icon: FaWhatsapp  },
   { href: "https://t.me/+639922916852",                                 Icon: FaTelegramPlane },
+  { href: "https://discord.com/users/edagraceparagoso",                 Icon: FaDiscord, label: "Discord · edagraceparagoso" },
 ]
 
 function SkillPill({ label, Icon }) {
@@ -272,8 +273,9 @@ export default function Home() {
             onMouseLeave={e => { e.currentTarget.style.borderColor = "var(--glass-border)"; e.currentTarget.style.color = "var(--body-color)" }}>
             Hire Me
           </button>
-          {socials.map(({ href, Icon }) => (
-            <a key={href} href={href} target={href !== "#" ? "_blank" : undefined} rel="noreferrer" style={socialBtn}
+          {socials.map(({ href, Icon, label }) => (
+            <a key={href} href={href} target={href !== "#" ? "_blank" : undefined} rel="noreferrer"
+              aria-label={label} title={label} style={socialBtn}
               onMouseEnter={e => { e.currentTarget.style.color = "var(--rose)"; e.currentTarget.style.borderColor = "var(--rose)" }}
               onMouseLeave={e => { e.currentTarget.style.color = "var(--text-dim)"; e.currentTarget.style.borderColor = "var(--glass-border)" }}>
               <Icon size={13}/>
