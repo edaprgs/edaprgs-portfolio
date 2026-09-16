@@ -1,19 +1,24 @@
-import { createContext, useCallback, useContext, useEffect, useState } from "react"
+import { createContext, useCallback, useContext, useEffect, useRef, useState } from "react"
 
-const Ctx = createContext({ theme: "light", dark: false, toggle: () => {} })
+const Ctx = createContext({
+  theme: "light",
+  preference: "system",
+  dark: false,
+  toggle: () => {},
+})
 
-function systemTheme() {
+function readBrowserTheme() {
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light"
 }
 
-function storedTheme() {
+function storedPreference() {
   try {
     const stored = localStorage.getItem("theme")
-    if (stored === "light" || stored === "dark") return stored
+    if (stored === "light" || stored === "dark" || stored === "system") return stored
   } catch {
     /* ignore */
   }
-  return null
+  return "system"
 }
 
 function applyTheme(theme) {
@@ -21,37 +26,61 @@ function applyTheme(theme) {
 }
 
 export function ThemeProvider({ children }) {
-  const [theme, setTheme] = useState(() => {
-    if (typeof document === "undefined") return "light"
-    const current = document.documentElement.getAttribute("data-theme")
-    if (current === "light" || current === "dark") return current
-    return storedTheme() ?? systemTheme()
+  const [preference, setPreference] = useState(() => {
+    if (typeof window === "undefined") return "system"
+    return storedPreference()
   })
+  const [browserScheme, setBrowserScheme] = useState(() => {
+    if (typeof window === "undefined") return "light"
+    return readBrowserTheme()
+  })
+  const preferenceRef = useRef(preference)
+  const skipBrowserSyncRef = useRef(false)
+  preferenceRef.current = preference
+
+  const theme = preference === "system" ? browserScheme : preference
 
   useEffect(() => {
     applyTheme(theme)
   }, [theme])
 
   useEffect(() => {
-    const media = window.matchMedia("(prefers-color-scheme: dark)")
-    const onChange = () => {
-      if (storedTheme()) return
-      setTheme(systemTheme())
+    const syncFromBrowser = () => {
+      if (skipBrowserSyncRef.current) return
+      if (preferenceRef.current !== "system") return
+      setBrowserScheme(readBrowserTheme())
     }
-    media.addEventListener("change", onChange)
-    return () => media.removeEventListener("change", onChange)
+
+    const media = window.matchMedia("(prefers-color-scheme: dark)")
+    media.addEventListener("change", syncFromBrowser)
+    window.addEventListener("focus", syncFromBrowser)
+    document.addEventListener("visibilitychange", syncFromBrowser)
+    window.addEventListener("pageshow", syncFromBrowser)
+
+    return () => {
+      media.removeEventListener("change", syncFromBrowser)
+      window.removeEventListener("focus", syncFromBrowser)
+      document.removeEventListener("visibilitychange", syncFromBrowser)
+      window.removeEventListener("pageshow", syncFromBrowser)
+    }
   }, [])
 
   const toggle = useCallback(() => {
-    setTheme(prev => {
-      const next = prev === "dark" ? "light" : "dark"
+    setPreference(prev => {
+      const next = prev === "system" ? "light" : prev === "light" ? "dark" : "system"
+      skipBrowserSyncRef.current = true
+      if (next === "system") {
+        window.setTimeout(() => {
+          skipBrowserSyncRef.current = false
+        }, 100)
+      }
       try { localStorage.setItem("theme", next) } catch { /* ignore */ }
       return next
     })
   }, [])
 
   return (
-    <Ctx.Provider value={{ theme, dark: theme === "dark", toggle }}>
+    <Ctx.Provider value={{ theme, preference, dark: theme === "dark", toggle }}>
       {children}
     </Ctx.Provider>
   )

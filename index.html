@@ -2,14 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
+    <meta name="color-scheme" content="light dark" />
     <script>
       (function () {
         try {
           var stored = localStorage.getItem("theme");
-          var theme = stored === "light" || stored === "dark"
-            ? stored
-            : (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-          document.documentElement.setAttribute("data-theme", theme);
+          var html = document.documentElement;
+          var theme;
+          if (stored === "light" || stored === "dark") {
+            theme = stored;
+            html.style.colorScheme = theme;
+          } else {
+            html.style.colorScheme = "light dark";
+            theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+          }
+          html.setAttribute("data-theme", theme);
         } catch (e) {}
       })();
     </script>
