@@ -18,7 +18,7 @@ const stats = [
 const offers = [
   { Icon: Code2,       label: "Frontend Engineering",  sub: "React 19 · Next.js 16 · Tailwind CSS 4" },
   { Icon: Layers,      label: "Full-Stack Delivery",   sub: "Node.js · MongoDB · Supabase · PostgreSQL" },
-  { Icon: ShieldCheck, label: "Auth & Payments",       sub: "OAuth · Stripe · Rate limiting · reCAPTCHA" },
+  { Icon: ShieldCheck, label: "Auth & Payments",       sub: "OAuth · Stripe · Rate limiting · Cloudflare Turnstile" },
   { Icon: Palette,     label: "UI Systems",            sub: "Figma · Design tokens · WCAG · Design-to-code" },
 ]
 

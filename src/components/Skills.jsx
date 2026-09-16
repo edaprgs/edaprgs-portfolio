@@ -41,7 +41,7 @@ const categories = [
   { label: "Languages",              color: "#9a1847", skills: ["JavaScript", "TypeScript", "Python", "HTML5", "CSS3", "SQL"] },
   { label: "Frontend",               color: "#7e3460", skills: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "Shadcn UI"] },
   { label: "Backend & Data",         color: "#5b2a82", skills: ["Node.js", "MongoDB", "Supabase", "PostgreSQL", "MySQL", "Flask", "REST APIs", "WebSockets"] },
-  { label: "Auth, Payments & Security", color: "#7e3460", skills: ["JWT", "Google OAuth", "bcrypt", "reCAPTCHA", "Stripe", "Zod"] },
+  { label: "Auth, Payments & Security", color: "#7e3460", skills: ["JWT", "Google OAuth", "bcrypt", "reCAPTCHA", "Cloudflare Turnstile", "Stripe", "Zod"] },
   { label: "AI, ML & Vision",          color: "#c084a8", skills: ["Gemini API", "OpenAI", "OpenCV", "TensorFlow", "Keras", "Prompt Engineering"] },
   { label: "Tools & Design",         color: "#b52a5d", skills: ["Figma", "Git", "GitHub Actions", "Vercel", "pnpm", "Turborepo", "WCAG"] },
 ]

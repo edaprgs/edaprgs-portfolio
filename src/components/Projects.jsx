@@ -18,8 +18,8 @@ const projects = [
   {
     title: "Church Membership System",
     icon: <Church size={18}/>,
-    desc: "Production membership platform for a local congregation with a three-tier role system (Admin, Staff, Member), AI-powered report summarization via Gemini, configurable CSV exports, and a 40+ field normalized schema. Serving 3,000+ active records.",
-    tech: ["Next.js", "TypeScript", "Tailwind v4", "Supabase", "PostgreSQL", "Gemini API", "Zod", "Recharts", "Vercel"],
+    desc: "Production membership platform for a local congregation with a three-tier role system (Admin, Staff, Member), AI-powered report summarization via Gemini, configurable CSV exports, and a 40+ field normalized schema. Serving 3,000+ active records. Integrated Cloudflare Turnstile bot protection into the authentication flow to mitigate automated login/registration abuse.",
+    tech: ["Next.js", "TypeScript", "Tailwind v4", "Supabase", "PostgreSQL", "Gemini API", "Zod", "Recharts", "Vercel", "Cloudflare Turnstile"],
     accent: "#b52a5d",
     live: "https://uccpiligan.vercel.app/",
     image: "/images/church-management-preview.png",
