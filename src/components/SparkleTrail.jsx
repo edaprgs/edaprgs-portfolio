@@ -1,6 +1,12 @@
 import { useEffect, useRef } from "react"
 
-const COLORS = ["#b52a5d", "#7e3460", "#c084a8", "#e8a0bf", "#f5d0e8"]
+const COLORS = [
+  "var(--rose)",
+  "var(--mauve)",
+  "var(--rose-deep)",
+  "color-mix(in srgb, var(--rose) 55%, white)",
+  "color-mix(in srgb, var(--mauve) 45%, white)",
+]
 const CHARS  = ["✦", "✧", "·", "⋆", "✺"]
 
 export default function SparkleTrail() {

@@ -26,10 +26,10 @@ const CAT_COLORS_LIGHT = [
   "#7e3460", // Tools: deep mauve
 ]
 const CAT_COLORS_DARK = [
-  "#e879a0",
-  "#c4a0e0",
-  "#f3c1d4",
-  "#d44a7a",
+  "#d4a8be",
+  "#b8a0cc",
+  "#e0c4d0",
+  "#c49aac",
 ]
 
 function fibonacciSphere(n) {

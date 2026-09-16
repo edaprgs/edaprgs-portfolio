@@ -35,41 +35,47 @@
   --globe-ring-rgb: 154,24,71;
   --success:      #0f7a4a;
   --error:        #b42318;
+  --glow-a:       color-mix(in srgb, var(--rose) 11%, transparent);
+  --glow-b:       color-mix(in srgb, var(--mauve) 9%, transparent);
+  --glow-c:       color-mix(in srgb, var(--rose-deep) 8%, transparent);
 }
 
 /* ─── Dark Theme ─────────────────────────────────────────────── */
 [data-theme="dark"] {
   color-scheme: dark;
-  --bg:           #140d12;
-  --bg-sidebar:   #120b10;
-  --bg-panel:     #140d12;
-  --bg-editor:    #1a1016;
-  --body-color:   #f4e8ee;
-  --text-muted:   rgba(244,232,238,0.78);
-  --text-dim:     rgba(244,232,238,0.55);
+  --bg:           #1b1519;
+  --bg-sidebar:   #1b1519;
+  --bg-panel:     #1b1519;
+  --bg-editor:    #1b1519;
+  --body-color:   #e8dce3;
+  --text-muted:   rgba(232,220,227,0.74);
+  --text-dim:     rgba(232,220,227,0.52);
 
-  --rose:         #e879a0;
-  --rose-deep:    #d44a7a;
-  --mauve:        #c084a8;
+  --rose:         #d4a8be;
+  --rose-deep:    #b67a94;
+  --mauve:        #b49aac;
 
-  --glass-bg:     rgba(255,255,255,0.06);
-  --glass-border: rgba(232,121,160,0.18);
-  --surface:      rgba(232,121,160,0.08);
-  --surface-2:    rgba(232,121,160,0.14);
-  --nav-active:   rgba(232,121,160,0.12);
-  --tag-bg:       rgba(232,121,160,0.10);
-  --tag-border:   rgba(232,121,160,0.22);
-  --divider:      rgba(232,121,160,0.12);
-  --scrollbar:    rgba(232,121,160,0.28);
-  --status-bg:    #8a3054;
-  --status-border: #f6c9d8;
-  --status-color: #fff8fa;
-  --card-hover-border: rgba(232,121,160,0.42);
-  --card-hover-shadow: rgba(232,121,160,0.12);
-  --globe-label-rgb: 244,232,238;
-  --globe-ring-rgb: 232,121,160;
-  --success:      #86efac;
-  --error:        #fca5a5;
+  --glass-bg:     rgba(255,236,244,0.05);
+  --glass-border: rgba(212,168,190,0.16);
+  --surface:      rgba(212,168,190,0.08);
+  --surface-2:    rgba(212,168,190,0.13);
+  --nav-active:   rgba(212,168,190,0.12);
+  --tag-bg:       rgba(212,168,190,0.10);
+  --tag-border:   rgba(212,168,190,0.20);
+  --divider:      rgba(212,168,190,0.11);
+  --scrollbar:    rgba(212,168,190,0.24);
+  --status-bg:    rgba(212,168,190,0.20);
+  --status-border: rgba(224,196,208,0.40);
+  --status-color: #edd4e0;
+  --card-hover-border: rgba(212,168,190,0.32);
+  --card-hover-shadow: rgba(180,120,150,0.10);
+  --globe-label-rgb: 232,220,227;
+  --globe-ring-rgb: 182,122,148;
+  --success:      #93c4ae;
+  --error:        #d4a8a8;
+  --glow-a:       color-mix(in srgb, var(--rose) 9%, transparent);
+  --glow-b:       color-mix(in srgb, var(--mauve) 8%, transparent);
+  --glow-c:       color-mix(in srgb, var(--rose-deep) 7%, transparent);
 }
 
 /* ─── Reset & Base ───────────────────────────────────────────── */
@@ -105,6 +111,7 @@ img { display: block; max-width: 100% }
   height: 100vh;
   display: flex;
   position: relative;
+  z-index: 1;
 }
 
 .split-layout {
@@ -120,7 +127,7 @@ img { display: block; max-width: 100% }
   height: 100vh;
   display: flex;
   flex-direction: column;
-  background: var(--bg-sidebar);
+  background: transparent;
   overflow: hidden;
   position: relative;
 }

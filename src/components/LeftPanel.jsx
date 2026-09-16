@@ -20,7 +20,7 @@ export default function LeftPanel() {
       height: "100vh",
       display: "flex",
       flexDirection: "column",
-      background: "var(--bg-sidebar)",
+      background: "transparent",
       borderRight: "1px solid var(--glass-border)",
       overflow: "hidden",
       padding: "1.5rem 1.2rem 1.1rem",
