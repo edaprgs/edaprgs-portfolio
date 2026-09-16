@@ -39,6 +39,22 @@ export default function About() {
         </h2>
       </motion.div>
 
+      <motion.div {...fade(0.5)} style={{
+        marginBottom: "1.6rem", padding: "0.95rem 1.1rem",
+        background: "var(--glass-bg)", border: "1px solid var(--glass-border)",
+        borderRadius: 14, borderLeft: "3px solid var(--rose)",
+      }}>
+        <p style={{
+          fontSize: "0.65rem", fontWeight: 700, letterSpacing: "0.14em",
+          textTransform: "uppercase", color: "var(--rose)", marginBottom: "0.4rem",
+        }}>
+          TL;DR
+        </p>
+        <p style={{ fontSize: "0.92rem", color: "var(--body-color)", lineHeight: 1.65, fontWeight: 500 }}>
+          CS graduate (Cum Laude) and full-stack developer, remote-first and open to full-time work. Recently shipped production frontend at a US AI startup, plus a membership system serving 3,000+ records.
+        </p>
+      </motion.div>
+
       <div className="about-main-grid" style={{ display: "grid", gridTemplateColumns: "1fr 260px", gap: "2rem", marginBottom: "2.2rem", alignItems: "start" }}>
 
         <div>

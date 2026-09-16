@@ -36,6 +36,7 @@ function Field({ as: Tag = "input", label, ...props }) {
 export default function Contact() {
   const form = useRef()
   const [status, setStatus] = useState(null)
+  const [showPhone, setShowPhone] = useState(false)
 
   const send = e => {
     e.preventDefault()
@@ -94,7 +95,6 @@ export default function Contact() {
           {[
             { Icon: FaMapMarkerAlt, text: "General Trias, Cavite, Philippines", href: null, color: "var(--mauve)" },
             { Icon: FaEnvelope, text: CONTACT_EMAIL, href: `mailto:${CONTACT_EMAIL}`, color: "var(--rose)" },
-            { Icon: FaPhone, text: "+63 992-291-6852", href: "tel:+639922916852", color: "var(--rose)" },
           ].map(({ Icon, text, href, color }) => (
             <div key={text} style={{ display: "flex", alignItems: "center", gap: "0.7rem", cursor: href ? "pointer" : "default" }}
               onClick={() => href && window.open(href)}>
@@ -106,6 +106,29 @@ export default function Contact() {
               </span>
             </div>
           ))}
+
+          <div style={{ display: "flex", alignItems: "center", gap: "0.7rem" }}>
+            <FaPhone size={13} style={{ color: "var(--rose)", flexShrink: 0 }}/>
+            {showPhone ? (
+              <a href="tel:+639922916852"
+                style={{ fontSize: "0.84rem", color: "var(--text-muted)", textDecoration: "none" }}
+                onMouseEnter={e => e.currentTarget.style.color = "var(--rose)"}
+                onMouseLeave={e => e.currentTarget.style.color = "var(--text-muted)"}>
+                {["+", "63 ", "992-", "291-", "6852"].join("")}
+              </a>
+            ) : (
+              <button type="button" onClick={() => setShowPhone(true)}
+                aria-label="Show phone number"
+                style={{
+                  background: "none", border: "none", padding: 0, cursor: "pointer",
+                  fontSize: "0.84rem", fontWeight: 600, color: "var(--rose)",
+                  fontFamily: "inherit", textDecoration: "underline",
+                  textUnderlineOffset: 3,
+                }}>
+                Show phone
+              </button>
+            )}
+          </div>
 
           <div style={{ display: "flex", gap: "0.6rem", marginTop: "0.4rem" }}>
             {[

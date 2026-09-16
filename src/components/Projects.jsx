@@ -48,8 +48,7 @@ const projects = [
     desc: "Undergraduate thesis combining MTCNN for face detection and LBPH for recognition, designed to hold up under inconsistent lighting. Curated a 20,500-image dataset, applied CLAHE illumination normalization, and benchmarked accuracy, precision, recall, and F1 against a FaceNet baseline. Hit up to 99.6% detection accuracy under medium lighting, with a Flask app for live visualization and model tuning.",
     tech: ["Python", "OpenCV", "MTCNN", "LBPH", "CLAHE", "Flask", "Computer Vision"],
     accent: "#9a1847",
-    mark: "FR",
-    placeholderLabel: "Thesis · 2025",
+    image: "/images/thesis-result-preview.png",
   },
   {
     title: "CNN Hair Type Recognition",
@@ -92,7 +91,8 @@ function ProjectCard({ project, i }) {
       <div style={{ position: "relative", overflow: "hidden", height: 175, flexShrink: 0 }}>
         {project.image ? (
           <img src={project.image} alt={project.title}
-            style={{ width: "100%", height: "100%", objectFit: "cover",
+            style={{ width: "100%", height: "100%", objectFit: "cover", objectPosition: "top",
+              transformOrigin: "top center",
               transform: hovered ? "scale(1.05)" : "scale(1)", transition: "transform 0.6s" }}/>
         ) : (
           <div style={{

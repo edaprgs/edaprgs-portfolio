@@ -2,39 +2,34 @@ import { useEffect, useRef, useCallback, useState } from "react"
 import { useTheme } from "../context/ThemeContext"
 
 const SKILLS = [
-  { label: "React",         cat: 0 },
-  { label: "Next.js",      cat: 0 },
-  { label: "TypeScript",   cat: 0 },
-  { label: "JavaScript",   cat: 0 },
-  { label: "Tailwind",     cat: 0 },
-  { label: "Framer Motion",cat: 0 },
-  { label: "Shadcn UI",    cat: 0 },
-  { label: "HTML5",        cat: 0 },
-  { label: "CSS3",         cat: 0 },
-  { label: "Python",       cat: 1 },
-  { label: "Flask",        cat: 1 },
-  { label: "Node.js",      cat: 1 },
-  { label: "Supabase",     cat: 1 },
-  { label: "PostgreSQL",   cat: 1 },
-  { label: "MySQL",        cat: 1 },
-  { label: "MongoDB",      cat: 1 },
-  { label: "Stripe",       cat: 1 },
-  { label: "WebSockets",   cat: 1 },
-  { label: "Gemini API",   cat: 2 },
-  { label: "TensorFlow",   cat: 2 },
-  { label: "OpenCV",       cat: 2 },
-  { label: "Prompt Eng.",  cat: 2 },
-  { label: "Figma",        cat: 3 },
-  { label: "Git",          cat: 3 },
-  { label: "Vercel",       cat: 3 },
+  { label: "React",       cat: 0 },
+  { label: "Next.js",     cat: 0 },
+  { label: "TypeScript",  cat: 0 },
+  { label: "Tailwind",    cat: 0 },
+  { label: "Node.js",     cat: 1 },
+  { label: "Supabase",    cat: 1 },
+  { label: "PostgreSQL",  cat: 1 },
+  { label: "Stripe",      cat: 1 },
+  { label: "Gemini API",  cat: 2 },
+  { label: "TensorFlow",  cat: 2 },
+  { label: "OpenCV",      cat: 2 },
+  { label: "Figma",       cat: 3 },
+  { label: "Git",         cat: 3 },
+  { label: "Vercel",      cat: 3 },
 ]
 
-// category palette (light-mode readable)
-const CAT_COLORS = [
+// category palette
+const CAT_COLORS_LIGHT = [
   "#b52a5d", // Frontend: rose
   "#5b2a82", // Backend: purple
   "#c084a8", // AI: mauve-pink
   "#7e3460", // Tools: deep mauve
+]
+const CAT_COLORS_DARK = [
+  "#e879a0",
+  "#c4a0e0",
+  "#f3c1d4",
+  "#d44a7a",
 ]
 
 function fibonacciSphere(n) {
@@ -62,14 +57,22 @@ function hexToRgb(hex) {
   return `${r},${g},${b}`
 }
 
-export default function SkillsGlobe() {
+export default function SkillsGlobe({ filter = null, onFilterChange }) {
   const { theme } = useTheme()
   const canvasRef = useRef()
   const labelRgb = useRef("28,13,22")
   const ringRgb = useRef("154,24,71")
+  const catColors = useRef(CAT_COLORS_LIGHT)
+  const filterRef = useRef(filter)
   const [canvasHeight, setCanvasHeight] = useState(
-    window.innerWidth <= 640 ? 340 : 680
+    window.innerWidth <= 640 ? 280 : 420
   )
+
+  const setFilter = (next) => onFilterChange?.(next)
+
+  useEffect(() => {
+    filterRef.current = filter
+  }, [filter])
 
   useEffect(() => {
     const styles = getComputedStyle(document.documentElement)
@@ -77,10 +80,11 @@ export default function SkillsGlobe() {
     const nextRing = styles.getPropertyValue("--globe-ring-rgb").trim()
     if (nextLabel) labelRgb.current = nextLabel
     if (nextRing) ringRgb.current = nextRing
+    catColors.current = theme === "dark" ? CAT_COLORS_DARK : CAT_COLORS_LIGHT
   }, [theme])
 
   useEffect(() => {
-    const update = () => setCanvasHeight(window.innerWidth <= 640 ? 340 : 680)
+    const update = () => setCanvasHeight(window.innerWidth <= 640 ? 280 : 420)
     window.addEventListener("resize", update)
     return () => window.removeEventListener("resize", update)
   }, [])
@@ -114,7 +118,7 @@ export default function SkillsGlobe() {
       ctx.clearRect(0, 0, W, H)
 
       const CX = W / 2, CY = H / 2
-      const R  = Math.min(W, H) * 0.43
+      const R  = Math.min(W, H) * 0.50
 
       // ── Latitude rings ──────────────────────────────────────
       ctx.save()
@@ -170,16 +174,21 @@ export default function SkillsGlobe() {
       })
       projected.sort((a, b) => a.z - b.z)
 
+      const activeCat = filterRef.current
+
       // ── Connections ──────────────────────────────────────────
       projected.forEach((p, i) => {
         if (p.depth < 0.25) return
-        for (let j = i + 1; j < Math.min(i + 4, projected.length); j++) {
+        const pOn = activeCat === null || p.cat === activeCat
+        for (let j = i + 1; j < Math.min(i + 3, projected.length); j++) {
           const q = projected[j]
+          const qOn = activeCat === null || q.cat === activeCat
+          if (!pOn || !qOn) continue
           const dx = p.sx - q.sx, dy = p.sy - q.sy
           const dist = Math.sqrt(dx*dx + dy*dy)
-          if (dist < R * 0.38) {
-            const alpha = Math.min(p.depth, q.depth) * 0.18
-            const rgb = hexToRgb(CAT_COLORS[p.cat])
+          if (dist < R * 0.42) {
+            const alpha = Math.min(p.depth, q.depth) * 0.22
+            const rgb = hexToRgb(catColors.current[p.cat])
             ctx.beginPath()
             ctx.strokeStyle = `rgba(${rgb},${alpha})`
             ctx.lineWidth = 0.7 * dpr * 0.5
@@ -193,14 +202,15 @@ export default function SkillsGlobe() {
       // ── Dots + labels ────────────────────────────────────────
       projected.forEach(({ sx, sy, depth, label, cat }) => {
         if (depth < 0.05) return
-        const color   = CAT_COLORS[cat]
+        const on = activeCat === null || cat === activeCat
+        const color   = catColors.current[cat]
         const rgb     = hexToRgb(color)
-        const opacity = 0.3 + depth * 0.7
-        const dotR    = (4 + depth * 6.5) * dpr * 0.5
-        const fontSize= Math.round((14 + depth * 8) * dpr * 0.5)
+        const opacity = on ? (0.35 + depth * 0.65) : 0.08
+        const dotR    = (5 + depth * 7) * dpr * 0.5
+        const fontSize= Math.round((15 + depth * 8) * dpr * 0.5)
 
         // Glow for prominent front points
-        if (depth > 0.6) {
+        if (on && depth > 0.6) {
           const glow = ctx.createRadialGradient(sx, sy, 0, sx, sy, dotR * 5)
           glow.addColorStop(0, `rgba(${rgb},${(depth - 0.6) * 0.35})`)
           glow.addColorStop(1, "transparent")
@@ -211,7 +221,7 @@ export default function SkillsGlobe() {
         }
 
         // Dot ring (for front nodes)
-        if (depth > 0.7) {
+        if (on && depth > 0.7) {
           ctx.beginPath()
           ctx.arc(sx, sy, dotR + 2.5 * dpr * 0.5, 0, Math.PI * 2)
           ctx.strokeStyle = `rgba(${rgb},${opacity * 0.35})`
@@ -226,7 +236,7 @@ export default function SkillsGlobe() {
         ctx.fill()
 
         // Label
-        if (depth > 0.18) {
+        if (on && depth > 0.18) {
           ctx.font = `${depth > 0.6 ? 600 : 400} ${fontSize}px Inter, sans-serif`
           ctx.textAlign = "center"
           ctx.fillStyle = `rgba(${labelRgb.current},${opacity * 0.92})`
@@ -282,30 +292,60 @@ export default function SkillsGlobe() {
   useEffect(() => { const cleanup = init(); return cleanup }, [init])
 
   // Legend
+  const palette = theme === "dark" ? CAT_COLORS_DARK : CAT_COLORS_LIGHT
   const legend = [
-    { label: "Frontend",        color: CAT_COLORS[0] },
-    { label: "Backend & Data",  color: CAT_COLORS[1] },
-    { label: "AI, ML & Vision", color: CAT_COLORS[2] },
-    { label: "Tools & Design",  color: CAT_COLORS[3] },
+    { label: "Frontend",        color: palette[0] },
+    { label: "Backend & Data",  color: palette[1] },
+    { label: "AI, ML & Vision", color: palette[2] },
+    { label: "Tools & Design",  color: palette[3] },
   ]
 
   return (
     <div>
       <canvas
         ref={canvasRef}
+        className="globe-canvas"
         style={{ width: "100%", height: canvasHeight, cursor: "grab", display: "block" }}
       />
-      {/* Legend */}
-      <div style={{
-        display: "flex", gap: "0.85rem", flexWrap: "wrap",
-        justifyContent: "center", marginTop: "0.5rem",
+      <p style={{
+        textAlign: "center", fontSize: "0.62rem", color: "var(--text-dim)",
+        marginTop: "0.15rem", marginBottom: "0.35rem",
       }}>
-        {legend.map(({ label, color }) => (
-          <span key={label} style={{ display: "flex", alignItems: "center", gap: "0.3rem" }}>
-            <span style={{ width: 7, height: 7, borderRadius: "50%", background: color, display: "block", flexShrink: 0 }}/>
-            <span style={{ fontSize: "0.62rem", color: "var(--text-dim)", fontWeight: 500 }}>{label}</span>
-          </span>
-        ))}
+        Drag to rotate · click a category to filter
+      </p>
+      <div style={{
+        display: "flex", gap: "0.45rem", flexWrap: "wrap",
+        justifyContent: "center", marginTop: "0.15rem",
+      }}>
+        {legend.map(({ label, color }, i) => {
+          const active = filter === i
+          return (
+            <button
+              key={label}
+              type="button"
+              aria-pressed={active}
+              onClick={() => setFilter(active ? null : i)}
+              style={{
+                display: "inline-flex", alignItems: "center", gap: "0.3rem",
+                padding: "0.28rem 0.7rem", borderRadius: 999, cursor: "pointer",
+                background: active ? "var(--surface-2)" : "var(--surface)",
+                border: `1px solid ${active ? color : "var(--glass-border)"}`,
+                color: active ? color : "var(--text-dim)",
+                fontSize: "0.62rem", fontWeight: active ? 700 : 500,
+                fontFamily: "inherit",
+                letterSpacing: "0.02em",
+                transition: "border-color 0.15s, color 0.15s, background 0.15s",
+              }}
+            >
+              <span style={{
+                width: 7, height: 7, borderRadius: "50%", background: color,
+                display: "block", flexShrink: 0,
+                opacity: filter === null || active ? 1 : 0.35,
+              }}/>
+              {label}
+            </button>
+          )
+        })}
       </div>
     </div>
   )

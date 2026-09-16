@@ -7,7 +7,7 @@ import {
   SiPostgresql, SiSupabase, SiFigma,
   SiGit, SiVercel, SiStripe,
 } from "react-icons/si"
-import { FolderOpen, Wrench, Award, Briefcase, GraduationCap, Star, Download, Brain } from "lucide-react"
+import { FolderOpen, Wrench, Award, Briefcase, GraduationCap, Star, Download, Brain, Quote } from "lucide-react"
 import { usePage } from "../context/PageContext"
 
 const roles = ["Full-Stack Developer", "Frontend Developer", "UI/UX Designer", "Open to Work"]
@@ -290,10 +290,10 @@ export default function Home() {
       </p>
 
       {/* ── Card Grid ── */}
-      <div className="home-card-grid" style={{ flex: 1, minHeight: 0, display: "grid", gridTemplateColumns: "1.5fr 1fr", gridTemplateRows: "minmax(0,1fr) minmax(0,1fr)", gap: "0.65rem" }}>
+      <div className="home-card-grid" style={{ flex: 1, minHeight: 0, display: "grid", gridTemplateColumns: "1.15fr 1fr 1fr", gridTemplateRows: "minmax(0,1fr) minmax(0,1fr)", gap: "0.65rem" }}>
 
         {/* ① Projects Showcase: left info + right vertical scroll stack */}
-        <div className="home-card" onClick={() => setPage("projects")}
+        <div className="home-card home-span-2" onClick={() => setPage("projects")}
           style={{ cursor: "pointer", flexDirection: "row", gap: "1rem", padding: "1.1rem" }}>
           {/* Left: icon + title + description */}
           <div style={{ display: "flex", flexDirection: "column", justifyContent: "flex-start", flexShrink: 0, width: 110 }}>
@@ -308,7 +308,7 @@ export default function Home() {
             <div className="v-scroll-hide projects-img-scroll" style={{ height: "100%", display: "flex", flexDirection: "column", gap: "0.5rem", overflowY: "auto" }}>
               {projects.map(p => (
                 <div key={p.title} style={{ flexShrink: 0, borderRadius: 10, overflow: "hidden", border: "1px solid var(--glass-border)" }}>
-                  <img src={p.img} alt={p.title} style={{ width: "100%", height: 80, objectFit: "cover", display: "block" }}/>
+                  <img src={p.img} alt={p.title} style={{ width: "100%", height: 80, objectFit: "cover", objectPosition: "top", display: "block" }}/>
                 </div>
               ))}
             </div>
@@ -376,8 +376,41 @@ export default function Home() {
           </div>
         </div>
 
-        {/* ④ Career: big logo icons */}
-        <div className="home-card" onClick={() => setPage("experience")} style={{ cursor: "pointer" }}>
+        {/* ④ Testimonials */}
+        <div className="home-card" style={{ cursor: "default" }}>
+          <CardHeader Icon={Quote} title="Testimonials" sub="Adapted from client feedback"/>
+          <div style={{
+            flex: 1, minHeight: 0, display: "flex", flexDirection: "column",
+            justifyContent: "center", gap: "0.5rem", position: "relative", overflow: "hidden",
+          }}>
+            <Quote size={28} style={{
+              position: "absolute", top: 0, right: 2, color: "var(--rose)", opacity: 0.14,
+              pointerEvents: "none",
+            }}/>
+            <p style={{
+              fontSize: "clamp(0.62rem, 1.05vw, 0.76rem)",
+              color: "var(--body-color)", lineHeight: 1.55, fontWeight: 500,
+              fontStyle: "italic",
+            }}>
+              "I've appreciated Eda's work ethic, her willingness to help, and all of the time and effort she put into bringing Nudgine to life."
+            </p>
+            <div style={{ display: "flex", alignItems: "center", gap: "0.45rem" }}>
+              <div style={{
+                width: 26, height: 26, borderRadius: 7, flexShrink: 0,
+                background: "var(--surface-2)", border: "1px solid var(--glass-border)",
+                display: "flex", alignItems: "center", justifyContent: "center",
+                fontSize: "0.65rem", fontWeight: 800, color: "var(--rose)",
+              }}>N</div>
+              <div style={{ minWidth: 0 }}>
+                <p style={{ fontSize: "0.65rem", fontWeight: 700, color: "var(--body-color)", lineHeight: 1.2 }}>Founder</p>
+                <p style={{ fontSize: "0.55rem", color: "var(--text-dim)", lineHeight: 1.3 }}>Nudgine · 2026</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* ⑤ Career: big logo icons */}
+        <div className="home-card home-career-card" onClick={() => setPage("experience")} style={{ cursor: "pointer" }}>
           <CardHeader Icon={Briefcase} title="Career" sub="Most recent first · click for details"/>
           <div style={{ flex: 1, minHeight: 0, display: "flex", flexDirection: "column", justifyContent: "center", gap: "0.45rem" }}>
             {career.map(({ logo, initials, name, role, period, color }) => (

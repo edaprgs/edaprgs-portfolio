@@ -1,3 +1,4 @@
+import { useState } from "react"
 import { motion } from "framer-motion"
 import SkillsGlobe from "./SkillsGlobe"
 import {
@@ -38,15 +39,17 @@ const ICON_MAP = {
 }
 
 const categories = [
-  { label: "Languages",              color: "#9a1847", skills: ["JavaScript", "TypeScript", "Python", "HTML5", "CSS3", "SQL"] },
-  { label: "Frontend",               color: "#7e3460", skills: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "Shadcn UI"] },
-  { label: "Backend & Data",         color: "#5b2a82", skills: ["Node.js", "MongoDB", "Supabase", "PostgreSQL", "MySQL", "Flask", "REST APIs", "WebSockets"] },
-  { label: "Auth, Payments & Security", color: "#7e3460", skills: ["JWT", "Google OAuth", "bcrypt", "reCAPTCHA", "Cloudflare Turnstile", "Stripe", "Zod"] },
-  { label: "AI, ML & Vision",          color: "#c084a8", skills: ["Gemini API", "OpenAI", "OpenCV", "TensorFlow", "Keras", "Prompt Engineering"] },
-  { label: "Tools & Design",         color: "#b52a5d", skills: ["Figma", "Git", "GitHub Actions", "Vercel", "pnpm", "Turborepo", "WCAG"] },
+  { label: "Languages",                 color: "#9a1847", globeCat: null, skills: ["JavaScript", "TypeScript", "Python", "HTML5", "CSS3", "SQL"] },
+  { label: "Frontend",                  color: "#7e3460", globeCat: 0,    skills: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "Shadcn UI"] },
+  { label: "Backend & Data",            color: "#5b2a82", globeCat: 1,    skills: ["Node.js", "MongoDB", "Supabase", "PostgreSQL", "MySQL", "Flask", "REST APIs", "WebSockets"] },
+  { label: "Auth, Payments & Security", color: "#7e3460", globeCat: 1,    skills: ["JWT", "Google OAuth", "bcrypt", "reCAPTCHA", "Cloudflare Turnstile", "Stripe", "Zod"] },
+  { label: "AI, ML & Vision",           color: "#c084a8", globeCat: 2,    skills: ["Gemini API", "OpenAI", "OpenCV", "TensorFlow", "Keras", "Prompt Engineering"] },
+  { label: "Tools & Design",            color: "#b52a5d", globeCat: 3,    skills: ["Figma", "Git", "GitHub Actions", "Vercel", "pnpm", "Turborepo", "WCAG"] },
 ]
 
 export default function Skills() {
+  const [globeFilter, setGlobeFilter] = useState(null)
+
   return (
     <section id="skills" className="ide-section">
       <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
@@ -69,21 +72,32 @@ export default function Skills() {
 
       <motion.div initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}
         transition={{ duration: 1 }} style={{ marginBottom: "1.2rem", marginTop: "-0.5rem" }}>
-        <SkillsGlobe/>
+        <SkillsGlobe filter={globeFilter} onFilterChange={setGlobeFilter}/>
       </motion.div>
 
       <div style={{ display: "flex", flexDirection: "column", gap: "1.4rem" }}>
-        {categories.map(({ label, color, skills }, i) => (
+        {categories.map(({ label, color, globeCat, skills }, i) => {
+          const dimmed = globeFilter !== null && globeCat !== globeFilter
+          return (
           <motion.div key={label}
             initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.06 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.65rem" }}>
+            viewport={{ once: true }} transition={{ duration: 0.5, delay: i * 0.06 }}
+            style={{ opacity: dimmed ? 0.38 : 1, transition: "opacity 0.2s" }}>
+            <button
+              type="button"
+              onClick={() => setGlobeFilter(globeCat === null ? null : (globeFilter === globeCat ? null : globeCat))}
+              style={{
+                display: "flex", alignItems: "center", gap: "0.6rem", marginBottom: "0.65rem",
+                width: "100%", background: "none", border: "none", padding: 0, cursor: "pointer",
+                fontFamily: "inherit", textAlign: "left",
+              }}
+            >
               <span style={{ width: 6, height: 6, borderRadius: "50%", background: color, display: "block", flexShrink: 0 }}/>
               <span style={{ fontSize: "0.7rem", fontWeight: 700, color, letterSpacing: "0.1em", textTransform: "uppercase" }}>
                 {label}
               </span>
               <div style={{ flex: 1, height: 1, background: "var(--divider)" }}/>
-            </div>
+            </button>
             <div style={{ display: "flex", flexWrap: "wrap", gap: "0.45rem" }}>
               {skills.map(s => {
                 const Icon = ICON_MAP[s]
@@ -104,7 +118,8 @@ export default function Skills() {
               })}
             </div>
           </motion.div>
-        ))}
+          )
+        })}
       </div>
     </section>
   )
