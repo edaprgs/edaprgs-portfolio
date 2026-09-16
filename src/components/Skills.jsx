@@ -6,7 +6,7 @@ import {
   SiHtml5, SiCss, SiTailwindcss, SiSupabase, SiPostgresql,
   SiMysql, SiFlask, SiNodedotjs, SiSocketdotio, SiMongodb,
   SiGooglegemini, SiTensorflow, SiFigma, SiGit, SiVercel,
-  SiFramer, SiStripe, SiZod, SiGithubactions, SiPnpm,
+  SiFramer, SiStripe, SiZod, SiGithubactions, SiPnpm, SiVite,
 } from "react-icons/si"
 import { Wrench } from "lucide-react"
 
@@ -36,15 +36,16 @@ const ICON_MAP = {
   "Zod":              SiZod,
   "GitHub Actions":   SiGithubactions,
   "pnpm":             SiPnpm,
+  "Vite":             SiVite,
 }
 
 const categories = [
   { label: "Languages",                 color: "#9a1847", globeCat: null, skills: ["JavaScript", "TypeScript", "Python", "HTML5", "CSS3", "SQL"] },
-  { label: "Frontend",                  color: "#7e3460", globeCat: 0,    skills: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "Shadcn UI"] },
+  { label: "Frontend",                  color: "#7e3460", globeCat: 0,    skills: ["React", "Next.js", "Tailwind CSS", "Framer Motion", "Shadcn UI", "Canvas API"] },
   { label: "Backend & Data",            color: "#5b2a82", globeCat: 1,    skills: ["Node.js", "MongoDB", "Supabase", "PostgreSQL", "MySQL", "Flask", "REST APIs", "WebSockets"] },
   { label: "Auth, Payments & Security", color: "#7e3460", globeCat: 1,    skills: ["JWT", "Google OAuth", "bcrypt", "reCAPTCHA", "Cloudflare Turnstile", "Stripe", "Zod"] },
   { label: "AI, ML & Vision",           color: "#c084a8", globeCat: 2,    skills: ["Gemini API", "OpenAI", "OpenCV", "TensorFlow", "Keras", "Prompt Engineering"] },
-  { label: "Tools & Design",            color: "#b52a5d", globeCat: 3,    skills: ["Figma", "Git", "GitHub Actions", "Vercel", "pnpm", "Turborepo", "WCAG"] },
+  { label: "Tools & Design",            color: "#b52a5d", globeCat: 3,    skills: ["Figma", "Git", "GitHub Actions", "Vercel", "Vite", "EmailJS", "pnpm", "Turborepo", "WCAG"] },
 ]
 
 export default function Skills() {

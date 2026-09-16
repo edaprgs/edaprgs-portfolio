@@ -1,5 +1,5 @@
 import { motion } from "framer-motion"
-import { Church, Sprout, Hospital, Brain, ExternalLink, Timer, FolderOpen, Sparkles, ScanFace } from "lucide-react"
+import { Church, Sprout, Hospital, Brain, ExternalLink, Timer, FolderOpen, Sparkles, ScanFace, AppWindow } from "lucide-react"
 import { FaGithub } from "react-icons/fa"
 import { useState } from "react"
 
@@ -67,6 +67,17 @@ const projects = [
     accent: "#2d7a2d",
     figma: "https://www.figma.com/design/a4593rDDQslYZMxCI6gh5O/eTanom-Planter-s-Interface-%7C-Paragoso?node-id=0-1",
     image: "/images/etanom-ui-preview.png",
+  },
+  {
+    title: "Personal Portfolio",
+    icon: <AppWindow size={18}/>,
+    desc: "This site. A recruiter-friendly personal portfolio with system-aware dark/light theming, a filterable skills globe, click-to-reveal contact, and EmailJS messaging. Built with React 19, Vite 8, and Tailwind CSS 4.",
+    tech: ["React 19", "Vite", "Tailwind CSS 4", "Framer Motion", "EmailJS", "Lucide", "Canvas API", "Vercel"],
+    accent: "#7e3460",
+    github: "https://github.com/edaprgs/edaprgs-portfolio",
+    live: "https://edaprgs.vercel.app",
+    liveLabel: "Live Site",
+    image: "/images/portfolio-preview.png",
   },
 ]
 
@@ -180,7 +191,7 @@ export default function Projects() {
           What I've Built
         </h2>
         <p style={{ fontSize: "0.88rem", color: "var(--text-muted)", marginTop: "0.6rem", lineHeight: 1.7 }}>
-          Selected production work: SaaS platforms, membership systems, design, and computer vision research.
+          Selected production work: SaaS platforms, membership systems, this site, design, and computer vision research.
         </p>
       </motion.div>
 

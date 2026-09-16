@@ -5,7 +5,7 @@ import {
   SiReact, SiNextdotjs, SiTypescript, SiPython, SiNodedotjs,
   SiHtml5, SiCss, SiTailwindcss, SiMongodb,
   SiPostgresql, SiSupabase, SiFigma,
-  SiGit, SiVercel, SiStripe,
+  SiGit, SiVercel, SiStripe, SiVite, SiFramer,
 } from "react-icons/si"
 import { FolderOpen, Wrench, Award, Briefcase, GraduationCap, Star, Download, Brain, Quote } from "lucide-react"
 import { usePage } from "../context/PageContext"
@@ -18,6 +18,7 @@ const projects = [
   { title: "Clinic Management System",  img: "/images/clinic-management-preview.png",  tag: "Full-Stack" },
   { title: "eTanom UI Design",           img: "/images/etanom-ui-preview.png",           tag: "UI/UX"      },
   { title: "CNN Hair Recognition",       img: "/images/hair-cnn-preview.png",            tag: "AI / ML"   },
+  { title: "Personal Portfolio",         img: "/images/portfolio-preview.png",           tag: "Frontend"  },
 ]
 
 const skillsRow1 = [
@@ -29,6 +30,7 @@ const skillsRow1 = [
   { label: "HTML5",      Icon: SiHtml5      },
   { label: "CSS3",       Icon: SiCss        },
   { label: "Tailwind",   Icon: SiTailwindcss},
+  { label: "Vite",       Icon: SiVite       },
 ]
 
 const skillsRow2 = [
@@ -39,6 +41,7 @@ const skillsRow2 = [
   { label: "Stripe",     Icon: SiStripe     },
   { label: "Figma",      Icon: SiFigma      },
   { label: "Vercel",     Icon: SiVercel     },
+  { label: "Framer",     Icon: SiFramer     },
 ]
 
 const achievements = [

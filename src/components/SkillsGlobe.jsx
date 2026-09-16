@@ -14,7 +14,7 @@ const SKILLS = [
   { label: "TensorFlow",  cat: 2 },
   { label: "OpenCV",      cat: 2 },
   { label: "Figma",       cat: 3 },
-  { label: "Git",         cat: 3 },
+  { label: "Vite",        cat: 3 },
   { label: "Vercel",      cat: 3 },
 ]
 
