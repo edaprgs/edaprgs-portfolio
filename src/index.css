@@ -132,6 +132,13 @@ img { display: block; max-width: 100% }
   position: relative;
 }
 
+.left-nav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
 .right-panel {
   flex: 1;
   height: 100vh;

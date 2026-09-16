@@ -90,7 +90,7 @@ export default function LeftPanel() {
 
       {/* Nav */}
       <nav style={{ flex: 1 }}>
-        <ul style={{ listStyle: "none" }}>
+        <ul className="left-nav">
           {navItems.map(({ id, label, Icon }, i) => {
             const isActive = page === id
             return (
